@@ -1,0 +1,16 @@
+@import 'vars';
+
+.d-active{
+    display: block !important;
+}
+.d-hide{
+    display: none ;
+}
+
+.hr-line{
+    width: 100%;
+    height: 1.2px;
+    margin-top: rem(1.2);
+    background-color: $cLine;
+}
+

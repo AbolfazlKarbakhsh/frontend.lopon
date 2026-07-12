@@ -1,0 +1,45 @@
+@import '_functions';
+@import '_vars';
+@import '_global';
+@import '_mixings';
+@import './pages/_home';
+@import './pages/_fillter';
+@import './pages/_tabel';
+
+p{
+    margin-bottom: 0px;
+}
+
+.page-link{
+    color: $cbrand !important;
+    @include media(lg , "up"){
+        padding: 10px 12px !important;
+        font-size: 13px !important;
+    }
+}
+
+.page-item.active .page-link {
+color: #272727 !important;
+  background-color: #d3f9ff !important;
+  border: 1px solid #32dfff !important;
+  border-radius: 4px !important;
+  font-weight: 400 !important;
+  }
+
+
+  .custom-pagination{
+    padding: .7em 0.6em !important;
+  }
+
+  .custom-pagination .pagination{
+    box-shadow: 7px 7px 33px -15px rgba(0, 0, 0, 0.25);
+  }
+
+  #select-page-size{
+    @include media(lg , "up"){
+        height: calc(2.5em + .75rem + 2px) !important;
+    }
+    @include media(xl , "up"){
+      height: calc(2.5em + -0.25rem + 2px) !important;
+    }
+  }

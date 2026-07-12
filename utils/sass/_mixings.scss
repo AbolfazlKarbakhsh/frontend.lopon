@@ -1,0 +1,100 @@
+@use "sass:map";
+
+@mixin flex_center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex_beat() {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin flex() {
+    display: flex;
+    align-items: center;
+}
+
+@mixin bg($ct){
+    background-color: $ct;
+}
+
+@mixin hover_border($cbrand){
+    border: 1px solid transparent;
+    transition: border .2s;
+    cursor: pointer;
+    &:hover{
+        border: 1px solid $cbrand;
+    }
+
+    &.active_Item_B{
+        border: 1px solid $cbrand !important;
+        background: #d3f9ff;
+        transition: all .5s;
+    }
+}
+
+@mixin hideSkrollBar(){
+    white-space: nowrap; 
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+
+// Breakpoints map
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+// Media query directions
+$media-directions: ("up", "down", "only") !default;
+
+@mixin media($breakpoint, $direction: "up") {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map.get($breakpoints, $breakpoint);
+    
+    @if $direction == "up" {
+      @media (min-width: $breakpoint-value) {
+        @content;
+      }
+    } @else if $direction == "down" {
+      @media (max-width: ($breakpoint-value - 1)) {
+        @content;
+      }
+    } @else if $direction == "only" {
+      $next-breakpoint: null;
+      
+      @each $name, $width in $breakpoints {
+        @if $width > $breakpoint-value {
+          $next-breakpoint: $width;
+          @break;
+        }
+      }
+      
+      @if $next-breakpoint {
+        @media (min-width: $breakpoint-value) and (max-width: ($next-breakpoint - 1)) {
+          @content;
+        }
+      } @else {
+        @media (min-width: $breakpoint-value) {
+          @content;
+        }
+      }
+    } @else {
+      @warn "Invalid direction #{$direction}. Use one of #{$media-directions}";
+    }
+  } @else {
+    @warn "Invalid breakpoint: #{$breakpoint}. Use one of #{map.keys($breakpoints)}";
+  }
+}

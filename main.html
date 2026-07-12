@@ -1,0 +1,134 @@
+<div>
+
+    <div class="titlePanel">
+        درخواست ها
+    </div>
+
+    <div class="slideButton_Group">
+        <div class="slideMover"></div>
+        <div class="slideBtn_1 slideBtn" id="state_1"> درخواست جاری</div>
+        <div class="slideBtn_2 slideBtn" id="state_2">تکمیل شده</div>
+    </div>
+
+    <hr>
+
+    <div class="fillterBox">
+        <div class="serchType">
+            <div class="vote-personel-title">
+                نوع جستجو :
+            </div>
+            <div class="vote-personel-box">
+
+                <div id="searchType_req" class="active_Item_B">
+                    <img src="https://my.kerman.ir/storage/13549/sms-search.png" alt="" class="img-fluid">
+                    <p>شناسه درخواست </p>
+                </div>
+
+                <div id="searchType_servise" class="">
+                    <img src="https://my.kerman.ir/storage/13548/3dcube.png" alt="" class="img-fluid">
+                    <p>  خدمت </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="searchBox" id="request_Search_box">
+            <div class="vote-personel-title">
+                جستجو شناسه درخواست :
+            </div>
+            <input type="text" class="search-bar" placeholder="شناسه درخواست مورد نظر را جستجو کنید ..."
+                id="searchBar_reqest">
+        </div>
+
+        <div class="searchBox d-none" id="request_Servies_box">
+            <div class="vote-personel-title">
+                جستجو خدمت :
+            </div>
+            <div class="search-bar p-0 position-relative comboFeild" id="searchBar_serviesBox">
+                <input type="text" placeholder="نام خدمت مورد نظر را جستجو کنید ...">
+                <div class="comboArrow"></div>
+                <div class="comboBoxMain d-none">
+                    <ul class="comboBoxList">
+                        <li class="comboBoxItem active" data-id="1">Service 1</li>
+                        <li class="comboBoxItem" data-id="2">Service 2</li>
+                        <li class="comboBoxItem" data-id="3">Service 3</li>
+
+                        <li class="notFoundComboBox">
+                            <span>موردی یافت نشد !</span>
+                            <img src="https://my.kerman.ir/storage/6731/notFound.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="serchType">
+            <div class="vote-personel-title ">
+                از تاریخ :
+            </div>
+
+            <div class="vote-personel-box">
+                <div id="date_start">
+                    <img src="https://my.kerman.ir/storage/13554/calendar.png" alt="" class="img-fluid">
+                    <p class="fw-300" id="datePik_1">
+                        انتخاب کنید ...
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="serchType">
+            <div class="vote-personel-title ">
+                تا تاریخ :
+            </div>
+
+            <div class="vote-personel-box">
+                <div id="date_end">
+                    <img src="https://my.kerman.ir/storage/13554/calendar.png" alt="" class="img-fluid">
+                    <p class="fw-300" id="datePik_2">انتخاب کنید ...</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="PBtn mt-min" id="searchFillters"> جستجو </div>
+
+    </div>
+
+
+    <div class="table-container-sp" id="progressTabel">
+        <table class="requests-table">
+            <thead>
+                <tr>
+                    <th>شناسه درخواست</th>
+                    <th>نام خدمت</th>
+                    <th>زمان</th>
+                    <th>اقدام</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container-sp d-none" id="compeleteTabel">
+        <table class="requests-table">
+            <thead>
+                <tr>
+                    <th>شناسه درخواست</th>
+                    <th>نام خدمت</th>
+                    <th>زمان</th>
+                    <th>اقدام</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="mobileProgress" class="mt-3"></div>
+    <div id="mobileComplete" class="d-none mt-3"></div>
+
+</div>
+
