@@ -1,0 +1,102 @@
+{
+    "attachment": {
+        "clickToDownload": "برای دانلود کلیک کنید",
+        "noAttachment": "هیچ فایل پیوستی وجود ندارد"
+    },
+    "bookmark": {
+        "noBookmark": "هیچ نشانکی وجود ندارد"
+    },
+    "core": {
+        "askingPassword": {
+            "requirePasswordToOpen": "فایل برای باز شدن نیاز به رمز عبور دارد",
+            "submit": "ارسال"
+        },
+        "wrongPassword": {
+            "submit": "ارسال",
+            "tryAgain": "رمز عبور اشتباه است. لطفاً دوباره تلاش کنید"
+        }
+    },
+    "defaultLayout": {
+        "attachment": "پیوست‌ها",
+        "bookmark": "نشانک‌ها",
+        "thumbnail": "تصاویر کوچک"
+    },
+    "download": {
+        "download": "دانلود"
+    },
+    "drop": {
+        "dragDropFile": "فایل PDF را اینجا بکشید و رها کنید"
+    },
+    "fullScreen": {
+        "enterFullScreen": "تمام‌صفحه"
+    },
+    "localeSwitcher": {
+        "switchLocale": "تغییر زبان"
+    },
+    "open": {
+        "openFile": "باز کردن فایل"
+    },
+    "pageNavigation": {
+        "goToFirstPage": "رفتن به صفحه اول",
+        "goToLastPage": "رفتن به صفحه آخر",
+        "goToNextPage": "صفحه بعدی",
+        "goToPreviousPage": "صفحه قبلی"
+    },
+    "print": {
+        "cancel": "لغو",
+        "preparingDocument": "در حال آماده‌سازی سند...",
+        "print": "چاپ"
+    },
+    "properties": {
+        "author": "نویسنده",
+        "close": "بستن",
+        "creationDate": "تاریخ ایجاد",
+        "creator": "ایجادکننده",
+        "fileName": "نام فایل",
+        "fileSize": "حجم فایل",
+        "keywords": "کلیدواژه‌ها",
+        "modificationDate": "تاریخ ویرایش",
+        "pageCount": "تعداد صفحات",
+        "pdfProducer": "سازنده PDF",
+        "pdfVersion": "نسخه PDF",
+        "showProperties": "نمایش جزئیات فایل",
+        "subject": "موضوع",
+        "title": "عنوان"
+    },
+    "rotate": {
+        "rotateBackward": "چرخش پادساعت‌گرد",
+        "rotateForward": "چرخش ساعت‌گرد"
+    },
+    "scrollMode": {
+        "horizontalScrolling": "اسکرول افقی",
+        "verticalScrolling": "اسکرول عمودی",
+        "wrappedScrolling": "اسکرول شبکه‌ای"
+    },
+    "search": {
+        "close": "بستن",
+        "enterToSearch": "برای جستجو Enter را فشار دهید",
+        "matchCase": "تطابق حروف کوچک و بزرگ",
+        "nextMatch": "یافتن بعدی",
+        "previousMatch": "یافتن قبلی",
+        "search": "جستجو",
+        "wholeWords": "کلمات کامل"
+    },
+    "selectionMode": {
+        "handTool": "ابزار دست",
+        "textSelectionTool": "انتخاب متن"
+    },
+    "theme": {
+        "switchDarkTheme": "حالت تیره",
+        "switchLightTheme": "حالت روشن"
+    },
+    "toolbar": {
+        "moreActions": "عملیات بیشتر"
+    },
+    "zoom": {
+        "actualSize": "اندازه واقعی",
+        "pageFit": "تناسب با صفحه",
+        "pageWidth": "تناسب با عرض صفحه",
+        "zoomIn": "بزرگ‌نمایی",
+        "zoomOut": "کوچک‌نمایی"
+    }
+}

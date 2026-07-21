@@ -1,4 +1,0 @@
-@function rem($rem) {
-    $base-font-size: 16px;
-    @return ($rem * $base-font-size);
-}
