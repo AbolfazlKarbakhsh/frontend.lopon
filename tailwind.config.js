@@ -137,7 +137,6 @@ export default {
     },
     caretColor: ({ theme }) => theme('colors'),
     colors: ({ colors }) => ({
-      current: 'currentColor',
         "27": '#272727',
       "firoze": "#ffa5a5",
       "b-gray": '#eceef0',
@@ -318,7 +317,6 @@ export default {
       "kal-2": "kal-2",
       "kal-3": "kal-3",
       "kal-4": "kal-4",
-      "dana": "dana",
       "dana": "dana",
       sans: [
         'ui-sans-serif',

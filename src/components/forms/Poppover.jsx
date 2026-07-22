@@ -23,7 +23,7 @@ export default function Poppover({ children }) {
 
       <button
         className={`btn  btn-global mx-2 my-1 my-md-0 px-2  font3 centerAll  `}
-        aria-describedby={id} variant="contained" onClick={handleClick}
+        aria-describedby={id} onClick={handleClick}
       >
 
         <span className="font1 me-1" >عملیات</span>

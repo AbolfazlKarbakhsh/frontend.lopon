@@ -1,31 +1,10 @@
 import { useState, useEffect } from "react"
-import { initDB, useIndexedDB } from "react-indexed-db-hook"
-
-const DBConfig = {
-  name: "bookSp",
-  version: 3,
-  objectStoresMeta: [
-    {
-      store: "books",
-      storeConfig: { keyPath: "id", autoIncrement: true },
-      storeSchema: [
-        { name: "name", keypath: "name", options: { unique: false } },
-        { name: "title", keypath: "title", options: { unique: false } },
-        { name: "imageUrl", keypath: "imageUrl", options: { unique: false } },
-        { name: "price", keypath: "price", options: { unique: false } },
-        { name: "file", keypath: "file", options: { unique: false } },
-      ],
-    },
-  ],
-}
+import { useIndexedDB } from "react-indexed-db-hook"
+import { initPdfStorage, PdfStorageService } from "../../lib/pdf-storage"
 
 const useIndexDb = (id , listData) => {
-  // initialise db
-  try {
-    initDB(DBConfig)
-  } catch (error) {
-    // Silent catch for already initialized DB
-  }
+  // initialise db via isolated service
+  initPdfStorage()
 
   // states
   const [hasFile, setHasFile] = useState(null)
@@ -41,8 +20,6 @@ const useIndexDb = (id , listData) => {
       checkFile()
     }
   }, [id])
-
- 
 
   // methods use
   const checkFile = () => {
@@ -64,7 +41,7 @@ const useIndexDb = (id , listData) => {
         checkFile()
       },
       (error) => {
-        console.log("Error adding book:", error)
+        PdfStorageService.handleStorageError(error);
       },
     )
   }

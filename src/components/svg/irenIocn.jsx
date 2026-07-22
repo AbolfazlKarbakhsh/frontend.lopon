@@ -14,7 +14,7 @@ function IrenIocn() {
         <rect width="630" height="120" fill="#239f40" />
         <g transform="translate(8.4,100.4)">
           <g id="tb4">
-            <g id="tb1" fill="none" stroke="#fff" stroke-width="2">
+            <g id="tb1" fill="none" stroke="#fff" strokeWidth="2">
               <path
                 id="tbp1"
                 d="M0,1H26M1,10V5H9V9H17V5H12M4,9H6M26,9H21V5H29M29,0V9H37V0M33,0V9"

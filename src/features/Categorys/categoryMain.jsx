@@ -15,8 +15,8 @@ const CategoryMain = () => {
       <div className="flex flex-wrap justify-around gap-3 mt-4 ">
 
         {
-          (!loadCateGorys && !errCategorys && cateGorys?.data?.length != 0) && cateGorys?.data?.map(e => (
-              <CategoryBox className="w-[48%] [&>p]:text-base" size="42" data={e} />
+          (!loadCateGorys && !errCategorys && cateGorys?.data?.length != 0) && cateGorys?.data?.map((e, index) => (
+              <CategoryBox key={e.id || e._id || index} className="w-[48%] [&>p]:text-base" size="42" data={e} />
           ))
         }
       </div>
