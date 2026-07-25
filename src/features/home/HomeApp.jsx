@@ -79,7 +79,7 @@ function HomeApp() {
       </div>
 
       {/* Hero Image Section */}
-      <div className="relative w-full overflow-hidden bg-gray-100">
+      <div className="relative w-full  bg-gray-100">
         <img
           src="/images/header.png"
           alt="سالن زیبایی لوپون"
@@ -89,10 +89,15 @@ function HomeApp() {
         {/* Floating Chat Location Button */}
         <button
           onClick={() => setIsSupportOpen(true)}
-          className="absolute bottom-4 left-4 w-11 h-11 bg-amber-400 hover:bg-amber-500 text-white rounded-full flex items-center justify-center shadow-lg border-2 border-white transition-transform active:scale-95 cursor-pointer"
+          className="absolute -bottom-4 z-31 left-4 w-[50px] h-[50px]  rounded-full flex items-center justify-center shadow-lg  transition-transform active:scale-95 cursor-pointer"
           aria-label="گفتگو با پشتیبانی"
         >
-          <BsChatDotsFill size={19} className="text-white" />
+          
+           <img
+                  src="/images/suport.png"
+                  alt="پشتیبانی"
+                  className="w-full h-full object-cover rounded-full"
+                />    
         </button>
       </div>
 
@@ -104,49 +109,124 @@ function HomeApp() {
       />
 
       {/* Section 2: 4 Trust / Feature Badges Grid */}
-      <div className="px-4 my-2">
-        <div className="bg-gray-50/90 rounded-2xl p-3.5 border border-gray-100 grid grid-cols-2 gap-3 shadow-2xs">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-pink-100/80 text-[#ff0055] flex items-center justify-center shrink-0">
-              <LuLock size={15} />
-            </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-kal-3 font-bold text-xs text-gray-800 leading-tight">پرداخت امن</span>
-              <span className="font-kal-2 text-[10px] text-gray-400 truncate mt-0.5">با درگاه‌های معتبر</span>
-            </div>
-          </div>
+     <div className="px-4 my-4">
+  <div className="relative overflow-hidden rounded-3xl bg-white shadow-md">
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-pink-100/80 text-[#ff0055] flex items-center justify-center shrink-0">
-              <LuShieldCheck size={16} />
-            </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-kal-3 font-bold text-xs text-gray-800 leading-tight">دارای نماد اعتماد</span>
-              <span className="font-kal-2 text-[10px] text-gray-400 truncate mt-0.5">خریدی مطمئن و امن</span>
-            </div>
-          </div>
+ {/* خط عمودی بالا */}
+<div className="absolute left-1/2 top-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-pink-100/80 text-[#ff0055] flex items-center justify-center shrink-0">
-              <LuAward size={16} />
-            </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-kal-3 font-bold text-xs text-gray-800 leading-tight">مجموعه‌های معتبر</span>
-              <span className="font-kal-2 text-[10px] text-gray-400 truncate mt-0.5">بررسی و تأیید شده</span>
-            </div>
-          </div>
+{/* خط عمودی پایین */}
+<div className="absolute left-1/2 bottom-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
 
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-pink-100/80 text-[#ff0055] flex items-center justify-center shrink-0">
-              <BiSupport size={16} />
-            </div>
-            <div className="flex flex-col min-w-0">
-              <span className="font-kal-3 font-bold text-xs text-gray-800 leading-tight">پشتیبانی سریع</span>
-              <span className="font-kal-2 text-[10px] text-gray-400 truncate mt-0.5">همیشه کنار شما</span>
-            </div>
-          </div>
-        </div>
+{/* خط افقی سمت چپ */}
+<div className="absolute left-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+
+{/* خط افقی سمت راست */}
+<div className="absolute right-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+
+    <div className="grid grid-cols-2">
+
+      {/* پرداخت امن */}
+      <div className="flex items-center p-3">
+  <div className="grid w-full grid-cols-2 items-center">
+
+    {/* متن */}
+    <div className="text-center">
+      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
+        پرداخت امن
+      </h3>
+      <p className="mt-1 text-xs text-gray-400">
+         درگاه بانکی معتبر
+      </p>
+    </div>
+
+    {/* آیکون */}
+    <div className="flex justify-center">
+      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+        <LuLock size={25} />
       </div>
+    </div>
+
+  </div>
+</div>
+
+
+      {/* دارای نماد اعتماد */}
+     <div className="flex items-center p-3">
+  <div className="grid w-full grid-cols-2 items-center">
+
+    <div className="text-center">
+      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
+         نماد اعتماد
+      </h3>
+      <p className="mt-1 text-xs text-gray-400">
+       خریدی مطمئن 
+      </p>
+    </div>
+
+    <div className="flex justify-center">
+      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+        <LuShieldCheck size={25} />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+      {/* پشتیبانی سریع */}
+     {/* پشتیبانی سریع */}
+<div className="flex items-center p-3">
+  <div className="grid w-full grid-cols-2 items-center">
+
+    {/* متن */}
+    <div className="text-center">
+      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
+        پشتیبانی سریع
+      </h3>
+      <p className="mt-1 text-xs text-gray-400">
+        همیشه کنار شما
+      </p>
+    </div>
+
+    {/* آیکون */}
+    <div className="flex justify-center">
+      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+        <BiSupport size={25} />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+{/* مجموعه‌های معتبر */}
+<div className="flex items-center p-3">
+  <div className="grid w-full grid-cols-2 items-center">
+
+    {/* متن */}
+    <div className="text-center">
+      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
+        مجموعه‌ معتبر
+      </h3>
+      <p className="mt-1 text-xs text-gray-400">
+        بررسی و تأیید شده
+      </p>
+    </div>
+
+    {/* آیکون */}
+    <div className="flex justify-center">
+      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+        <LuAward size={25} />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
 
       {/* Section 3: Special Offers */}
       <SectionCarousel
@@ -184,6 +264,22 @@ function HomeApp() {
         deals={medicalDeals.length > 0 ? medicalDeals : featuredDeals}
         id="deals-4"
       />
+
+      {/* Section 7: Promo Discount Code Banner */}
+      <div className="px-4 my-3">
+         
+        
+
+          {/* Model Image Accent */}
+          <div className="relative   shrink-0 -my-2 overflow-hidden rounded-xl">
+            <img
+              src="images/present.png"
+              alt="جایزه لوپون" 
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
+        
+      </div>
 
       {/* Support Drawer */}
       <SupportDrawer isOpen={isSupportOpen} setIsOpen={setIsSupportOpen} />
