@@ -139,117 +139,113 @@ md:px-10
      <div className="px-4 my-4">
   <div className="relative overflow-hidden rounded-3xl bg-white shadow-md">
 
- {/* خط عمودی بالا */}
-<div className="absolute left-1/2 top-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
+    {/* خط عمودی بالا */}
+    <div className="absolute left-1/2 top-5 sm:top-6 h-[calc(50%-10px)] sm:h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
 
-{/* خط عمودی پایین */}
-<div className="absolute left-1/2 bottom-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
+    {/* خط عمودی پایین */}
+    <div className="absolute left-1/2 bottom-5 sm:bottom-6 h-[calc(50%-10px)] sm:h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
 
-{/* خط افقی سمت چپ */}
-<div className="absolute left-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+    {/* خط افقی سمت چپ */}
+    <div className="absolute left-5 sm:left-6 top-1/2 w-[calc(50%-10px)] sm:w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
 
-{/* خط افقی سمت راست */}
-<div className="absolute right-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+    {/* خط افقی سمت راست */}
+    <div className="absolute right-5 sm:right-6 top-1/2 w-[calc(50%-10px)] sm:w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
 
     <div className="grid grid-cols-2">
 
       {/* پرداخت امن */}
-      <div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
+      <div className="flex items-center p-2.5 sm:p-3">
+        <div className="grid w-full grid-cols-2 items-center">
 
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        پرداخت امن
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-         درگاه بانکی معتبر
-      </p>
-    </div>
+          {/* متن */}
+          <div className="text-center">
+            <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-tight">
+              پرداخت امن
+            </h3>
+            <p className="mt-1 text-[10px] sm:text-xs text-gray-400 leading-tight">
+              درگاه بانکی معتبر
+            </p>
+          </div>
 
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuLock size={25} />
+          {/* آیکون */}
+          <div className="flex justify-center">
+            <div className="flex h-10 w-10 sm:h-[50px] sm:w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+              <LuLock className="h-5 w-5 sm:h-[25px] sm:w-[25px]" />
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-
-  </div>
-</div>
-
 
       {/* دارای نماد اعتماد */}
-     <div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
+      <div className="flex items-center p-2.5 sm:p-3">
+        <div className="grid w-full grid-cols-2 items-center">
 
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-         نماد اعتماد
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-       خریدی مطمئن 
-      </p>
-    </div>
+          <div className="text-center">
+            <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-tight">
+              نماد اعتماد
+            </h3>
+            <p className="mt-1 text-[10px] sm:text-xs text-gray-400 leading-tight">
+              خریدی مطمئن
+            </p>
+          </div>
 
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuShieldCheck size={25} />
+          <div className="flex justify-center">
+            <div className="flex h-10 w-10 sm:h-[50px] sm:w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+              <LuShieldCheck className="h-5 w-5 sm:h-[25px] sm:w-[25px]" />
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-
-  </div>
-</div>
-
 
       {/* پشتیبانی سریع */}
-     {/* پشتیبانی سریع */}
-<div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
+      <div className="flex items-center p-2.5 sm:p-3">
+        <div className="grid w-full grid-cols-2 items-center">
 
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        پشتیبانی سریع
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-        همیشه کنار شما
-      </p>
-    </div>
+          {/* متن */}
+          <div className="text-center">
+            <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-tight">
+              پشتیبانی سریع
+            </h3>
+            <p className="mt-1 text-[10px] sm:text-xs text-gray-400 leading-tight">
+              همیشه کنار شما
+            </p>
+          </div>
 
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <BiSupport size={25} />
+          {/* آیکون */}
+          <div className="flex justify-center">
+            <div className="flex h-10 w-10 sm:h-[50px] sm:w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+              <BiSupport className="h-5 w-5 sm:h-[25px] sm:w-[25px]" />
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
 
-  </div>
-</div>
+      {/* مجموعه‌های معتبر */}
+      <div className="flex items-center p-2.5 sm:p-3">
+        <div className="grid w-full grid-cols-2 items-center">
 
+          {/* متن */}
+          <div className="text-center">
+            <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-tight">
+              مجموعه‌ معتبر
+            </h3>
+            <p className="mt-1 text-[10px] sm:text-xs text-gray-400 leading-tight">
+              بررسی و تأیید شده
+            </p>
+          </div>
 
-{/* مجموعه‌های معتبر */}
-<div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
+          {/* آیکون */}
+          <div className="flex justify-center">
+            <div className="flex h-10 w-10 sm:h-[50px] sm:w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
+              <LuAward className="h-5 w-5 sm:h-[25px] sm:w-[25px]" />
+            </div>
+          </div>
 
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        مجموعه‌ معتبر
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-        بررسی و تأیید شده
-      </p>
-    </div>
-
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuAward size={25} />
+        </div>
       </div>
-    </div>
-
-  </div>
-</div>
 
     </div>
   </div>

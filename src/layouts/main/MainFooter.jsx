@@ -22,9 +22,9 @@ bg-white
           <footer className={`bg-slate-50 pt-12 border-t border-slate-100 text-center ${location === '/' ? 'pb-24 xl:pb-8' : 'pb-8'}`}>
       <div className="px-6 flex flex-col gap-10">
         <div id="footer-about">
-          <h3 className="text-base font-bold mb-3 font-kal-3">درباره کرمان تخفیف</h3>
+          <h3 className="text-base font-bold mb-3 font-kal-3">درباره لوپُن</h3>
           <p className="text-slate-500 leading-relaxed text-[12px] font-kal-2">
-            کرمان تخفیف پلتفرمی برای معرفی تخفیف خدمات محلی در شهر کرمان است. ما تلاش میکنیم بهترین مجموعههای شهر را با پیشنهادهای ویژه به شما معرفی کنیم.
+           لوپُن پلتفرمی برای معرفی تخفیف خدمات محلی در شهر کرمان است. ما تلاش میکنیم بهترین مجموعههای شهر را با پیشنهادهای ویژه به شما معرفی کنیم.
           </p>
         </div>
         <div id="footer-social" className="flex flex-col items-center">
@@ -42,7 +42,7 @@ bg-white
         </div>
       </div>
       <div className="px-4 text-center border-t border-slate-200 pt-6 mt-10">
-        <p className="text-slate-400 text-[10px] font-kal-2">© ۱۴۰۳ کرمان تخفیف. تمامی حقوق محفوظ است.</p>
+        <p className="text-slate-400 text-[10px] font-kal-2">© ۱۴۰۳   تمامی حقوق لوپُن محفوظ است.</p>
       </div>
     </footer>
     </div>
