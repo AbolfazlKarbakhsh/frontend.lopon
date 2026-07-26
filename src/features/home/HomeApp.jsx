@@ -45,10 +45,37 @@ function HomeApp() {
   const medicalDeals = DEALS.filter(deal => deal.category === 'medical');
 
   return (
-    <div className="flex flex-col  min-h-screen max-w-md mx-auto shadow-xl relative ">
+    <div 
+className="
+flex flex-col 
+min-h-screen 
+w-full
+max-w-md
+md:max-w-3xl
+lg:max-w-5xl
+mx-auto
+shadow-xl
+relative
+bg-white
+"
+>
       {/* Top Header */}
-      <div className="absolute top-0 left-0 right-0 z-30 h-[110px] flex justify-between items-center px-6">
-        {/* Left Side Buttons */}
+<div
+className="
+absolute 
+top-0 
+left-0 
+right-0 
+z-30
+h-[100px]
+md:h-[130px]
+flex
+justify-between
+items-center
+px-5
+md:px-10
+"
+>        {/* Left Side Buttons */}
           <Link to="/" className="flex items-center cursor-pointer py-1">
           <img
             src="/images/lopon-logo.png"
