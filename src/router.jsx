@@ -12,6 +12,10 @@ import MainLayout from "@layouts/main/MainLayout";
 // pages
 import Home from "@pages/app/Home";
 import Business from "@pages/app/Business";
+import Cart from "@pages/app/Cart";
+import Orders from "@pages/app/Orders";
+import Profile from "@pages/app/Profile";
+import PayList from "@pages/app/PayList";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +32,31 @@ const router = createBrowserRouter([
         errorElement: <Business />,
         path: "/business/:id",
       },
-
+      {
+        element: <Cart />,
+        errorElement: <Cart />,
+        path: "/cart",
+      },
+      {
+        element: <Orders />,
+        errorElement: <Orders />,
+        path: "/orders",
+      },
+      {
+        element: <Orders />,
+        errorElement: <Orders />,
+        path: "/profile/orders",
+      },
+      {
+        element: <Profile />,
+        errorElement: <Profile />,
+        path: "/profile",
+      },
+      {
+        element: <PayList />,
+        errorElement: <PayList />,
+        path: "/profile/myPaymentList",
+      },
     ],
   },
   {

@@ -35,7 +35,7 @@ export const BUSINESSES = [
   {
     id: 'b4',
     name: 'کلینیک زیبایی یاس',
-    address: 'کرمان، پارک نو، نبش کوچه ۱۲',
+    address: 'کرمان، شهرک مطهری، نبش کوچه ۱۲',
     instagram: '@yas_clinic',
     description: 'کلینیک تخصصی پوست و مو، فیشیال تخصصی و جوانسازی تحت نظر پزشک متخصص.',
     imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/63317/ZBr69rE1oRKzOnGOvOpnsw.JPG',
@@ -57,7 +57,7 @@ export const BUSINESSES = [
   {
     id: 'b6',
     name: 'مرکز مراقبت پوست آیلین',
-    address: 'کرمان، خیابان والفجر، ساختمان پزشکان آفتاب',
+    address: 'کرمان، شهرک باهنر ، ساختمان پزشکان آفتاب',
     instagram: '@aylin_skincare',
     description: 'ارائه دهنده خدمات مزوتراپی، میکرونیدلینگ و جوانسازی پوست به صورت کاملا تخصصی.',
     imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/100410/xvM7_dHdgzyAGCYKcqmRTQ.jpg',
@@ -77,7 +77,7 @@ export const DEALS = [
     discountedPrice: 1750000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۱۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/117237/q9pQJ20OMz4bs5UEI3sTxw.png',
+    imageUrl: 'https://www.digikala.com/mag/wp-content/uploads/2023/04/keratine.jpg',
     category: 'hair',
   },
   {
@@ -89,7 +89,7 @@ export const DEALS = [
     discountedPrice: 150000,
     discountPercentage: 50,
     expiryDate: '۱۴۰۵/۰۳/۱۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/19784/yNLgDEW2fsDJtEnOysY8Hw.JPG',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlcww6J-xMRPPp77rtQYA92fKJiuyiQqH0wCu08ghmeA&s',
     category: 'hair',
   },
   {
@@ -101,7 +101,7 @@ export const DEALS = [
     discountedPrice: 595000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۲۰',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/119274/cuPnkiN-jZKsUJeLU08UEw.jpg',
+    imageUrl: 'https://i1.delgarm.com/i/828/020813/65462621f1fcd.jpeg',
     category: 'skin',
   },
   {
@@ -125,7 +125,7 @@ export const DEALS = [
     discountedPrice: 315000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۲۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/116589/CesTTYgGoMC8Ylo-gV-Pww.png',
+    imageUrl: 'https://s100.divarcdn.com/static/photo/neda/webp_post/XKFm7wuH5n49OEtSINyuBg/1d1f88a6-657e-4686-a30c-c08515762e56.webp',
     category: 'nail',
   },
   {
@@ -137,7 +137,7 @@ export const DEALS = [
     discountedPrice: 100000,
     discountPercentage: 50,
     expiryDate: '۱۴۰۵/۰۳/۲۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/119592/12jb-WdhETVbGlNIe5LvKw.png',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwyLFBKNs_rU__HQ2WaM28DIbA_HWIBl0vxBSeXF2WvUUn-qV5pc7tyXb1&s=10',
     category: 'nail',
   },
   {
@@ -149,7 +149,7 @@ export const DEALS = [
     discountedPrice: 420000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۲۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/115355/KFtkvFbzrwCQDMOYmPHhfg.jpg',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmgtWbU5MVIxtkEJ5nLDyo2lsh6aLtgVDLjDqn6NN80OUmAJrV1cWuVCVE&s=10',
     category: 'nail',
   },
   {
@@ -157,11 +157,11 @@ export const DEALS = [
     businessId: 'b3',
     businessName: 'سالن زیبایی آوینا',
     serviceTitle: 'پارافین تراپی دست',
-    originalPrice: 300000,
-    discountedPrice: 210000,
+    originalPrice: 550000,
+    discountedPrice: 310000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۲۵',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/90368/XANnPRPgHoVjIpP09iwsRw.png',
+    imageUrl: 'https://www.digikala.com/mag/wp-content/uploads/2024/04/paraffin-Treatment-3.jpg',
     category: 'nail',
   },
   {
@@ -173,7 +173,7 @@ export const DEALS = [
     discountedPrice: 840000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۳/۱۰',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/47238/ogj6AjDUjwwsqm9bbsEECQ.png',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1UJRsBWsbkPMBF4gELSsNquRQI4z0LJxkZ8fxYzbDDT2BxaZ4ZjGYi_Fj&s=10',
     category: 'medical',
   },
   {
@@ -185,7 +185,7 @@ export const DEALS = [
     discountedPrice: 900000,
     discountPercentage: 40,
     expiryDate: '۱۴۰۵/۰۳/۱۰',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/117349/50IRyc0IlOeWwY0QBfhMkg.JPG',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYaeCmuX8patY9oot0U7HU606Z-TZXIbUYRsWr76XjOobO4ljLkW4Qmm8&s=10',
     category: 'medical',
   },
   {
@@ -197,7 +197,7 @@ export const DEALS = [
     discountedPrice: 2450000,
     discountPercentage: 30,
     expiryDate: '۱۴۰۵/۰۴/۰۱',
-    imageUrl: 'https://cdn.takhfifan.com/images/1.0?id=vendor/production/business/images/100410/xvM7_dHdgzyAGCYKcqmRTQ.jpg',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrDacnFl0RJ_EOwFFMIFl_WWhDpAkd2Fssb2GJqM1nKtIOkxgrNNHvhYSt&s=10',
     category: 'hair',
   },
   {

@@ -5,7 +5,20 @@ import { Link, useLocation } from "react-router-dom";
 function MainFooter() {
   const location = useLocation().pathname
   return (
-    <div>
+        <div 
+className="
+flex flex-col 
+min-h-screen 
+w-full
+max-w-md
+md:max-w-3xl
+lg:max-w-5xl
+mx-auto
+shadow-xl
+relative
+bg-white
+"
+>
           <footer className="bg-slate-50 pt-12 pb-8 border-t border-slate-100 text-center">
       <div className="px-6 flex flex-col gap-10">
         <div id="footer-about">

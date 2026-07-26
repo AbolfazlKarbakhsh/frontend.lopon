@@ -8,9 +8,9 @@ function Catgorys({ cateGorys, loadCateGorys }) {
     <div className="mt-9 pr-4">
       <SliderBox slidesPerView={3.5} spaceBetween={10}>
         {
-          cateGorys?.data?.map((e) => {
+          cateGorys?.data?.map((e, index) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={e.id || e._id || index}>
                 <CategoryBox data={e} />
               </SwiperSlide>
             )
