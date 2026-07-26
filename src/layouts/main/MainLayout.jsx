@@ -1,5 +1,6 @@
 import MainHeader from "./MainHeader"
 import MainFooter from "./MainFooter"
+import BottomNavigation from "@components/global/BottomNavigation"
 import { Outlet } from "react-router"
 import useHeaderShow from "@store/app/appLayout"
 import useFooterShow from "@store/app/appFooter"
@@ -34,7 +35,7 @@ function MainLayout() {
         <MainFooter />
 
       </div>
-      {/* {!hideFooter && } */}
+      <BottomNavigation />
     </div>
   )
 }

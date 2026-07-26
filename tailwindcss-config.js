@@ -1,3 +1,5 @@
+import daisyui from "daisyui";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   important: true,
@@ -26,5 +28,5 @@ export default {
       "ir-sand": "ir-sand",
     }
   },
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
 }

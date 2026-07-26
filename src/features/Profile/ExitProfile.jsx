@@ -2,12 +2,13 @@ import React from 'react'
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useNavigate } from 'react-router';
 import Button from '@components/table/Button';
+import { STORAGE_KEYS } from '@core/constants/storage-keys';
 
 function ExitProfile() {
   const navigate = useNavigate();
 
   const exitProfile = () => {
-    localStorage.setItem('t_sa!@!##@$df', '');
+    localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
     navigate('/login');
   }
 

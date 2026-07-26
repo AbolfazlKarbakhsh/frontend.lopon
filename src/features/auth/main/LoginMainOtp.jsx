@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
 import { usePost } from "@hooks/server/auth/usePost";
 import { Link } from "react-router-dom";
+import { STORAGE_KEYS } from "@core/constants/storage-keys";
 
-const LoginMainOtp = ({ }) => {
+const LoginMainOtp = () => {
 
   //? use hookFrom
   const { control, handleSubmit, watch, reset } = useForm();
@@ -17,7 +18,7 @@ const LoginMainOtp = ({ }) => {
   const navigate = useNavigate();
 
   //? get otp
-  const [getOtpCgetOtpCodeode] = usePost("users/send-otp_POST", "users/send-otp", "");
+  const [getOtpCode] = usePost("users/send-otp_POST", "users/send-otp", "");
   const [sendOtp, tokenAuth, , isError] = usePost("users/login_POST", "users/login", "");
 
   //*func submit form
@@ -41,7 +42,7 @@ const LoginMainOtp = ({ }) => {
   //!effect after success
   useEffect(() => {
     if (tokenAuth?.data?.token) {
-      localStorage.setItem("t_sa!@!##@$df", tokenAuth.data.token);
+      localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, tokenAuth.data.token);
       navigate("/")
     }
   }, [tokenAuth]);
