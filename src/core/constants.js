@@ -160,6 +160,7 @@ export const DEALS = [
     originalPrice: 570000,
     discountedPrice: 332000,
     discountPercentage: 9,
+
     expiryDate: '۱۴۰۵/۰۳/۲۵',
     imageUrl: 'https://www.digikala.com/mag/wp-content/uploads/2024/04/paraffin-Treatment-3.jpg',
     category: 'nail',

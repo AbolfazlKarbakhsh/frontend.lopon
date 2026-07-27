@@ -1,11 +1,14 @@
 import React from 'react';
 import { Drawer } from 'vaul';
+
 import { Phone, Headset, HelpCircle } from 'lucide-react';
+
 
 function SupportDrawer({ isOpen, setIsOpen }) {
   return (
     <Drawer.Root dismissible={true} open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Portal>
+
         <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-xs transition-opacity" />
         <Drawer.Content className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[85vh] rounded-t-[28px] z-50 p-5 shadow-2xl border-t border-slate-100 outline-none max-w-md md:max-w-lg mx-auto">
           {/* Grab handle */}
@@ -55,6 +58,7 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             type="button"
             onClick={() => setIsOpen(false)}
             className="w-full py-3.5 rounded-xl border border-slate-300 text-slate-700 font-kal-3 font-bold text-sm hover:bg-slate-50 active:scale-[0.99] transition-all cursor-pointer shadow-2xs"
+
           >
             بستن
           </button>
@@ -65,4 +69,5 @@ function SupportDrawer({ isOpen, setIsOpen }) {
 }
 
 export default SupportDrawer;
+
 
