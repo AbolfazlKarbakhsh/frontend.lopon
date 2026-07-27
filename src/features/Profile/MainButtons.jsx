@@ -1,80 +1,77 @@
-import { MdArticle, MdOutlineShoppingBag, MdOutlineShoppingCart } from "react-icons/md";
-import { BsBrowserChrome } from "react-icons/bs";
-import { BiSupport } from "react-icons/bi";
-import { ImBooks } from "react-icons/im";
-import React from 'react'
-import Button from '@components/table/Button';
-import DrawerVual from "@components/global/Drawers/Drawer";
-import { MdOutlinePayment } from "react-icons/md";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+import { Headset, TicketPercent, ShoppingCart, CreditCard, BookOpen, ChevronDown } from 'lucide-react';
 
-function ButtonLink({ children, title, className, to }) {
+function MainButtons({ onSupportClick, onFaqClick, onExitClick }) {
+  const [showMore, setShowMore] = useState(false);
+
   return (
-    <Link className={className} to={to}>
-      <Button className="bg-white mt-0 flex flex-col items-start text-gray-800 p-4 rounded-xl h-full hover:!text-white ps-4 border border-gray-100 shadow-xs">
-        {children}
-        <h2 className="font-kal-2 text-sm mt-1">  {title} </h2>
-      </Button>
-    </Link>
-  )
-}
+    <div className="w-full space-y-3.5 my-4">
+      {/* Primary Action Button: سفارشات من */}
+      <Link to="/orders" className="block w-full">
+        <div className="w-full bg-[#ff0055] hover:bg-[#e0004c] text-white py-4 px-6 rounded-2xl flex items-center justify-center gap-2.5 shadow-md shadow-pink-500/20 active:scale-[0.99] transition-all cursor-pointer">
+          <img className='w-[38px] h-[38px]' src="/images/off.png" alt="" />
+          <span className="font-kal-3 font-bold text-base text-white">سفارشات من</span>
+        </div>
+      </Link>
 
-function ButtonA({ children, title, className, href, onClick = () => { } }) {
-  return (
-    <a className={className} href={href} onClick={onClick}
-      target="_blank" rel="noopener noreferrer">
-      <Button className="bg-white mt-0 flex flex-col items-center justify-evenly text-gray-800 p-4 rounded-xl h-full hover:!text-white ps-4 border border-gray-100 shadow-xs">
-        {children}
-        <h2 className="font-kal-2 text-sm text-nowrap mt-1">  {title} </h2>
-      </Button>
-    </a>
-  )
-}
+      {/* 2x2 Grid */}
+      <div className="grid grid-cols-2 gap-3.5 w-full">
+        {/* Top Right: پشتیبانی */}
+        <button
+          type="button"
+          onClick={onSupportClick}
+          className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-2xl py-4 px-3 flex items-center justify-center gap-2.5 hover:border-slate-200 active:scale-[0.98] transition-all cursor-pointer w-full"
+        >
+          <Headset className="w-5 h-5 text-slate-600 shrink-0" />
+          <span className="font-kal-2 text-slate-700 font-medium text-sm sm:text-base">پشتیبانی</span>
+        </button>
 
-function MainButtons() {
-  return (
-    <div>
-      <div className="flex gap-2 w-full flex-wrap items-stretch h-full">
+        {/* Top Left: سوالات متداول */}
+        <button
+          type="button"
+          onClick={onFaqClick || onSupportClick}
+          className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-2xl py-4 px-3 flex items-center justify-center gap-2.5 hover:border-slate-200 active:scale-[0.98] transition-all cursor-pointer w-full"
+        >
+          <svg className="w-5 h-5 text-slate-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span className="font-kal-2 text-slate-700 font-medium text-sm sm:text-base">سوالات متداول</span>
+        </button>
 
-        <Link to="/orders" className="w-full">
-          <div className="bg-[#ff0055] hover:bg-[#e0004c] text-white p-4 rounded-2xl flex items-center justify-between shadow-md shadow-pink-500/15 cursor-pointer transition-all active:scale-[0.99]">
-            <div className="flex items-center gap-3">
-              <MdOutlineShoppingBag size={26} />
-              <span className="font-kal-3 font-bold text-sm">سفارشات من</span>
-            </div>
-            <span className="text-xs bg-white/20 px-2.5 py-1 rounded-full font-kal-2">مشاهده سفارشات</span>
-          </div>
-        </Link>
+        {/* Bottom Right: درباره ما */}
+        <a
+          href=""
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-2xl py-4 px-3 flex items-center justify-center gap-2.5 hover:border-slate-200 active:scale-[0.98] transition-all cursor-pointer w-full"
+        >
+          <svg className="w-5 h-5 text-slate-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span className="font-kal-2 text-slate-700 font-medium text-sm sm:text-base">درباره ما</span>
+        </a>
 
-        <ButtonLink title="سبد خرید" className="w-[calc(50%-0.25rem)]" to="/cart">
-          <MdOutlineShoppingCart size={25} className="text-[#ff0055]" />
-        </ButtonLink>
-
-        <ButtonLink title="لیست پرداخت من" className="w-[calc(50%-0.25rem)]" to="/profile/myPaymentList">
-          <MdOutlinePayment size={25} className="text-firoze" />
-        </ButtonLink>
-
-        <ButtonLink title="کتاب های دانلود شده" className="w-full" to='/mylib?justDownload=true'>
-          <ImBooks size={25} className="text-firoze" />
-        </ButtonLink>
-
-        <ButtonA title=" وب سایت SA" className="w-[calc(33%-0.3rem)]" href={"https://sa-iran.org/"}>
-          <BsBrowserChrome size={25} className="text-yellow-400" />
-        </ButtonA>
-        <ButtonA title=" درباره SA" className="w-[calc(33%-0.3rem)]" href={"https://sa-iran.org/%d8%af%d8%b1%d8%a8%d8%a7%d8%b1%d9%87-%d9%85%d8%a7/"}>
-          <MdArticle size={25} className="text-purple-500" />
-        </ButtonA>
-
-        <DrawerVual
-          isHeaight={true}
-          trigger={<ButtonA title="پشتیبانی تلفنی" className="w-[calc(33%-0.3rem)]" >
-            <BiSupport size={25} className="text-green-500" />
-          </ButtonA>}>
-          <h3 className="font-bold text-lg">پشتیبانی تلفنی</h3>
-          <p className="py-4"> جهت گزارش و رفع مشکلات با شماره <span>09103748047 </span> تماس بگیرید ! </p>
-        </DrawerVual>
-
+        {/* Bottom Left: خروجی از حساب */}
+        <button
+          type="button"
+          onClick={onExitClick}
+          className="bg-white border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] rounded-2xl py-4 px-3 flex items-center justify-center gap-2.5 hover:border-rose-100 active:scale-[0.98] transition-all cursor-pointer w-full"
+        >
+          <svg className="w-5 h-5 text-[#ff0055] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            <polyline points="16 17 21 12 16 7" />
+            <line x1="21" y1="12" x2="9" y2="12" />
+          </svg>
+          <span className="font-kal-2 text-[#ff0055] font-medium text-sm sm:text-base">خروجی از حساب</span>
+        </button>
       </div>
+
+     
     </div>
   )
 }

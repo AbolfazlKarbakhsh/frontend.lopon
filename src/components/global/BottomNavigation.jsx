@@ -33,19 +33,16 @@ const NAV_ITEMS = [
 export default function BottomNavigation() {
   const location = useLocation();
 
-  // Show ONLY on the Home page
-  if (location.pathname !== '/') {
-    return null;
-  }
-
   return (
     <nav
       aria-label="منوی اصلی"
-      className="fixed bottom-0 left-0 right-0 z-50 w-full max-w-md md:max-w-3xl lg:max-w-5xl mx-auto  bg-white/95 backdrop-blur-md border-t border-slate-100 rounded-t-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.08)] px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]"
+      className="fixed bottom-0 left-0 right-0 z-50 w-full max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto bg-white/95 backdrop-blur-md border-t border-slate-100 rounded-t-2xl shadow-[0_-8px_30px_rgba(0,0,0,0.08)] px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]"
     >
       <div className="grid grid-cols-4 items-center">
         {NAV_ITEMS.map((item) => {
-          const active = location.pathname === item.path;
+          const active =
+            location.pathname === item.path ||
+            (item.path !== '/' && location.pathname.startsWith(item.path));
           const Icon = item.icon;
 
           return (

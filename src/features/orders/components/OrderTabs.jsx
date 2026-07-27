@@ -1,29 +1,46 @@
 import React from 'react';
+import { motion } from 'motion/react';
 
 function OrderTabs({ activeTab, setActiveTab }) {
   return (
-    <div className="bg-gray-100/80 p-1 rounded-full flex items-center justify-center gap-1 mx-4 my-3">
-      <button
-        onClick={() => setActiveTab('active')}
-        className={`flex-1 py-2 text-xs font-kal-3 transition-all duration-200 rounded-full cursor-pointer text-center ${
-          activeTab === 'active'
-            ? 'bg-[#ff0055] text-white font-bold shadow-xs'
-            : 'text-gray-500 hover:text-gray-800'
-        }`}
-      >
-        قابل استفاده
-      </button>
+    <div className="flex justify-center my-4 px-4">
+      <div className="relative w-full max-w-xs sm:max-w-sm bg-[#FE0659] p-1 rounded-full  shadow-[2px_2px_20px_0px_rgba(254,130,171,0.5)] flex items-center">
+        {/* Right Option in RTL: قابل استفاده */}
+        <button
+          type="button"
+          onClick={() => setActiveTab('active')}
+          className={`relative z-10 flex-1 py-2 text-center text-sm font-kal-3 transition-colors duration-200 cursor-pointer ${
+            activeTab === 'active' ? 'text-slate-700 font-bold' : 'text-white font-bold'
+          }`}
+        >
+          {activeTab === 'active' && (
+            <motion.div
+              layoutId="order-tab-pill"
+              className="absolute inset-0 bg-white rounded-full shadow-xs"
+              transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+            />
+          )}
+          <span className="relative z-10">قابل استفاده</span>
+        </button>
 
-      <button
-        onClick={() => setActiveTab('completed')}
-        className={`flex-1 py-2 text-xs font-kal-3 transition-all duration-200 rounded-full cursor-pointer text-center ${
-          activeTab === 'completed'
-            ? 'bg-[#ff0055] text-white font-bold shadow-xs'
-            : 'text-gray-500 hover:text-gray-800'
-        }`}
-      >
-        تمام شده
-      </button>
+        {/* Left Option in RTL: تمام شده */}
+        <button
+          type="button"
+          onClick={() => setActiveTab('completed')}
+          className={`relative z-10 flex-1 py-2 text-center text-sm font-kal-3 transition-colors duration-200 cursor-pointer ${
+            activeTab === 'completed' ? 'text-slate-700 font-bold' : 'text-white font-bold'
+          }`}
+        >
+          {activeTab === 'completed' && (
+            <motion.div
+              layoutId="order-tab-pill"
+              className="absolute inset-0 bg-white rounded-full shadow-xs"
+              transition={{ type: 'spring', stiffness: 450, damping: 35 }}
+            />
+          )}
+          <span className="relative z-10">تمام شده</span>
+        </button>
+      </div>
     </div>
   );
 }

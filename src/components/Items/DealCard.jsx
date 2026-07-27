@@ -21,7 +21,7 @@ export const CarouselDealCard = ({ deal }) => {
       className="bg-white rounded-2xl overflow-hidden shadow-xs border border-gray-100 flex flex-col h-full min-w-[210px] w-[210px] sm:min-w-[230px] sm:w-[230px] snap-center select-none"
       id={`carousel-deal-card-${deal.id}`}
     >
-      <Link to={`/business/${deal.businessId}`} className="flex flex-col h-full">
+      <Link to={`/business/${deal.businessId}?dealId=${deal.id}`} className="flex flex-col h-full">
         <div className="relative h-36 overflow-hidden bg-gray-100">
           <img
             src={deal.imageUrl}
