@@ -1,23 +1,43 @@
 import React from 'react'
 import profileImage from "@assets/images/profile.png";
-import Card from '@components/UI/Card';
+import { Pencil } from 'lucide-react';
 
-function DetailsProfile({data}) {
+function DetailsProfile({ data, onEditClick }) {
   return (
-    <Card classCard="shadow-sm">
-      <div className="flex  items-center">
-        <div className="avatar placeholder">
-          <div className="bg-[#f78639] text-white rounded-full w-20">
-            <img src={profileImage} alt="پروفایل" className="wh-full" />
-          </div>
+    <div className="flex flex-col items-center justify-center my-4">
+      {/* Avatar Container */}
+      <div className="relative">
+        {/* Pink Ring Frame */}
+        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-[3px] border-[#ff2a70] p-1 bg-white shadow-xs flex items-center justify-center">
+          <img
+            src={data?.avatar || profileImage}
+            alt={data?.name || "پروفایل"}
+            className="w-full h-full rounded-full object-cover"
+          />
         </div>
-        <div className=" mr-4 space-y-1">
-          <h2 className="text-base text-27 font-kal-3"> {data?.name || "بدون نام کاربری"}</h2>
-          <p className="text-sm font-kal-2">{data?.mobile || "در حال بارگیری"}</p>
-        </div>
+
+        {/* Pencil Edit Icon Badge */}
+        <button
+          type="button"
+          onClick={onEditClick}
+          className="absolute top-0 left-0 w-7 h-7 rounded-full bg-[#f4f5f7] border-2 border-white flex items-center justify-center text-slate-600 shadow-xs hover:bg-slate-200 transition-all cursor-pointer"
+          title="ویرایش پروفایل"
+        >
+          <Pencil className="w-3.5 h-3.5 text-slate-600" />
+        </button>
       </div>
-    </Card>
+
+      {/* User Name */}
+      <h2 className="font-kal-3 font-bold text-slate-800 text-lg sm:text-xl mt-3 text-center">
+        {data?.name || "علی علی آبادی"}
+      </h2>
+
+      {/* Mobile Number */}
+      <p className="text-slate-400 font-kal-2 text-sm mt-0.5 text-center dir-ltr">
+        {data?.mobile || "۰۹۳۸۱۷۷۸۹۲۰"}
+      </p>
+    </div>
   )
 }
 
-export default DetailsProfile
+export default DetailsProfile;

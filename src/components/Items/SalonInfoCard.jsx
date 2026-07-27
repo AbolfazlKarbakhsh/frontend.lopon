@@ -9,16 +9,20 @@ const DotLine = () => {
     </div>
   )
 }
-export default function SalonInfoCard({name , address , time , rate , discount ,}) {
+export default function SalonInfoCard({ name, serviceTitle, address, time, rate, discount, purchasesCount }) {
   return (
     <div className="relative -mt-14 mx-4 z-20 bg-white rounded-3xl shadow-lg border border-gray-100 p-4 pb-0 px-2">
 
-      {/* Salon Name Heading */}
+      {/* Salon Name Heading & Service Title */}
       <div className="text-center mb-4">
         <h1 className="text-xl font-black text-slate-800 tracking-tight select-none">
-          مجموعه زیبایی بیوتی کرمان
-          {name}
+          {name || "مجموعه زیبایی بیوتی کرمان"}
         </h1>
+        {serviceTitle && (
+          <p className="text-xs font-bold text-[#ff1461] mt-1.5 font-kal-3">
+            {serviceTitle}
+          </p>
+        )}
       </div>
 
       <DotLine />
@@ -27,20 +31,20 @@ export default function SalonInfoCard({name , address , time , rate , discount ,
       <div className="space-y-2 my-4 text-[.8rem] text-slate-600 px-1 text-right">
 
         <div className="flex items-center gap-1 justify-start">
-          <div className="flex items-center justify-center w-7 h-7 rounded-full  text-slate-400  flex-shrink-0">
+          <div className="flex items-center justify-center w-7 h-7 rounded-full text-slate-400 flex-shrink-0">
             <MapPin className="w-4 h-4" />
           </div>
           <span className="font-extrabold text-slate-500 leading-relaxed">
-            خیابان قرنی کوچه شماره ۲۲
+            {address || "خیابان قرنی کوچه شماره ۲۲"}
           </span>
         </div>
 
         <div className="flex items-center gap-1 justify-start">
-          <div className="flex items-center justify-center w-7 h-7 rounded-full  text-slate-400 flex-shrink-0">
+          <div className="flex items-center justify-center w-7 h-7 rounded-full text-slate-400 flex-shrink-0">
             <Clock className="w-4 h-4" />
           </div>
           <span className="font-bold text-slate-500">
-            ساعت ۱۲ ظهر تا ۴ عصر
+            {time || "ساعت ۱۲ ظهر تا ۴ عصر"}
           </span>
         </div>
       </div>
@@ -49,24 +53,23 @@ export default function SalonInfoCard({name , address , time , rate , discount ,
 
       <div className="flex justify-between items-stretch text-center ">
 
-        <div className="flex-1 flex flex-col justify-center items-center  pb-3 pt-5">
+        <div className="flex-1 flex flex-col justify-center items-center pb-3 pt-5">
           <span className="text-md font-black text-slate-500 tracking-tight select-none leading-none">
-            ۱۲۰
+            {purchasesCount ? purchasesCount.toLocaleString('fa-IR') : "۱۲۰"}
           </span>
           <span className="text-[10px] font-bold text-slate-500 mt-1.5 whitespace-nowrap">
             خرید موفق
           </span>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center items-center border-r-2 border-dashed border-slate-300  pb-3 pt-5">
+        <div className="flex-1 flex flex-col justify-center items-center border-r-2 border-dashed border-slate-300 pb-3 pt-5">
           <div className="flex items-center gap-1 justify-center leading-none">
             <Star className="w-4 h-4 fill-amber-400 text-amber-400 mb-1" />
             <span className="text-md font-black text-slate-500 tracking-tight leading-none">
-              ۴.۵
+              {rate ? rate.toLocaleString('fa-IR') : "۴.۵"}
             </span>
           </div>
         </div>
-
 
         <div className="flex-1 flex flex-col justify-center items-center border-s-2 border-dashed border-slate-300 pb-3 pt-5">
           <div className="flex gap-1 items-center ">
@@ -74,10 +77,10 @@ export default function SalonInfoCard({name , address , time , rate , discount ,
               تا
             </span>
             <span className="text-md font-black text-rose-500 ">
-              ۶۰٪
+              {discount ? (typeof discount === 'number' ? discount.toLocaleString('fa-IR') : discount) : "۶۰"}٪
             </span>
           </div>
-          <span className="text-md font-extrabold text-rose-500  whitespace-nowrap">
+          <span className="text-md font-extrabold text-rose-500 whitespace-nowrap">
             تخفیف
           </span>
         </div>

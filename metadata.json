@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
+  "name": "Lopon",
+=======
   "name": "Kerman Takhfif",
+>>>>>>> origin/main
   "description": "Discount and booking application for services, books, and businesses",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

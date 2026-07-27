@@ -11,9 +11,6 @@ function PayButton({ data }) {
   // create payment
   const createPaymentFN = () => createPayment({ id: data._id });
 
-
-
-
   useEffect(() => {
     createPayData?.data?.data && window.location.replace(createPayData.data.data.paymentLink);
   }, [createPayData]);

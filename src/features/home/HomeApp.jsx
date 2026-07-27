@@ -136,135 +136,94 @@ md:px-10
       />
 
       {/* Section 2: 4 Trust / Feature Badges Grid */}
-     <div className="px-4 my-4">
-  <div className="relative overflow-hidden rounded-3xl bg-white shadow-md">
+      <div className="px-3 sm:px-4 my-3 sm:my-4">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white shadow-xs border border-slate-100/80">
+          {/* خط عمودی بالا */}
+          <div className="absolute left-1/2 top-3 h-[calc(50%-8px)] w-px -translate-x-1/2 bg-pink-100/80" />
 
- {/* خط عمودی بالا */}
-<div className="absolute left-1/2 top-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
+          {/* خط عمودی پایین */}
+          <div className="absolute left-1/2 bottom-3 h-[calc(50%-8px)] w-px -translate-x-1/2 bg-pink-100/80" />
 
-{/* خط عمودی پایین */}
-<div className="absolute left-1/2 bottom-6 h-[calc(50%-12px)] w-px -translate-x-1/2 bg-pink-100" />
+          {/* خط افقی سمت چپ */}
+          <div className="absolute left-3 top-1/2 w-[calc(50%-8px)] h-px -translate-y-1/2 bg-pink-100/80" />
 
-{/* خط افقی سمت چپ */}
-<div className="absolute left-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+          {/* خط افقی سمت راست */}
+          <div className="absolute right-3 top-1/2 w-[calc(50%-8px)] h-px -translate-y-1/2 bg-pink-100/80" />
 
-{/* خط افقی سمت راست */}
-<div className="absolute right-6 top-1/2 w-[calc(50%-12px)] h-px -translate-y-1/2 bg-pink-100" />
+          <div className="grid grid-cols-2">
+            {/* پرداخت امن */}
+            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
+              <div className="text-right flex-1 min-w-0">
+                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
+                  پرداخت امن
+                </h3>
+                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
+                  درگاه بانکی معتبر
+                </p>
+              </div>
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
+                <LuLock className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+            </div>
 
-    <div className="grid grid-cols-2">
+            {/* دارای نماد اعتماد */}
+            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
+              <div className="text-right flex-1 min-w-0">
+                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
+                  نماد اعتماد
+                </h3>
+                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
+                  خریدی مطمئن
+                </p>
+              </div>
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
+                <LuShieldCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+            </div>
 
-      {/* پرداخت امن */}
-      <div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
+            {/* پشتیبانی سریع */}
+            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
+              <div className="text-right flex-1 min-w-0">
+                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
+                  پشتیبانی سریع
+                </h3>
+                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
+                  همیشه کنار شما
+                </p>
+              </div>
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
+                <BiSupport className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+            </div>
 
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        پرداخت امن
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-         درگاه بانکی معتبر
-      </p>
-    </div>
-
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuLock size={25} />
+            {/* مجموعه‌های معتبر */}
+            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
+              <div className="text-right flex-1 min-w-0">
+                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
+                  مجموعه‌ معتبر
+                </h3>
+                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
+                  بررسی و تأیید شده
+                </p>
+              </div>
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
+                <LuAward className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-  </div>
-</div>
-
-
-      {/* دارای نماد اعتماد */}
-     <div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
-
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-         نماد اعتماد
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-       خریدی مطمئن 
-      </p>
-    </div>
-
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuShieldCheck size={25} />
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-      {/* پشتیبانی سریع */}
-     {/* پشتیبانی سریع */}
-<div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
-
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        پشتیبانی سریع
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-        همیشه کنار شما
-      </p>
-    </div>
-
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <BiSupport size={25} />
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-{/* مجموعه‌های معتبر */}
-<div className="flex items-center p-3">
-  <div className="grid w-full grid-cols-2 items-center">
-
-    {/* متن */}
-    <div className="text-center">
-      <h3 className="font-kal-3 text-sm font-bold text-gray-900">
-        مجموعه‌ معتبر
-      </h3>
-      <p className="mt-1 text-xs text-gray-400">
-        بررسی و تأیید شده
-      </p>
-    </div>
-
-    {/* آیکون */}
-    <div className="flex justify-center">
-      <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500">
-        <LuAward size={25} />
-      </div>
-    </div>
-
-  </div>
-</div>
-
-    </div>
-  </div>
-</div>
 
       {/* Section 3: Special Offers */}
       <SectionCarousel
-        title="پیشنهادهای ویژه"
+        title="محبوب ترین "
         deals={nailDeals.length > 0 ? nailDeals : featuredDeals}
         id="deals-2"
       />
 
       {/* Section 4: Special Offers */}
       <SectionCarousel
-        title="پیشنهادهای ویژه"
+        title="نزدیک شما "
         deals={skinDeals.length > 0 ? skinDeals : featuredDeals}
         id="deals-3"
       />
@@ -287,7 +246,7 @@ md:px-10
 
       {/* Section 6: Special Offers */}
       <SectionCarousel
-        title="پیشنهادهای ویژه"
+        title="جست و جو های اخیر "
         deals={medicalDeals.length > 0 ? medicalDeals : featuredDeals}
         id="deals-4"
       />
@@ -301,7 +260,7 @@ md:px-10
           <div className="relative   shrink-0 -my-2 overflow-hidden rounded-xl">
             <img
               src="images/present.png"
-              alt="جایزه لوپون" 
+              alt="پر فروش ترین ها " 
               className="w-full h-full object-cover rounded-xl"
             />
           </div>
