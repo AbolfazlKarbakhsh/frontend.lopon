@@ -50,7 +50,7 @@ function OrdersMain() {
   const displayedOrders = activeTab === 'active' ? MOCK_ACTIVE_ORDERS : MOCK_COMPLETED_ORDERS;
 
   return (
-    <div className="min-h-screen bg-slate-50/60 pb-24 max-w-md md:max-w-xl mx-auto px-3 py-2">
+    <div className="min-h-screen pb-24 max-w-md md:max-w-xl mx-auto px-3 py-2">
       {/* Top Header */}
       <OrdersHeader title="سفارشات من" />
 

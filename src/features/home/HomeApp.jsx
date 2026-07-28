@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 import { DEALS, BUSINESSES } from '@core/constants';
 import { CarouselDealCard } from '../../components/Items/DealCard';
 import SupportDrawer from '@components/global/Drawers/SupportDrawer';
+import {
+  ShieldCheck,Headphones,BadgeCheck, Circle,
+  ShieldAlert,
+  ShieldBan,
+  ShieldIcon,
+  ShieldPlus,} from "lucide-react";
 
 function SectionCarousel({ title, deals, id }) {
   if (!deals || deals.length === 0) return null;
@@ -136,83 +142,110 @@ md:px-10
       />
 
       {/* Section 2: 4 Trust / Feature Badges Grid */}
-      <div className="px-3 sm:px-4 my-3 sm:my-4">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white shadow-xs border border-slate-100/80">
-          {/* خط عمودی بالا */}
-          <div className="absolute left-1/2 top-3 h-[calc(50%-8px)] w-px -translate-x-1/2 bg-pink-100/80" />
 
-          {/* خط عمودی پایین */}
-          <div className="absolute left-1/2 bottom-3 h-[calc(50%-8px)] w-px -translate-x-1/2 bg-pink-100/80" />
+      <div className="flex justify-center py-6">
+  <div className="relative w-[90%] h-[174px] rounded-[32px] bg-white overflow-hidden shadow-gray shadow-md">
 
-          {/* خط افقی سمت چپ */}
-          <div className="absolute left-3 top-1/2 w-[calc(50%-8px)] h-px -translate-y-1/2 bg-pink-100/80" />
+    {/* خط افقی */}
+    <div className="absolute left-6 right-6 top-1/2 h-px -translate-y-1/2 bg-[#FDF2F8]" />
 
-          {/* خط افقی سمت راست */}
-          <div className="absolute right-3 top-1/2 w-[calc(50%-8px)] h-px -translate-y-1/2 bg-pink-100/80" />
+    {/* خط عمودی بالا */}
+    <div className="absolute left-1/2 top-6 h-[50px] w-px -translate-x-1/2 bg-[#FDF2F8]" />
 
-          <div className="grid grid-cols-2">
-            {/* پرداخت امن */}
-            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
-              <div className="text-right flex-1 min-w-0">
-                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  پرداخت امن
-                </h3>
-                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
-                  درگاه بانکی معتبر
-                </p>
-              </div>
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
-                <LuLock className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-              </div>
-            </div>
+    {/* خط عمودی پایین */}
+    <div className="absolute left-1/2 bottom-6 h-[50px] w-px -translate-x-1/2 bg-[#FDF2F8]" />
 
-            {/* دارای نماد اعتماد */}
-            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
-              <div className="text-right flex-1 min-w-0">
-                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  نماد اعتماد
-                </h3>
-                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
-                  خریدی مطمئن
-                </p>
-              </div>
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
-                <LuShieldCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-              </div>
-            </div>
+    {/* چهار قسمت */}
+    <div className="grid grid-cols-2 grid-rows-2 h-full">
 
-            {/* پشتیبانی سریع */}
-            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
-              <div className="text-right flex-1 min-w-0">
-                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  پشتیبانی سریع
-                </h3>
-                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
-                  همیشه کنار شما
-                </p>
-              </div>
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
-                <BiSupport className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-              </div>
-            </div>
+      {/* بالا راست */}
+      <div className="px-4 flex items-center">
+        <div className="grid grid-cols-[1fr_50px] items-center  w-full">
 
-            {/* مجموعه‌های معتبر */}
-            <div className="flex items-center justify-between w-full p-2.5 sm:p-3.5 px-3 sm:px-4">
-              <div className="text-right flex-1 min-w-0">
-                <h3 className="font-kal-3 text-xs sm:text-sm font-bold text-gray-900 leading-snug">
-                  مجموعه‌ معتبر
-                </h3>
-                <p className="mt-0.5 text-[10px] sm:text-xs text-gray-400 leading-tight truncate">
-                  بررسی و تأیید شده
-                </p>
-              </div>
-              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-pink-50 text-pink-500 mr-2">
-                <LuAward className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-              </div>
-            </div>
+          <div className="text-center">
+            <h3 className="text-[12px] font-bold">
+              پرداخت امن
+            </h3>
+
+            <p className="mt-1 text-[11px] text-gray-500">
+              با درگاه بانکی معتبر
+            </p>
           </div>
+
+          <div className="w-[56px] h-[56px] flex-shrink-0 flex items-center justify-center rounded-full bg-pink-50">
+            <ShieldCheck className="w-6 h-6 text-pink-500" />
+          </div>
+
         </div>
       </div>
+
+      {/* بالا چپ */}
+      <div className="px-4 flex items-center">
+        <div className="grid grid-cols-[1fr_50px] items-center gap-3 w-full">
+
+          <div className="text-center">
+            <h3 className="text-[12px] font-bold">
+              دارای نماد اعتماد
+            </h3>
+
+            <p className="mt-1 text-[11px] text-gray-500">
+               مطمئن و امن
+            </p>
+          </div>
+
+          <div className="w-[56px] h-[56px] flex-shrink-0 flex items-center justify-center rounded-full bg-pink-50">
+            <ShieldPlus className="w-6 h-6 text-pink-500" />
+          </div>
+
+        </div>
+      </div>
+
+      {/* پایین راست */}
+      <div className="px-4 flex items-center">
+        <div className="grid grid-cols-[1fr_50px] items-center gap-3 w-full">
+
+          <div className="text-center">
+            <h3 className="text-[12px] font-bold">
+              مجموعه‌ معتبر
+            </h3>
+
+            <p className="mt-1 text-[11px] text-gray-500">
+              بررسی و تایید شده
+            </p>
+          </div>
+
+          <div className="w-[56px] h-[56px] flex-shrink-0 flex items-center justify-center rounded-full bg-pink-50">
+            <BadgeCheck className="w-6 h-6 text-pink-500" />
+          </div>
+
+        </div>
+      </div>
+
+      {/* پایین چپ */}
+      <div className="px-4 flex items-center">
+        <div className="grid grid-cols-[1fr_50px] items-center gap-3 w-full">
+
+          <div className="text-center">
+            <h3 className="text-[12px] font-bold">
+              پشتیبانی سریع
+            </h3>
+
+            <p className="mt-1 text-[11px] text-gray-500">
+              همیشه کنار شما
+            </p>
+          </div>
+
+          <div className="w-[56px] h-[56px] flex-shrink-0 flex items-center justify-center rounded-full bg-pink-50">
+            <Headphones className="w-6 h-6 text-pink-500" />
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+      
 
       {/* Section 3: Special Offers */}
       <SectionCarousel
