@@ -10,14 +10,15 @@ function CartHeader({ title = 'سبد خرید' }) {
 
   return (
     <>
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+      <div className="flex items-center justify-between w-full py-2 px-4 mb-2 bg-white">
         {/* Back Button (Top Right in RTL) */}
         <button
           onClick={() => navigate(-1)}
           className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 transition-colors cursor-pointer"
           aria-label="بازگشت"
         >
-          <HiChevronRight size={22} />
+          
+          <img src="/svg/iconback.svg" alt="" />
         </button>
 
         {/* Title (Center) */}
@@ -26,13 +27,7 @@ function CartHeader({ title = 'سبد خرید' }) {
         </h1>
 
         {/* Support Button (Top Left in RTL) */}
-        <button
-          onClick={() => setIsSupportOpen(true)}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-100/70 hover:bg-slate-200/70 text-[#ff0055] transition-colors cursor-pointer"
-          aria-label="پشتیبانی"
-        >
-          <BiSupport size={20} />
-        </button>
+            <div></div>
       </div>
 
       <SupportDrawer isOpen={isSupportOpen} setIsOpen={setIsSupportOpen} />

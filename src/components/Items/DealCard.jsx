@@ -36,25 +36,25 @@ export const CarouselDealCard = ({ deal }) => {
         </div>
 
         <div className="p-3 flex flex-col flex-grow text-right">
-          <p className="text-[10px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{deal.businessName || 'مجموعه زیبا بیوتی کرمان کریمان'}</p>
-          <h3 className="text-xs font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{deal.serviceTitle}</h3>
+          <p className="text-[13px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{deal.businessName || 'مجموعه زیبا بیوتی کرمان کریمان'}</p>
+          <h3 className="text-[14px] font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{deal.serviceTitle}</h3>
 
-          <div className="flex items-center gap-1 text-[10px] text-gray-400 font-kal-2 mb-2">
-            <FiMapPin size={11} className="shrink-0 text-gray-400" />
+          <div className="flex items-center gap-1 text-[9px] text-gray-400 font-kal-2 mb-2">
+            <FiMapPin size={11} className="shrink-0 text-gray-600" />
             <span className="line-clamp-1">{address}</span>
           </div>
 
-    <div className="mt-auto flex items-start justify-end pt-1">
+    <div className=" flex items-start justify-end ">
 
   <div className="flex  flex-col  items-start">
 
     {/* قیمت اصلی خط خورده */}
      <div className="flex items-center gap-2">
-      <span className="bg-[#ef4444] text-white text-[10px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
+      <span className=" flex items-center justify-center bg-[#ef4444] w-[37px] h-[24px] text-white text-[12px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
         {deal.discountPercentage}٪
       </span>
 
-    <span className="relative text-[10px] text-[#64748b] font-kal-2">
+    <span className="relative text-[12px] text-[#64748b] font-kal-2">
       {formatPrice(deal.originalPrice)}
       <span className="absolute left-0 top-1/2 h-px w-full rotate-[-10deg] bg-[#64748b]"></span>
     </span>
@@ -64,12 +64,13 @@ export const CarouselDealCard = ({ deal }) => {
     {/* قیمت تخفیف خورده + درصد */}
    
 
-      <span className="text-xs sm:text-sm font-bold text-gray-900 font-kal-3">
-        {formatPrice(deal.discountedPrice)}
-        <span className="text-[9px] font-normal text-gray-500">
-          تومان
-        </span>
-      </span>
+  <span className="text-[18px] font-normal text-gray-900 ">
+  {formatPrice(deal.discountedPrice)}
+<span className="text-[12px] font-normal text-gray-500 mr-1 relative inline-block">
+  توما
+  <span className="absolute -top-[10px] right-[9px]">ن</span>
+</span>
+</span>
 
 
 

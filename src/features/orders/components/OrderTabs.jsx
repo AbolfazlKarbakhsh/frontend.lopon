@@ -3,14 +3,14 @@ import { motion } from 'motion/react';
 
 function OrderTabs({ activeTab, setActiveTab }) {
   return (
-    <div className="flex justify-center my-4 px-4">
-      <div className="relative w-full max-w-xs sm:max-w-sm bg-[#FE0659] p-1 rounded-full  shadow-[2px_2px_20px_0px_rgba(254,130,171,0.5)] flex items-center">
+    <div className="flex justify-center mb-8 px-4">
+      <div className="relative w-[265px] h-[44px] max-w-xs sm:max-w-sm bg-[#fe82ab] p-1 rounded-full  shadow-[2px_2px_20px_0px_rgba(254,130,171,0.5)] flex items-center">
         {/* Right Option in RTL: قابل استفاده */}
         <button
           type="button"
           onClick={() => setActiveTab('active')}
           className={`relative z-10 flex-1 py-2 text-center text-sm font-kal-3 transition-colors duration-200 cursor-pointer ${
-            activeTab === 'active' ? 'text-slate-700 font-bold' : 'text-white font-bold'
+            activeTab === 'active' ? 'text-slate-500 font-bold' : 'text-white font-bold'
           }`}
         >
           {activeTab === 'active' && (
@@ -28,7 +28,7 @@ function OrderTabs({ activeTab, setActiveTab }) {
           type="button"
           onClick={() => setActiveTab('completed')}
           className={`relative z-10 flex-1 py-2 text-center text-sm font-kal-3 transition-colors duration-200 cursor-pointer ${
-            activeTab === 'completed' ? 'text-slate-700 font-bold' : 'text-white font-bold'
+            activeTab === 'completed' ? 'text-slate-500 font-bold' : 'text-white font-bold'
           }`}
         >
           {activeTab === 'completed' && (

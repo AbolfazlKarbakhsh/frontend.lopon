@@ -90,8 +90,8 @@ function CartMain() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-3 sm:py-6 px-3 sm:px-6 lg:py-8 lg:px-8">
-      <div className="max-w-md md:max-w-2xl lg:max-w-5xl mx-auto bg-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xs border border-slate-100/80">
+    <div className="min-h-screen bg-white py-3 sm:py-6 px-3 sm:px-6 lg:py-8 lg:px-8">
+      <div className="max-w-md md:max-w-2xl lg:max-w-5xl mx-auto  rounded-3xl  shadow-xs ">
         {/* Header */}
         <CartHeader title="سبد خرید" />
 
@@ -124,7 +124,7 @@ function CartMain() {
             </div>
 
             {/* Cart Summary Box & Payment Button - Fixed above bottom navigation on mobile, sticky side column on laptop */}
-            <div className="max-lg:fixed max-lg:bottom-[56px] max-lg:left-0 max-lg:right-0 max-lg:z-40 max-lg:bg-white max-lg:p-3.5 max-lg:px-4 max-lg:border-t max-lg:border-slate-100 max-lg:shadow-[0_-6px_20px_rgba(0,0,0,0.08)] max-lg:rounded-t-2xl max-lg:max-w-md max-lg:mx-auto lg:col-span-5 lg:sticky lg:top-8">
+            <div className="max-lg:fixed max-lg:bottom-[56px] max-lg:left-0 max-lg:right-0 max-lg:z-40 max-lg:bg-white max-lg:p-3.5 max-lg:px-4 m  max-lg:rounded-t-2xl max-lg:max-w-md max-lg:mx-auto lg:col-span-5 lg:sticky lg:top-8">
               <CartSummary
                 summaryData={summaryData}
                 onCheckout={() => alert('انتقال به درگاه پرداخت...')}
