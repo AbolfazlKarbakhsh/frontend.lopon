@@ -1,4 +1,4 @@
-import BusinessApp from '@features/business/‌‌‌BusinessApp';
+import BusinessApp from '@features/business/BusinessApp';
 
 function Business() {
   return (

@@ -27,15 +27,27 @@ const LoginMainNumber = () => {
 
   // end-submit 
   const submitForm = async data => {
-    setPhone(watch("mobile"))
-    await getOtpCode(data);
+    const mobile = watch("mobile");
+    setPhone(mobile);
+    try {
+      getOtpCode(data, {
+        onSuccess: () => {
+          navigaite(`/login/otp/${mobile}`);
+        },
+        onError: () => {
+          navigaite(`/login/otp/${mobile}`);
+        }
+      });
+    } catch {
+      navigaite(`/login/otp/${mobile}`);
+    }
   }
   // Effect after submit 
   useEffect(() => {
-    if (stateOtp?.data?.status == "success") {
+    if (stateOtp?.data?.status == "success" && phone) {
       navigaite(`/login/otp/${phone}`);
     }
-  }, [stateOtp]);
+  }, [stateOtp, phone]);
 
   return (
     <form onSubmit={handleSubmit(submitForm)} >

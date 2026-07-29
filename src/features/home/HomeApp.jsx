@@ -14,11 +14,11 @@ import {
   ShieldIcon,
   ShieldPlus,} from "lucide-react";
 
-function SectionCarousel({ title, deals, id }) {
+function SectionCarousel({ title, deals, id, className = "py-4" }) {
   if (!deals || deals.length === 0) return null;
 
   return (
-    <section id={id} className="py-4 bg-white overflow-hidden text-right">
+    <section id={id} className={`bg-white overflow-hidden text-right ${className}`}>
       <div className="px-4">
         <div className="flex flex-col mb-3">
           <h2 className="text-base font-bold text-gray-900 font-kal-3">{title}</h2>
@@ -93,13 +93,7 @@ md:px-10
         {/* Right Side Brand Logo */}
      
          <div className="flex items-center gap-2">
-          <Link
-            to="/profile"
-            className="w-[48px] h-[48px] border border-gray-200 rounded-[8px] flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer bg-white"
-            aria-label="پروفایل"
-          >
-            <LuUser size={20} />
-          </Link>
+
 
           <button
             onClick={() => setIsSupportOpen(true)}
@@ -108,13 +102,21 @@ md:px-10
           >
             <BiSupport size={20} />
           </button>
+
+                    <Link
+            to="/profile"
+            className="w-[48px] h-[48px] border border-gray-200 rounded-[8px] flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer bg-white"
+            aria-label="پروفایل"
+          >
+            <LuUser size={20} />
+          </Link>
         </div>
       </div>
 
       {/* Hero Image Section */}
-      <div className="relative w-full  bg-gray-100">
+      <div className="relative w-full  bg-gray-100 mb-4">
         <img
-          src="/images/header.png"
+          src="/images/header.webp"
           alt="سالن زیبایی لوپون"
           className="w-full h-50 sm:h-50 object-cover"
         />
@@ -139,11 +141,12 @@ md:px-10
         title="پیشنهادهای ویژه"
         deals={featuredDeals}
         id="deals-1"
+        className="pt-8 pb-3"
       />
 
       {/* Section 2: 4 Trust / Feature Badges Grid */}
 
-      <div className="flex justify-center py-6">
+      <div className="flex justify-center pt-1 pb-6">
   <div className="relative w-[90%] h-[174px] rounded-[32px] bg-white overflow-hidden shadow-gray shadow-md">
 
     {/* خط افقی */}
@@ -269,7 +272,7 @@ md:px-10
           {/* Model Image Accent */}
           <div className="relative   shrink-0 -my-2 overflow-hidden rounded-xl">
             <img
-              src="images/Advertisement.png"
+              src="/images/Advertisement.png"
               alt="تخفیف لوپون"
               className="w-full h-full object-cover rounded-xl"
             />
@@ -292,7 +295,7 @@ md:px-10
           {/* Model Image Accent */}
           <div className="relative   shrink-0 -my-2 overflow-hidden rounded-xl">
             <img
-              src="images/present.png"
+              src="/images/off.png"
               alt="پر فروش ترین ها " 
               className="w-full h-full object-cover rounded-xl"
             />
