@@ -131,7 +131,7 @@ export default function MainBusiness() {
   };
 
   return (
-    <div className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto pb-20 bg-white">
+    <div className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto pb-32 bg-white">
       {/* Scrollable Container */}
       <div className="flex-1 flex flex-col">
         {/* Header Image */}

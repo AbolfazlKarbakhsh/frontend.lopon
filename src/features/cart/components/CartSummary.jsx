@@ -1,101 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function CartSummary({ summaryData, onCheckout }) {
   const {
-    totalOriginal = '۲۷۷,۵۰۰',
-    totalDiscount = '۲۷۷,۵۰۰',
+    totalOriginal = '۲۷۷.۵۰۰',
+    totalDiscount = '۲۷۷.۵۰۰',
     totalPayable = '۱۲,۵۰۰,۰۰۰',
   } = summaryData || {};
 
+  const [showDiscount, setShowDiscount] = useState(false);
+  const [discountCode, setDiscountCode] = useState('');
+
+  const handleApplyDiscount = (e) => {
+    e.preventDefault();
+    if (discountCode.trim()) {
+      alert(`کد تخفیف "${discountCode}" اعمال شد.`);
+    }
+  };
+
   return (
-    <div className="w-full space-y-3 sm:space-y-4">
-      {/* Receipt Style Box */}
-      <div className="relative my-4 rounded-2xl bg-[#f4f5f8] overflow-hidden">
+    <div className="w-full space-y-3 font-kal-2">
+      {/* Discount Code Row */}
+      <div className="pt-1 pb-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[13px] font-normal text-slate-700">کد تخفیف دارید؟</span>
+          
+          {/* Toggle Switch */}
+          <button
+            type="button"
+            dir="ltr"
+            onClick={() => setShowDiscount(!showDiscount)}
+            className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full p-0.5 transition-colors duration-200 ease-in-out focus:outline-none ${
+              showDiscount ? 'bg-[#334155]' : 'bg-slate-200'
+            }`}
+          >
+            <span
+              className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out transform ${
+                showDiscount ? 'translate-x-5' : 'translate-x-0'
+              }`}
+            />
+          </button>
+        </div>
 
-  {/* Border Layer */}
-  <div className="pointer-events-none absolute inset-0 rounded-2xl " />
+        {/* Discount Code Input Box (Visible when toggle is ON) */}
+        {showDiscount && (
+          <form onSubmit={handleApplyDiscount} className="mt-3 flex items-center gap-2">
+            <input
+              type="text"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
+              placeholder="کد تخفیف خود را وارد کنید"
+              className="flex-1 bg-white border border-slate-400 rounded-[8px] px-3.5 py-2.5 text-[13px] font-normal text-slate-700 placeholder:text-slate-300 focus:outline-none focus:border-slate-600 transition-colors text-right"
+            />
+            <button
+              type="submit"
+              className="bg-[#f0f3f7] hover:bg-slate-200 text-slate-500 font-kal-3 font-normal px-5 py-2.5 rounded-[8px] text-[13px] transition-colors cursor-pointer shrink-0"
+            >
+              اعمال
+            </button>
+          </form>
+        )}
+      </div>
 
-  {/* Left Ticket Cutout */}
-  <div className="absolute -left-[13px] top-[calc(50%+2px)] -translate-y-1/2 z-20 h-7 w-7 rounded-full ">
-    <div className="absolute inset-[1px] rounded-full bg-white" />
-  </div>
+      {/* Row 1: Total Orders */}
+      <div className="flex items-center justify-between py-1">
+        <span className="text-slate-600 font-normal text-[13px]">جمع کل سفارشات:</span>
+        <div className="flex items-center gap-1">
+          <span className="font-normal text-slate-800 text-[13px]">{totalOriginal}</span>
+          <span className="text-[13px] text-slate-400 font-normal">تومان</span>
+        </div>
+      </div>
 
-  {/* Right Ticket Cutout */}
-  <div className="absolute -right-[13px] top-[calc(50%+2px)] -translate-y-1/2 z-20 h-7 w-7 rounded-full ">
-    <div className="absolute inset-[1px] rounded-full bg-white" />
-  </div>
+      {/* Row 2: Savings Pill (Green Box with 8px border radius) */}
+      <div className="bg-[#e8f8ee] rounded-[8px] px-3.5 py-2.5 flex items-center justify-between text-[#1e8e4a] my-1.5">
+        <span className="font-normal text-[13px]">سود شما از خرید:</span>
+        <div className="flex items-center gap-1">
+          <span className="font-normal text-[#1e8e4a] text-[13px]">{totalDiscount}</span>
+          <span className="text-[13px] text-[#1e8e4a]/70 font-normal">تومان</span>
+        </div>
+      </div>
 
-  {/* Content */}
-  <div className="relative z-10 p-3.5 sm:p-5">
+      {/* Dashed Line Divider with wide dashes */}
+      <div
+        className="my-3 h-[1px] w-full"
+        style={{
+          backgroundImage: 'linear-gradient(to right, #cbd5e1 50%, rgba(255,255,255,0) 0%)',
+          backgroundSize: '16px 1px',
+          backgroundRepeat: 'repeat-x',
+        }}
+      />
 
-    {/* Row 1 */}
-<div className='pb-2'>
-    <div className="pb-2 flex items-center justify-between text-xs sm:text-sm text-slate-500 font-kal-2  ">
-      <span className='text-[14px] '>جمع کل سفارشات:</span>
+      {/* Row 3: Payable Amount */}
+      <div className="flex items-center justify-between py-1">
+        <span className="font-normal text-slate-700 text-[13px]">مبلغ قابل پرداخت:</span>
+        <div className="flex items-center gap-1">
+          <span className="font-normal text-slate-900 text-[13px]">{totalPayable}</span>
+          <span className="text-[13px] text-slate-400 font-normal">تومان</span>
+        </div>
+      </div>
 
-      <span className="text-[18px]  text-slate-700">
-        {totalOriginal}
-        <span className="mr-1 text-[10px] sm:text-[11px] font-normal text-slate-400 font-kal-2">
-          تومان
-        </span>
-      </span>
-    </div>
-    
-    
-
-    {/* Row 2 */}
-    <div className="mt-2 sm:mt-3 flex items-center justify-between text-xs sm:text-sm text-slate-500 font-kal-2 ">
-      <span className='text-[14px]'>مجموع کل تخفیف:</span>
-
-      <span className="text-[18px]  text-slate-700">
-        {totalDiscount}
-        <span className="mr-1 text-[10px] sm:text-[11px] font-normal text-slate-400 font-kal-2">
-          تومان
-        </span>
-      </span>
-    </div>
-</div>
-
-    {/* Dashed Divider */}
-<div
-  className="absolute left-0 right-0 top-[55%] z-10 border border-[#cbd5e1] "
-  style={{
-    borderStyle: "dashed",
-    borderWidth: "1px",
-    borderImage:
-      "repeating-linear-gradient(to right, #cbd5e1 0 7px, transparent 7px 15px) 1",
-  }}
-/>
-
-    {/* Row 3 */}
-    <div className="mt-4 flex items-center justify-between font-kal-3 text-xs sm:text-sm font-bold text-slate-700 py-4 ">
-
-      <span className=" text-slate-500 text-[16px]">
-        مبلغ قابل پرداخت:
-      </span>
-
-      <span className="text-[18px] font-normal text-slate-900">
-        {totalPayable}
-        <span className="mr-1 text-[10px] sm:text-[11px] font-normal text-slate-500 font-kal-2">
-          تومان
-        </span>
-      </span>
-
-    </div>
-
-  </div>
-
-</div>
-
-      {/* Payment Action Button */}
-      <button
-        onClick={onCheckout}
-        className="w-full bg-[#ff0055] hover:bg-[#e0004c] active:scale-[0.99] text-white font-kal-3 font-bold text-sm sm:text-base py-3 sm:py-3.5 rounded-2xl shadow-md shadow-pink-500/15 text-center transition-all cursor-pointer"
-      >
-        پرداخت
-      </button>
+      {/* Row 4: Payment Button */}
+      <div className="pt-2">
+        <button
+          type="button"
+          onClick={onCheckout}
+          className="w-full bg-[#ff0055] hover:bg-[#e0004c] active:scale-[0.99] text-white font-kal-3 font-bold text-base py-3.5 rounded-lg shadow-md shadow-pink-500/15 text-center transition-all cursor-pointer"
+        >
+          پرداخت
+        </button>
+      </div>
     </div>
   );
 }
 
 export default CartSummary;
+

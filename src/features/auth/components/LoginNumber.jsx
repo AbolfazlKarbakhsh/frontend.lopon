@@ -6,7 +6,7 @@ import LoginHeader from '../components/LoginHeader';
 function LoginNumber({ validation, error, phoneLoading }) {
   return (
     <>
-      <LoginHeader head={"شروع کار با کرمان تخفیف"} description={"با شمارۀ موبایل‌تان وارد شوید:"} />
+      <LoginHeader head={"شروع کار با لوپُن"} description={"با شمارۀ موبایل‌تان وارد شوید:"} />
       {/* input  */}
       <PhoneInput validation={validation} />
       {error && <ErrorText value={error.message} />}

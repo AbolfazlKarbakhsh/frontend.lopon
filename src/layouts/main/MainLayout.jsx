@@ -46,7 +46,7 @@ function MainLayout() {
       >
         <Outlet />
         
-{!hideFooter && location.pathname !== '/orders' && location.pathname !== '/cart' && <MainFooter />}
+        {!hideFooter && location.pathname === '/' && <MainFooter />}
       </div>
       {!hideFooter && <BottomNavigation />}
     </div>
