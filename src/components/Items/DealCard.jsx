@@ -18,15 +18,15 @@ export const CarouselDealCard = ({ deal }) => {
 
   return (
     <motion.div
-      className="bg-white rounded-2xl overflow-hidden shadow-xs border border-gray-100 flex flex-col h-full min-w-[210px] w-[210px] sm:min-w-[230px] sm:w-[230px] snap-center select-none"
+      className="bg-white z-20 rounded-2xl overflow-hidden shadow-xs border border-gray-200  shadow-gray shadow  flex flex-col h-full min-w-[190px] w-[190px] sm:min-w-[230px] sm:w-[230px] snap-center select-none "
       id={`carousel-deal-card-${deal.id}`}
     >
       <Link to={`/business/${deal.businessId}?dealId=${deal.id}`} className="flex flex-col h-full">
-        <div className="relative h-36 overflow-hidden bg-gray-100">
+        <div className="relative h-32 overflow-hidden bg-gray-100">
           <img
             src={deal.imageUrl}
             alt={deal.serviceTitle}
-            className="w-full h-full object-cover"
+            className="w-full h-32 object-cover"
             referrerPolicy="no-referrer"
           />
           <div className="absolute top-2 left-2 bg-white/95 backdrop-blur-xs text-[#6474bb] text-[11px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs border border-gray-100 font-kal-3">
@@ -35,48 +35,48 @@ export const CarouselDealCard = ({ deal }) => {
           </div>
         </div>
 
-        <div className="p-3 flex flex-col flex-grow text-right">
-          <p className="text-[13px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{deal.businessName || 'مجموعه زیبا بیوتی کرمان کریمان'}</p>
-          <h3 className="text-[14px] font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{deal.serviceTitle}</h3>
+        <div className="p-3 pt-2 flex flex-col flex-grow text-right">
+          <p className="text-[12px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{deal.businessName || 'مجموعه زیبا بیوتی کرمان کریمان'}</p>
+          <h3 className="text-[13px] font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{deal.serviceTitle}</h3>
 
           <div className="flex items-center gap-1 text-[9px] text-gray-400 font-kal-2 mb-2">
             <FiMapPin size={11} className="shrink-0 text-gray-600" />
             <span className="line-clamp-1">{address}</span>
           </div>
 
-    <div className=" flex items-start justify-end ">
+          <div className=" flex items-start justify-end ">
 
-  <div className="flex  flex-col  items-start">
+            <div className="flex  flex-col  items-start">
 
-    {/* قیمت اصلی خط خورده */}
-     <div className="flex items-center gap-2">
-      <span className=" flex items-center justify-center bg-[#ef4444] w-[37px] h-[24px] text-white text-[12px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
-        {deal.discountPercentage}٪
-      </span>
+              {/* قیمت اصلی خط خورده */}
+              <div className="flex items-center gap-2">
+                <span className=" flex items-center justify-center bg-[#ef4444] w-[37px] h-[24px] text-white text-[12px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
+                  {deal.discountPercentage}٪
+                </span>
 
-    <span className="relative text-[12px] text-[#64748b] font-kal-2">
-      {formatPrice(deal.originalPrice)}
-      <span className="absolute left-0 top-1/2 h-px w-full rotate-[-10deg] bg-[#64748b]"></span>
-    </span>
-
-
-    </div>
-    {/* قیمت تخفیف خورده + درصد */}
-   
-
-  <span className="text-[18px] font-normal text-gray-900 ">
-  {formatPrice(deal.discountedPrice)}
-<span className="text-[12px] font-normal text-gray-500 mr-1 relative inline-block">
-  توما
-  <span className="absolute -top-[10px] right-[9px]">ن</span>
-</span>
-</span>
+                <span className="relative text-[12px] text-[#64748b] font-kal-2">
+                  {formatPrice(deal.originalPrice)}
+                  <span className="absolute left-0 top-1/2 h-px w-full rotate-[-10deg] bg-[#64748b]"></span>
+                </span>
 
 
+              </div>
+              {/* قیمت تخفیف خورده + درصد */}
 
-  </div>
 
-</div>
+              <span className="text-[18px] font-normal text-gray-900 ">
+                {formatPrice(deal.discountedPrice)}
+                <span className="text-[12px] font-normal text-gray-500 mr-1 relative inline-block">
+                  توما
+                  <span className="absolute -top-[10px] right-[9px]">ن</span>
+                </span>
+              </span>
+
+
+
+            </div>
+
+          </div>
         </div>
       </Link>
     </motion.div>

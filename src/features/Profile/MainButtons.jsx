@@ -10,7 +10,7 @@ function MainButtons({ onSupportClick, onFaqClick, onExitClick }) {
       {/* Primary Action Button: سفارشات من */}
       <Link to="/orders" className="block w-full">
         <div className="w-full bg-[#ff0055] hover:bg-[#e0004c] text-white py-4 px-6 rounded-2xl flex items-center justify-center gap-2.5 shadow-md shadow-pink-500/20 active:scale-[0.99] transition-all cursor-pointer">
-          <img className='w-[38px] h-[38px]' src="/images/off.png" alt="" />
+          <img className='w-[38px] h-[38px]' src="./images/off.png" alt="" />
           <span className="font-kal-3 font-bold text-base text-white">سفارشات من</span>
         </div>
       </Link>

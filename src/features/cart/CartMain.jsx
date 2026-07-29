@@ -6,30 +6,30 @@ import { ShoppingBag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const INITIAL_CART_ITEMS = [
-  {
-    id: 1,
-    title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
-    businessName: 'مجموعه بیوتی ایران',
-    image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
-    originalPriceVal: 460500,
-    originalPrice: '۴۶۰,۵۰۰',
-    discountPercent: '۶۰',
-    discountedPriceVal: 277500,
-    discountedPrice: '۲۷۷,۵۰۰',
-    quantity: 1,
-  },
-  {
-    id: 2,
-    title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
-    businessName: 'مجموعه بیوتی ایران',
-    image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
-    originalPriceVal: 460500,
-    originalPrice: '۴۶۰,۵۰۰',
-    discountPercent: '۶۰',
-    discountedPriceVal: 277500,
-    discountedPrice: '۲۷۷,۵۰۰',
-    quantity: 1,
-  },
+  // {
+  //   id: 1,
+  //   title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
+  //   businessName: 'مجموعه بیوتی ایران',
+  //   image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
+  //   originalPriceVal: 460500,
+  //   originalPrice: '۴۶۰,۵۰۰',
+  //   discountPercent: '۶۰',
+  //   discountedPriceVal: 277500,
+  //   discountedPrice: '۲۷۷,۵۰۰',
+  //   quantity: 1,
+  // },
+  // {
+  //   id: 2,
+  //   title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
+  //   businessName: 'مجموعه بیوتی ایران',
+  //   image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
+  //   originalPriceVal: 460500,
+  //   originalPrice: '۴۶۰,۵۰۰',
+  //   discountPercent: '۶۰',
+  //   discountedPriceVal: 277500,
+  //   discountedPrice: '۲۷۷,۵۰۰',
+  //   quantity: 1,
+  // },
 ];
 
 const toPersianDigits = (num) => {
@@ -95,7 +95,7 @@ function CartMain() {
       <CartHeader title="سبد خرید" />
 
       {items.length === 0 ? (
-        <div className="py-16 text-center flex flex-col items-center justify-center space-y-4">
+        <div className="py-16 mt-[10dvh] text-center flex flex-col items-center justify-center space-y-4">
           <div className="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
             <ShoppingBag size={32} />
           </div>

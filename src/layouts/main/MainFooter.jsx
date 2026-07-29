@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 function MainFooter() {
   const location = useLocation().pathname
   return (
-    <div 
+    <div
       className="
         w-full
         max-w-md
@@ -16,6 +16,7 @@ function MainFooter() {
         bg-slate-50
       "
     >
+       <div className="absolute  top-0 left-0 right-0 w-full h-24 bg-gradient-to-b from-gray-400/30 via-gray-200/5 to-transparent blur-sm" />
       <footer className="bg-slate-50 pt-10 pb-20 border-t border-slate-100 text-center">
         <div className="px-6 flex flex-col gap-10">
           <div id="footer-about">
@@ -39,36 +40,38 @@ function MainFooter() {
             <p className="text-slate-500 text-[12px] font-kal-2">Email: info@lopon.ir</p>
           </div>
         </div>
-                  <div className="flex justify-center gap-4 my-3">
-                   <div className=" border border-gray-800 rounded-lg ">
-                                                      <a
-                                  referrerPolicy="origin"
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                   href="https://trustseal.enamad.ir/?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
-                                    >
-                                  <img
-                                   className="w-[80px]"
-                                    referrerPolicy="origin"
-                                    src="https://trustseal.enamad.ir/logo.aspx?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
-                                    alt="نماد اعتماد الکترونیکی"
-                                    style={{ cursor: "pointer" }}
-                                    code="UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
-                                  />
-                                         </a>
-                          
-                        </div>
+        <div className="flex justify-center gap-4 my-3">
+          <div className=" border border-gray-800 rounded-lg flex justify-center items-center">
+            <a
+              referrerPolicy="origin"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://trustseal.enamad.ir/?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
+            >
+              <img
+                className="w-[80px]"
+                referrerPolicy="origin"
+                src="https://trustseal.enamad.ir/logo.aspx?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
+                alt="نماد اعتماد الکترونیکی"
+                style={{ cursor: "pointer" }}
+                code="UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
+              />
+            </a>
 
-                        <div className=" border border-gray-800 rounded-lg ">
-                      <img src="/images/zarin-palpng.png" alt=""  className="w-[80px]"/>
-                          
-                        </div>
+          </div>
 
-                        </div>
+          <div className=" border border-gray-800 rounded-lg ">
+            <img src="./images/zarin-palpng.png" alt="" className="w-[80px]" />
+
+          </div>
+
+        </div>
         <div className="px-4 text-center border-t border-slate-200 pt-6 mt-10">
           <p className="text-slate-400 text-[10px] font-kal-2">© ۱۴۰۳ لوپُن. تمامی حقوق محفوظ است.</p>
         </div>
       </footer>
+       <div className="absolute  bottom-5 left-0 right-0 w-full h-12 bg-gradient-to-b from-gray-400/30 via-gray-200/5 to-transparent blur-sm" />
+
     </div>
   );
 }

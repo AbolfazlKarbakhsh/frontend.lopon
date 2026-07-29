@@ -29,7 +29,7 @@ function PageHeader({ title, onBack, showProfileIcon = true, showSupportIcon = t
           className="w-10 h-10 rounded-full bg-[#f4f5f7] flex items-center justify-center text-slate-700 hover:bg-slate-200 active:scale-95 transition-all cursor-pointer"
           aria-label="بازگشت"
         >
-          <img src="/svg/iconback.svg" alt="بازگشت" />
+          <img src="./svg/iconback.svg" alt="بازگشت" />
         </button>
 
         {/* Center Title */}

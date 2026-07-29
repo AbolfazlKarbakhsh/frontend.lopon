@@ -178,17 +178,6 @@ export default function MainBusiness() {
       {/* Conditions Modal */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
 
-      {/* Invoice Billing Modal */}
-      <ReceiptModal
-        isOpen={isReceiptOpen}
-        onClose={() => {
-          setIsReceiptOpen(false);
-          resetCart();
-        }}
-        cart={cart}
-        services={currentServices}
-        totalDiscounted={totals.totalDiscounted}
-      />
     </div>
   );
 }
