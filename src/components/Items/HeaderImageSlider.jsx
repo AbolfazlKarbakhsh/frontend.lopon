@@ -16,7 +16,7 @@ export default function HeaderImageSlider({ image, images }) {
     <>
       <div
         onClick={() => setIsFullscreen(true)}
-        className="relative w-full h-80 overflow-hidden rounded-b-[40px] shadow-md group cursor-zoom-in bg-slate-100"
+        className="relative w-full h-80 overflow-hidden rounded-none shadow-sm group cursor-zoom-in bg-slate-100"
       >
         <img
           src={singleImage}

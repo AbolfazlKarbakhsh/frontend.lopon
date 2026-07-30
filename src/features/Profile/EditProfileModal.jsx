@@ -57,7 +57,7 @@ export default function EditProfileModal({ isOpen, onClose, initialData, onSave 
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="مثلاً: سارا احمدی"
+                placeholder=""
                 className="w-full bg-slate-50/80 border border-slate-200 rounded-2xl px-4 py-3 text-sm font-kal-2 text-slate-800 focus:outline-none focus:border-[#ff2d55] focus:bg-white transition-all"
               />
             </div>

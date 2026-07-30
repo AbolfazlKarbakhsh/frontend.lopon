@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-import { Star, MessageSquareCode, Check } from 'lucide-react';
-const DotLine = () => {
-  return (
-    <div className="relative h-px w-full mb-6 ">
-      <div className="absolute -left-8 top-1/2 -translate-y-1/2 w-5 h-5 bg-[#fefeff] border-r border-slate-400 rounded-full z-10" />
-      <div className="absolute inset-0 border-t-[2.3px] border-dashed border-slate-300" />
-      <div className="absolute -right-8 top-1/2 -translate-y-1/2 w-5 h-5 bg-[#fefeff] border-l border-slate-400 rounded-full z-10" />
-    </div>
-  )
-}
+import { Star, Check } from 'lucide-react';
+
 export default function ReviewsSection({ reviews, onAddReview }) {
   const [isOpen, setIsOpen] = useState(false);
   const [author, setAuthor] = useState('');
   const [rating, setRating] = useState(5);
   const [text, setText] = useState('');
   const [selectedTags, setSelectedTags] = useState([]);
+  const [alertMessage, setAlertMessage] = useState(null);
 
   const availableTags = ['خدمات ناخن', 'کراتین مو', 'پاکسازی پوست', 'کاپ‌شاپ', 'فیشال', 'طراحی مژه'];
 
@@ -29,7 +22,7 @@ export default function ReviewsSection({ reviews, onAddReview }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!author.trim() || !text.trim()) {
-      alert('لطفاً نام و متن نظر خود را وارد کنید.');
+      setAlertMessage('لطفاً نام و متن نظر خود را وارد کنید.');
       return;
     }
     onAddReview({
@@ -44,84 +37,107 @@ export default function ReviewsSection({ reviews, onAddReview }) {
     setText('');
     setSelectedTags([]);
     setIsOpen(false);
+    setAlertMessage('نظر شما با موفقیت ثبت شد!');
   };
 
-  const averageRating = (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1);
+  const avgValue = reviews.length > 0
+    ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length)
+    : 4.5;
+  const averageRating = avgValue.toFixed(1);
 
   return (
-    <div className="mx-4 mt-6 bg-slate-50 border border-slate-100/50 rounded-3xl p-5 shadow-xs mb-16">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-5">
-        <div className="flex items-center gap-1">
-          <span className="text-base font-black text-gray-800">امتیاز و نظرات کاربران:</span>
-         
-        </div>
-        <div className="flex  items-center ">
-          <Star className="w-4 h-4 fill-amber-400 text-amber-400 mb-2" />
-           <span className="text-md font-black text-slate-400 mr-1">{averageRating}</span>
-        </div>
-      </div>
+    <div className="relative mx-4 mt-6 mb-16 z-20 filter drop-shadow-[0_12px_24px_rgba(15,23,42,0.12)]">
+      <div
+        className="bg-white rounded-[16px] border border-slate-100/80 p-4 pt-4 px-4"
+        style={{
+          WebkitMaskImage: `
+            radial-gradient(circle 9px at 0px 52px, transparent 8.5px, black 9px),
+            radial-gradient(circle 9px at 100% 52px, transparent 8.5px, black 9px)
+          `,
+          maskImage: `
+            radial-gradient(circle 9px at 0px 52px, transparent 8.5px, black 9px),
+            radial-gradient(circle 9px at 100% 52px, transparent 8.5px, black 9px)
+          `,
+          WebkitMaskComposite: 'destination-in',
+          maskComposite: 'intersect',
+        }}
+      >
+        {/* Header: Title 17px font-500 on Right, Rating score 17px font-500 on Left */}
+        <div className="flex justify-between items-center h-[36px] px-1 mb-4">
+          {/* Right side (RTL): Title */}
+          <h2 className="text-[17px] font-[500] text-slate-800 tracking-tight">
+            امتیاز و نظرات کاربران
+          </h2>
 
-     <DotLine />
+          {/* Left side (RTL): Rating Score */}
+          <div className="flex items-center gap-1.5">
+            <span className="text-[17px] font-[500] text-slate-800">
+              {parseFloat(averageRating).toLocaleString('fa-IR')}
+            </span>
+            <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+          </div>
+        </div>
 
-      {/* Horizontal Swipeable Reviews Slider */}
-      <div className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-2 -mx-2 px-2">
-        {reviews.map((review) => (
-          <div
-            key={review.id}
-            className="w-72 bg-white rounded-2xl p-4 shadow-xs border border-gray-100 snap-center flex-shrink-0 text-right flex flex-col justify-between"
-          >
-            <div>
-              {/* Writer Header */}
-              <div className="flex justify-between items-center mb-6">
-                <span className="text-xs font-black text-slate-500">{review.author}</span>
-                <div className="flex gap-0.5 justify-end flex-row-reverse ">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`w-3.5 h-3.5 ${
-                      i < review.rating
-                        ? 'fill-amber-400 text-amber-400'
-                        : 'text-gray-200'
-                    }`}
-                  />
+        {/* Note: No dashed divider line as requested ("نیازی به خط چین پایین امتیازات نداره") */}
+
+        {/* Horizontal Swipeable Reviews Slider */}
+        <div className="flex gap-3 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-2 -mx-1 px-1">
+          {reviews.map((review) => (
+            <div
+              key={review.id}
+              className="w-72 bg-white rounded-[24px] p-5 border border-slate-200 snap-center flex-shrink-0 text-right flex flex-col justify-between"
+            >
+              <div>
+                {/* Writer & Rating Header */}
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-xs font-bold text-slate-500">{review.author}</span>
+                  <div className="flex gap-0.5 items-center">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < review.rating
+                            ? 'fill-yellow-400 text-yellow-400'
+                            : 'text-slate-200'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Comment Text */}
+                <p className="text-[12px] font-[600] text-slate-700 leading-[24px] mb-4">
+                  {review.text}
+                </p>
+              </div>
+
+              {/* Tags footer */}
+              <div className="flex flex-wrap gap-1.5 justify-end">
+                {review.tags && review.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-1.5 rounded-lg"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
-              </div>
-
-              {/* Star Bar */}
-              
-
-              {/* Text */}
-              <p className="text-xs font-semibold text-gray-600 leading-relaxed mb-4">
-                {review.text}
-              </p>
             </div>
+          ))}
+        </div>
 
-            {/* Tags footer */}
-            <div className="flex flex-wrap gap-1.5 ">
-              {review.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-3 rounded-lg"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+        {/* Write a Review Button */}
+        <div className="pt-4 pb-1">
+          <button
+            id="submit-rating-btn"
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="w-full py-3 border border-slate-700 rounded-[8px] text-sm font-bold text-slate-800 hover:bg-slate-50 transition-colors flex items-center justify-center cursor-pointer"
+          >
+            ثبت امتیاز و نظرات
+          </button>
+        </div>
       </div>
-
-      {/* Write a Review Button */}
-      {/* <button
-        id="submit-rating-btn"
-        onClick={() => setIsOpen(true)}
-        className="w-full mt-5 py-3 border border-gray-300 rounded-2xl text-xs font-black text-gray-600 hover:bg-white transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-99"
-      >
-        <span>ثبت امتیاز و نظرات</span>
-        <MessageSquareCode className="w-4 h-4" />
-      </button> */}
 
       {/* Write Review Modal Dialogue */}
       {isOpen && (
@@ -163,7 +179,7 @@ export default function ReviewsSection({ reviews, onAddReview }) {
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
                   className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:outline-hidden focus:border-rose-400 focus:ring-1 focus:ring-rose-400 text-right text-gray-800"
-                  placeholder="مثال: رضا کاربخش"
+                  placeholder=""
                 />
               </div>
 
@@ -226,6 +242,25 @@ export default function ReviewsSection({ reviews, onAddReview }) {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Centered Alert Modal */}
+      {alertMessage && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs transition-all animate-fade-in">
+          <div className="bg-white rounded-2xl w-full max-w-xs p-5 text-center shadow-2xl space-y-4 border border-slate-100">
+            <div className="text-sm font-bold text-slate-800 leading-relaxed">
+              {alertMessage}
+            </div>
+            <button
+              id="alert-close-btn"
+              type="button"
+              onClick={() => setAlertMessage(null)}
+              className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all cursor-pointer"
+            >
+              تایید
+            </button>
           </div>
         </div>
       )}

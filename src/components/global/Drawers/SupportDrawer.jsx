@@ -1,8 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Drawer } from 'vaul';
-
 import { Phone, Headset, HelpCircle } from 'lucide-react';
-
 
 function SupportDrawer({ isOpen, setIsOpen }) {
   return (
@@ -44,13 +43,14 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             <div className="border-b border-dashed border-slate-200 my-2 mx-1" />
 
             {/* Option 3: سوالات متداول */}
-            <div
+            <Link
+              to="/faq"
               onClick={() => setIsOpen(false)}
               className="flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700 cursor-pointer"
             >
               <span className="font-kal-2 text-sm font-bold text-slate-600">سوالات متداول</span>
               <HelpCircle className="w-5 h-5 text-slate-600 shrink-0" />
-            </div>
+            </Link>
           </div>
 
           {/* Close Button */}
@@ -58,7 +58,6 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             type="button"
             onClick={() => setIsOpen(false)}
             className="w-full py-3.5 rounded-xl border border-slate-300 text-slate-700 font-kal-3 font-bold text-sm hover:bg-slate-50 active:scale-[0.99] transition-all cursor-pointer shadow-2xs"
-
           >
             بستن
           </button>

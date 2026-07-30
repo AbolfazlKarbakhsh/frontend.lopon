@@ -12,7 +12,7 @@ export default function StickyFooterBar({
   const displayOriginal = totalQuantity > 0 ? totalOriginal : 13500000;
 
   return (
-    <div className="fixed bottom-[68px] left-3 right-3 z-40 max-w-md md:max-w-xl lg:max-w-2xl mx-auto bg-white/95 backdrop-blur-md border border-slate-100/90 rounded-2xl px-4 py-3 flex items-center justify-between font-kal-2 shadow-[0_8px_25px_rgba(0,0,0,0.08)] gap-4 transition-all">
+    <div className="fixed bottom-[68px] left-0 right-0 z-40 max-w-md md:max-w-xl lg:max-w-2xl mx-auto bg-white border-t border-slate-300 rounded-none px-4 py-3 flex items-center justify-between font-kal-2 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] gap-4 transition-all">
       {/* Right side in RTL: Complete Purchase Button (50% width) */}
       <motion.button
         whileHover={{ scale: 1.02 }}

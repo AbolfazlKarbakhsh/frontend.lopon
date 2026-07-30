@@ -9,41 +9,57 @@ export const INITIAL_SERVICES = [
   },
   {
     id: '2',
-    name: 'کاشت ناخن با حرارت کم',
-    originalPrice: 12500000,
-    discountedPrice: 12500000,
+    name: 'ژلیش و مانیکور روسی',
+    originalPrice: 8500000,
+    discountedPrice: 6800000,
     category: 'ناخن',
-    duration: '۹۰ دقیقه'
+    duration: '۶۰ دقیقه'
   },
   {
     id: '3',
-    name: 'کاشت ناخن با حرارت کم',
-    originalPrice: 12500000,
-    discountedPrice: 12500000,
-    category: 'ناخن',
-    duration: '۹۰ دقیقه'
+    name: 'پاکسازی و فیشیال تخصصی پوست',
+    originalPrice: 12000000,
+    discountedPrice: 8500000,
+    category: 'پوست',
+    duration: '۷۵ دقیقه'
   },
   {
     id: '4',
-    name: 'کاشت ناخن با حرارت کم',
-    originalPrice: 12500000,
-    discountedPrice: 12500000,
-    category: 'ناخن',
-    duration: '۹۰ دقیقه'
+    name: 'کراتینه و احیای ابریشمی مو',
+    originalPrice: 22000000,
+    discountedPrice: 16000000,
+    category: 'مو',
+    duration: '۱۵۰ دقیقه'
   },
   {
     id: '5',
-    name: 'کراتینه و احیای تخصصی موی سر',
-    originalPrice: 18000000,
-    discountedPrice: 11500000,
+    name: 'رنگ و لایت بالیاژ اروپایی',
+    originalPrice: 25000000,
+    discountedPrice: 19500000,
     category: 'مو',
     duration: '۱۸۰ دقیقه'
   },
   {
     id: '6',
-    name: 'پاکسازی عمیق پوست (فیشال VIP)',
-    originalPrice: 7500000,
-    discountedPrice: 3000000,
+    name: 'اصلاح و قرینه‌سازی ابرو و صورت',
+    originalPrice: 3500000,
+    discountedPrice: 2500000,
+    category: 'ابرو',
+    duration: '۴۵ دقیقه'
+  },
+  {
+    id: '7',
+    name: 'پدیکور و جکوزی VIP همراه با ماساژ',
+    originalPrice: 11000000,
+    discountedPrice: 7800000,
+    category: 'پا',
+    duration: '۶۰ دقیقه'
+  },
+  {
+    id: '8',
+    name: 'هیدرودرمی و آبرسانی عمیق چهره',
+    originalPrice: 14000000,
+    discountedPrice: 9900000,
     category: 'پوست',
     duration: '۶۰ دقیقه'
   }

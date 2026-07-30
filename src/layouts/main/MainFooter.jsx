@@ -41,7 +41,7 @@ function MainFooter() {
           </div>
         </div>
         <div className="flex justify-center gap-4 my-3">
-          <div className=" border border-gray-800 rounded-lg flex justify-center items-center">
+          <div className=" border border-gray-800 rounded-lg flex justify-center items-center w-[80px] ">
             <a
               referrerPolicy="origin"
               target="_blank"
@@ -49,7 +49,7 @@ function MainFooter() {
               href="https://trustseal.enamad.ir/?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
             >
               <img
-                className="w-[80px]"
+                
                 referrerPolicy="origin"
                 src="https://trustseal.enamad.ir/logo.aspx?id=763513&Code=UIQeXlSRZ57jd1bdFV18lN63ANr5ld7B"
                 alt="نماد اعتماد الکترونیکی"

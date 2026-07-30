@@ -34,7 +34,7 @@ export default function MainBusiness() {
   const businessDeals = DEALS.filter((d) => d.businessId === business.id);
 
   // Map business deals to service list format, prioritizing the active deal at top
-  const currentServices =
+  const mappedDeals =
     businessDeals.length > 0
       ? [...businessDeals]
           .sort((a, b) =>
@@ -49,7 +49,11 @@ export default function MainBusiness() {
             duration: '۶۰ دقیقه',
             imageUrl: deal.imageUrl,
           }))
-      : INITIAL_SERVICES;
+      : [];
+
+  const existingNames = new Set(mappedDeals.map((d) => d.name));
+  const additionalServices = INITIAL_SERVICES.filter((s) => !existingNames.has(s.name));
+  const currentServices = [...mappedDeals, ...additionalServices].slice(0, 8);
 
   const [cart, setCart] = useState({});
   const [isTermsOpen, setIsTermsOpen] = useState(false);
@@ -148,12 +152,9 @@ export default function MainBusiness() {
         {/* Salon Specific Brand Info Card overlapping the Header */}
         <SalonInfoCard
           name={business.name}
-          serviceTitle={activeDeal?.serviceTitle}
           address={business.address}
           rate={business.rating}
           discount={maxDiscount}
-          purchasesCount={activeDeal?.purchasesCount || 28}
-          time={business.workingHours || "ساعت ۱۲ ظهر تا ۴ عصر"}
         />
 
         {/* Services modules with actual prices */}
