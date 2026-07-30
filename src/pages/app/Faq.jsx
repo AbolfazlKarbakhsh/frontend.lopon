@@ -89,14 +89,23 @@ function Faq() {
       dir="rtl"
     >
       {/* Pink Header Card */}
-      <div className="bg-[#FFF0F2] rounded-[32px] p-6 text-center border border-[#FFE2E6] shadow-3xs relative overflow-hidden">
-        <div className="w-14 h-14 bg-[#ff2d55] rounded-full mx-auto flex items-center justify-center mb-4 shadow-sm">
-          <HelpCircle className="w-7 h-7 text-white stroke-[2.5]" />
+      <div className="bg-[#FFF4F6] rounded-[24px] p-5 sm:p-6 flex items-center gap-4 text-right border border-[#FFE4E8]/60 shadow-xs relative overflow-hidden">
+        {/* Right side in RTL: Pink speech bubble icon with outer ring */}
+        <div className="relative shrink-0"> 
+          
+          <img src="/public/svg/qust.svg" alt="سوال" />
+
         </div>
-        <h2 className="text-lg font-bold text-slate-800 font-kal-3 mb-2">سوالات متداول کاربران</h2>
-        <p className="text-[11.5px] text-slate-500 font-kal-2 leading-relaxed max-w-[290px] mx-auto">
-          پاسخ به متداول‌ترین پرسش‌های شما درباره نحوه خرید، استفاده و کنسلی کوپن‌های تخفیف لوپُن
-        </p>
+
+        {/* Left side in RTL: Title and Subtitle */}
+        <div className="flex flex-col gap-1.5 flex-1">
+          <h2 className="text-[17px] sm:text-[18px] font-bold text-[#2B364B] font-kal-3 tracking-tight">
+            سوالات متداول کاربران
+          </h2>
+          <p className="text-[11.5px] sm:text-[12px] text-[#5A6A85] font-kal-2 leading-[20px] sm:leading-[22px]">
+            پاسخ به متداول ترین پرسش های شما درباره نحوه خرید، استفاده و کنسلی کوپن های لوپن
+          </p>
+        </div>
       </div>
 
       {/* Category Horizontal Filter Badges */}
