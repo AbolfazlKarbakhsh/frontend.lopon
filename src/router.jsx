@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Page404 from "@pages/Page404";
 import IdentityLayout from "@layouts/Identity/IdentityLayout";
 import LoginMainNumber from "@features/auth/main/LoginMainNumber";
-import LoginMainOtp from "./features/auth/main/LoginMainOtp";
+import LoginMainOtp from "@features/auth/main/LoginMainOtp";
 
 // Layout main
 import MainLayout from "@layouts/main/MainLayout";
@@ -16,6 +16,8 @@ import Cart from "@pages/app/Cart";
 import Orders from "@pages/app/Orders";
 import Profile from "@pages/app/Profile";
 import PayList from "@pages/app/PayList";
+import Faq from "@pages/app/Faq";
+import AboutUs from "@pages/app/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,16 @@ const router = createBrowserRouter([
         element: <PayList />,
         errorElement: <PayList />,
         path: "/profile/myPaymentList",
+      },
+      {
+        element: <Faq />,
+        errorElement: <Faq />,
+        path: "/faq",
+      },
+      {
+        element: <AboutUs />,
+        errorElement: <AboutUs />,
+        path: "/about-us",
       },
     ],
   },

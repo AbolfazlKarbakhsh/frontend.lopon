@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { CheckCircle2, Copy, Check, Calendar, Phone, Share2, Printer } from 'lucide-react';
 
 export default function ReceiptModal({
@@ -104,33 +105,39 @@ export default function ReceiptModal({
 
         {/* Helper Action Buttons */}
         <div className="flex gap-3 mb-3">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
             id="print-invoice-btn"
             onClick={() => alert('چاپ فاکتور و کوپن')}
             className="flex-1 py-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-gray-650 text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
           >
             <span>دانلود PDF</span>
             <Printer className="w-4 h-4" />
-          </button>
+          </motion.button>
           
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
             id="share-invoice-btn"
             onClick={() => alert('ارسال جزئیات کوپن برای مخاطب از طریق پیام کوتاه')}
             className="flex-1 py-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-gray-650 text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
           >
             <span>اشتراک‌گذاری</span>
             <Share2 className="w-4 h-4" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Close Button */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
           id="close-receipt-btn"
           onClick={onClose}
-          className="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white text-xs font-black rounded-2xl transition-all shadow-md shadow-rose-200 cursor-pointer text-center"
+          className="w-full py-3.5 bg-[#ff2d55] hover:bg-[#e02547] text-white text-xs font-black rounded-2xl transition-all shadow-[0_6px_18px_rgba(255,45,85,0.25)] cursor-pointer text-center"
         >
           خروج و بازگشت به خانه
-        </button>
+        </motion.button>
 
       </div>
     </div>

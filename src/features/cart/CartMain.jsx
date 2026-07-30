@@ -1,48 +1,11 @@
 import React, { useState } from 'react';
-import CartHeader from './components/CartHeader';
 import CartItemCard from './components/CartItemCard';
 import CartSummary from './components/CartSummary';
-import { ShoppingBag } from 'lucide-react';
+import EmptyState from '@components/common/EmptyState';
 import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '@utils/formatters';
 
-const INITIAL_CART_ITEMS = [
-  // {
-  //   id: 1,
-  //   title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
-  //   businessName: 'مجموعه بیوتی ایران',
-  //   image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
-  //   originalPriceVal: 460500,
-  //   originalPrice: '۴۶۰,۵۰۰',
-  //   discountPercent: '۶۰',
-  //   discountedPriceVal: 277500,
-  //   discountedPrice: '۲۷۷,۵۰۰',
-  //   quantity: 1,
-  // },
-  // {
-  //   id: 2,
-  //   title: 'خدمات کاشت ناخن پدیکور با بهترین مواد اولیه',
-  //   businessName: 'مجموعه بیوتی ایران',
-  //   image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=400',
-  //   originalPriceVal: 460500,
-  //   originalPrice: '۴۶۰,۵۰۰',
-  //   discountPercent: '۶۰',
-  //   discountedPriceVal: 277500,
-  //   discountedPrice: '۲۷۷,۵۰۰',
-  //   quantity: 1,
-  // },
-];
-
-const toPersianDigits = (num) => {
-  if (num === null || num === undefined) return '۰';
-  const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-  return num.toString().replace(/\d/g, (x) => farsiDigits[parseInt(x)]);
-};
-
-const formatPrice = (num) => {
-  if (!num) return '۰';
-  const formatted = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return toPersianDigits(formatted);
-};
+const INITIAL_CART_ITEMS = [];
 
 function CartMain() {
   const [items, setItems] = useState(INITIAL_CART_ITEMS);
@@ -90,26 +53,20 @@ function CartMain() {
   };
 
   return (
-    <div className="min-h-screen pb-24 max-w-md md:max-w-xl mx-auto px-3 py-2">
-      {/* Header */}
-      <CartHeader title="سبد خرید" />
+    <div className="w-full max-w-md md:max-w-xl mx-auto px-3 py-2 flex flex-col">
 
       {items.length === 0 ? (
-        <div className="py-16 mt-[10dvh] text-center flex flex-col items-center justify-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center">
-            <ShoppingBag size={32} />
-          </div>
-          <p className="font-kal-3 font-bold text-slate-700 text-base">سبد خرید شما خالی است</p>
-          <button
-            onClick={() => navigate('/')}
-            className="bg-[#ff0055] text-white px-6 py-2.5 rounded-xl font-kal-3 font-bold text-sm shadow-sm hover:bg-[#e0004c] transition-colors cursor-pointer"
-          >
-            مشاهده پیشنهادها
-          </button>
-        </div>
+        <EmptyState
+          type="cart"
+          badgeText="سبد خرید شما"
+          title="سبد خرید شما خالی است!"
+          description="هنوز هیچ خدمات تخفیف‌داری به سبد خرید اضافه نکرده‌اید. برترین پیشنهادهای زیبایی کرمان را بررسی و رزرو کنید."
+          actionLabel="مشاهده پیشنهادهای تخفیف‌دار"
+          onAction={() => navigate('/')}
+        />
       ) : (
         /* Responsive Layout Grid: 1 column on mobile/tablet with fixed bottom summary */
-        <div className="mt-2 space-y-4 pb-[280px]">
+        <div className="mt-4 space-y-4 pb-[280px]">
           {/* Cart Items List */}
           <div className="divide-y divide-slate-100">
             {items.map((item) => (

@@ -1,68 +1,74 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 import LoginIcon from "@components/svg/LoginIcon";
 import { ValidationForms } from "@utils/forms";
 import useZeroPhone from "@hooks/validations/useZeroPhone";
 import { usePost } from "@hooks/server/auth/usePost";
 import LoginNumber from "../components/LoginNumber";
 
+const validator = new ValidationForms();
+
 const LoginMainNumber = () => {
+  const { register, formState: { errors }, setValue, watch, handleSubmit } = useForm();
 
-  // use hookFrom
-  const { register, formState: { errors }, setValue, watch, handleSubmit, } = useForm();
-
-  // phone validation
-  const validator = new ValidationForms;
   useZeroPhone(setValue, watch, "mobile");
 
-  //state page
-  const navigaite = useNavigate();
+  const navigate = useNavigate();
 
-  // mutate for post 
   const [getOtpCode, stateOtp, loading] = usePost("users/send-otp_POST", "users/send-otp", "");
 
-  // real-Phone
-  const [phone, setPhone] = useState();
+  const [phone, setPhone] = useState("");
 
-  // end-submit 
-  const submitForm = async data => {
+  const submitForm = async (data) => {
     const mobile = watch("mobile");
     setPhone(mobile);
     try {
       getOtpCode(data, {
         onSuccess: () => {
-          navigaite(`/login/otp/${mobile}`);
+          navigate(`/login/otp/${mobile}`);
         },
         onError: () => {
-          navigaite(`/login/otp/${mobile}`);
+          navigate(`/login/otp/${mobile}`);
         }
       });
     } catch {
-      navigaite(`/login/otp/${mobile}`);
+      navigate(`/login/otp/${mobile}`);
     }
-  }
-  // Effect after submit 
+  };
+
   useEffect(() => {
-    if (stateOtp?.data?.status == "success" && phone) {
-      navigaite(`/login/otp/${phone}`);
+    if (stateOtp?.data?.status === "success" && phone) {
+      navigate(`/login/otp/${phone}`);
     }
-  }, [stateOtp, phone]);
+  }, [stateOtp, phone, navigate]);
 
   return (
-    <form onSubmit={handleSubmit(submitForm)} >
-      <div className="h-screen w-full bg-white dark:bg-gray-700 flex justify-center items-center">
-        <div className="w-full px-4">
-          {/* icon  */}
-          <LoginIcon />
-          {/* number page  */}
+    <div className="min-h-screen w-full bg-white flex flex-col justify-center items-center px-6 py-12 relative select-none overflow-hidden">
+      {/* Premium subtle background grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
+      
+      <motion.form
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
+        onSubmit={handleSubmit(submitForm)}
+        className="w-full max-w-[380px] relative z-10 flex flex-col items-center"
+      >
+        <LoginIcon />
+        <div className="w-full mt-2">
           <LoginNumber
-            validation={register('mobile', { required: "شماره موبایل الزامی می باشد ! ", validate: validator.validatePhone })}
-            error={errors.mobile} phoneLoading={loading} />
+            validation={register('mobile', { required: "شماره موبایل الزامی می‌باشد!", validate: validator.validatePhone })}
+            error={errors.mobile}
+            phoneLoading={loading}
+          />
         </div>
-      </div>
-    </form>
+      </motion.form>
+    </div>
   );
 };
 
 export default LoginMainNumber;
+
+

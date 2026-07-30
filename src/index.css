@@ -143,10 +143,9 @@ body {
 }
 
 
-/* Smooth dotted divider */
-.dotted-divider {
-  background-image: linear-gradient(to right, #d1d5db 30%, rgba(255, 255, 255, 0) 0%);
-  background-position: bottom;
-  background-size: 8px 1px;
-  background-repeat: repeat-x;
-}
+
+
+
+
+
+

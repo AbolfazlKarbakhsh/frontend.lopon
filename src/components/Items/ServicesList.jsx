@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { HelpCircle, Plus, Minus, ChevronDown, ChevronUp } from 'lucide-react';
+import { formatPrice } from '@utils/formatters';
 
 const DotLine = () => {
   return (
@@ -60,11 +62,11 @@ export default function ServicesList({
                   <div className="flex flex-col gap-0.5">
                     {/* Original Price */}
                     <span className="text-[10px] text-slate-400 line-through tracking-wider">
-                      {service.originalPrice.toLocaleString('fa-IR')}
+                      {formatPrice(service.originalPrice)}
                     </span>
                     {/* Discounted Price */}
                     <span className="text-sm font-black text-slate-700 tracking-tight">
-                      {service.discountedPrice.toLocaleString('fa-IR')}{' '}
+                      {formatPrice(service.discountedPrice)}{' '}
                       <span className="text-[12px] text-slate-500 font-normal">ریال</span>
                     </span>
                   </div>
@@ -74,35 +76,41 @@ export default function ServicesList({
                 <div className="flex items-center">
                   {qty > 0 ? (
                     <div className="flex items-center bg-rose-50 border border-rose-100 rounded-xl p-1 gap-2">
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.92 }}
                         id={`inc-${service.id}`}
                         type="button"
                         onClick={() => onAddToCart(service.id)}
-                        className="w-8 h-8 flex items-center justify-center bg-[#ff1461] hover:bg-[#e00c50] text-white rounded-lg transition-all cursor-pointer shadow-xs active:scale-95"
+                        className="w-8 h-8 flex items-center justify-center bg-[#ff2d55] hover:bg-[#e02547] text-white rounded-lg transition-all cursor-pointer shadow-xs"
                       >
                         <Plus className="w-4 h-4" />
-                      </button>
+                      </motion.button>
                       <span className="text-sm font-black text-slate-800 w-5 text-center font-mono">
                         {qty}
                       </span>
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.08 }}
+                        whileTap={{ scale: 0.92 }}
                         id={`dec-${service.id}`}
                         type="button"
                         onClick={() => onRemoveFromCart(service.id)}
-                        className="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-650 rounded-lg transition-all cursor-pointer shadow-xs active:scale-95"
+                        className="w-8 h-8 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-650 rounded-lg transition-all cursor-pointer shadow-xs"
                       >
                         <Minus className="w-4 h-4" />
-                      </button>
+                      </motion.button>
                     </div>
                   ) : (
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                       id={`add-btn-${service.id}`}
                       type="button"
                       onClick={() => onAddToCart(service.id)}
-                      className="px-4 py-3 bg-[#ff1461] hover:bg-[#e00c50] active:scale-95 text-white text-xs font-black rounded-xl transition-all shadow-xs cursor-pointer"
+                      className="px-4 py-2.5 bg-[#ff2d55] hover:bg-[#e02547] text-white text-xs font-black rounded-xl transition-all shadow-[0_4px_12px_rgba(255,45,85,0.2)] cursor-pointer"
                     >
                       افزودن
-                    </button>
+                    </motion.button>
                   )}
                 </div>
               </div>
@@ -116,15 +124,17 @@ export default function ServicesList({
       {/* Expandable "Other Services" dropdown button */}
       {otherServices.length > 0 && (
         <div className="pt-5">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
             id="toggle-services-btn"
             type="button"
             onClick={() => setShowOtherServices(!showOtherServices)}
-            className="w-full py-3.5 border border-slate-300 rounded-xl text-xs font-black text-slate-600 hover:bg-slate-50 active:bg-slate-100 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+            className="w-full py-3.5 border border-slate-300 rounded-xl text-xs font-black text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
           >
             <span>{showOtherServices ? 'بستن سایر خدمات' : 'سایر خدمات'}</span>
             {showOtherServices ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
+          </motion.button>
         </div>
       )}
     </div>

@@ -9,15 +9,15 @@ function MainFooter() {
       className="
         w-full
         max-w-md
-        md:max-w-3xl
-        lg:max-w-5xl
+        md:max-w-xl
         mx-auto
         relative
         bg-slate-50
+        pb-[84px]
       "
     >
        <div className="absolute  top-0 left-0 right-0 w-full h-24 bg-gradient-to-b from-gray-400/30 via-gray-200/5 to-transparent blur-sm" />
-      <footer className="bg-slate-50 pt-10 pb-20 border-t border-slate-100 text-center">
+      <footer className="bg-slate-50 pt-10 pb-6 border-t border-slate-100 text-center">
         <div className="px-6 flex flex-col gap-10">
           <div id="footer-about">
             <h3 className="text-base font-bold mb-3 font-kal-3">درباره لوپُن</h3>
@@ -67,10 +67,10 @@ function MainFooter() {
 
         </div>
         <div className="px-4 text-center border-t border-slate-200 pt-6 mt-10">
-          <p className="text-slate-400 text-[10px] font-kal-2">© ۱۴۰۳ لوپُن. تمامی حقوق محفوظ است.</p>
+          <p className="text-slate-400 text-[10px] font-kal-2">© ۱۴۰۵ لوپُن. تمامی حقوق محفوظ است.</p>
         </div>
       </footer>
-       <div className="absolute  bottom-5 left-0 right-0 w-full h-12 bg-gradient-to-b from-gray-400/30 via-gray-200/5 to-transparent blur-sm" />
+       <div className="absolute bottom-0 left-0 right-0 w-full h-6 bg-gradient-to-t from-gray-400/15 to-transparent pointer-events-none blur-xs" />
 
     </div>
   );

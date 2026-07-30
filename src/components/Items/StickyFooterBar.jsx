@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'motion/react';
+import { formatPrice } from '@utils/formatters';
 
 export default function StickyFooterBar({
   totalOriginal = 13500000,
@@ -10,35 +12,37 @@ export default function StickyFooterBar({
   const displayOriginal = totalQuantity > 0 ? totalOriginal : 13500000;
 
   return (
-    <div className="fixed bottom-[58px] left-0 right-0 z-40 w-full max-w-md md:max-w-xl mx-auto bg-white border-t border-slate-100 px-4 py-2.5 flex items-center justify-between font-kal-2 shadow-[0_-4px_15px_rgba(0,0,0,0.03)] gap-5">
+    <div className="fixed bottom-[68px] left-3 right-3 z-40 max-w-md md:max-w-xl lg:max-w-2xl mx-auto bg-white/95 backdrop-blur-md border border-slate-100/90 rounded-2xl px-4 py-3 flex items-center justify-between font-kal-2 shadow-[0_8px_25px_rgba(0,0,0,0.08)] gap-4 transition-all">
       {/* Right side in RTL: Complete Purchase Button (50% width) */}
-      <button
+      <motion.button
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.97 }}
         id="checkout-trigger-btn"
         type="button"
         onClick={onCheckout}
-        className="w-1/2 bg-[#ff0055] hover:bg-[#e0004c] active:scale-[0.99] text-white font-kal-3 font-bold text-sm sm:text-base py-3 rounded-[8px] shadow-md shadow-pink-500/15 text-center transition-all cursor-pointer flex items-center justify-center gap-2"
+        className="w-1/2 bg-[#ff2d55] hover:bg-[#e02547] text-white font-kal-3 font-bold text-sm sm:text-base py-3 px-3 rounded-xl shadow-[0_6px_18px_rgba(255,45,85,0.25)] text-center transition-all cursor-pointer flex items-center justify-center gap-2"
       >
         <span>تکمیل خرید</span>
         {totalQuantity > 0 && (
-          <span className="bg-white text-[#ff0055] text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center">
+          <span className="bg-white text-[#ff2d55] text-[11px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-xs">
             {totalQuantity}
           </span>
         )}
-      </button>
+      </motion.button>
 
       {/* Left side in RTL: Price container (50% width) - aligned to left (justify-end in RTL) */}
       <div className="w-1/2 flex items-center justify-end gap-1.5 overflow-hidden">
         {/* Original Price with diagonal strike-through */}
         {displayOriginal > displayDiscounted && (
           <span className="relative inline-block text-xs text-slate-300 font-normal shrink-0">
-            {displayOriginal.toLocaleString('fa-IR')}
+            {formatPrice(displayOriginal)}
             <span className="absolute inset-0 top-1/2 -translate-y-1/2 border-b border-slate-300 transform -rotate-[14deg] origin-center pointer-events-none" />
           </span>
         )}
 
         {/* Discounted Price */}
-        <span className="text-base sm:text-lg font-normal text-slate-800 shrink-0">
-          {displayDiscounted.toLocaleString('fa-IR')}
+        <span className="text-base sm:text-lg font-bold text-slate-800 shrink-0 font-kal-3">
+          {formatPrice(displayDiscounted)}
         </span>
 
         {/* Custom Toman Word on the far left */}

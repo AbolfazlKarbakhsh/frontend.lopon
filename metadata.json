@@ -1,6 +1,8 @@
 {
-  "name": "Lopon",
-  "description": "Discount and booking application for services, books, and businesses",
+  "name": "Remix loponFront",
+  "description": "Imported from GitHub: mahdis1300s-sketch/loponFront",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

@@ -1,68 +1,104 @@
 import React from 'react';
-import { X, Calendar, AlertTriangle, CheckSquare, Award } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, Calendar, PhoneCall, ShieldCheck, Users } from 'lucide-react';
 
 export default function TermsModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
+  const termsList = [
+    {
+      id: 1,
+      title: 'مدت اعتبار کوپن‌ها',
+      description: 'کوپن‌ها تا تاریخ درج‌شده در فاکتور معتبر می‌باشند.',
+      icon: Calendar,
+    },
+    {
+      id: 2,
+      title: 'رزرو نوبت تلفنی',
+      description: 'حداقل ۲۴ ساعت پیش جهت رزرو قطعی نوبت تماس بگیرید.',
+      icon: PhoneCall,
+    },
+    {
+      id: 3,
+      title: 'ضمانت بازگشت وجه',
+      description: 'در صورت عدم ارائه خدمت، وجه به حساب شما عودت داده می‌شود.',
+      icon: ShieldCheck,
+    },
+    {
+      id: 4,
+      title: 'انتقال به دیگران',
+      description: 'ارائه کد پیگیری کوپن توسط سایر افراد جهت دریافت خدمت بلامانع است.',
+      icon: Users,
+    },
+  ];
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in">
-      <div className="bg-white rounded-3xl w-full max-w-md p-6 text-right relative shadow-2xl scale-up">
-        {/* Close Button */}
-        <button
-          id="close-terms-btn"
-          onClick={onClose}
-          className="absolute top-4 left-4 text-gray-400 hover:text-gray-600 w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center border border-gray-150 cursor-pointer"
+    <AnimatePresence>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.92, y: 16 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          className="bg-white rounded-3xl w-full max-w-sm p-5 text-right relative shadow-2xl border border-slate-100 flex flex-col"
         >
-          <X className="w-4 h-4" />
-        </button>
+          {/* Close Button */}
+          <button
+            type="button"
+            id="close-terms-btn"
+            onClick={onClose}
+            className="absolute top-4 left-4 text-slate-400 hover:text-slate-600 w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center border border-slate-200/60 cursor-pointer transition-colors"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
 
-        <h3 className="text-base font-black text-gray-800 mb-4 pl-8">قوانین و شرایط استفاده</h3>
-        
-        <div className="space-y-4 max-h-96 overflow-y-auto pl-1 pr-1 font-medium text-gray-600 text-xs leading-relaxed">
-          
-          <div className="flex gap-2 items-start justify-end">
-            <div>
-              <p className="font-bold text-gray-800 mb-0.5">مدت اعتبار کوپن‌ها</p>
-              <p className="text-gray-500">تمامی کوپن‌های خریداری شده تا پایان ماه جاری معتبر بوده و پس از آن منقضی می‌گردند.</p>
-            </div>
-            <Calendar className="w-4.5 h-4.5 text-blue-500 flex-shrink-0 mt-0.5" />
+          {/* Modal Header without Icon */}
+          <div className="mb-4 pr-1">
+            <h3 className="text-base font-kal-3 font-bold text-slate-800">قوانین و شرایط استفاده</h3>
+            <p className="text-[11px] font-kal-2 text-slate-400 mt-0.5">لوپُن - سامانه تخفیف و رزرو آنلاین</p>
           </div>
 
-          <div className="flex gap-2 items-start justify-end">
-            <div>
-              <p className="font-bold text-gray-800 mb-0.5">رزرو نوبت تلفنی</p>
-              <p className="text-gray-500">حداقل ۲۴ ساعت پیش از حضور، جهت رزرو قطعی ساعت خدمات دریافتی با پذیرش تماس حاصل فرمایید.</p>
-            </div>
-            <CheckSquare className="w-4.5 h-4.5 text-blue-500 flex-shrink-0 mt-0.5" />
+          {/* Terms Content */}
+          <div className="space-y-2.5 my-1">
+            {termsList.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  className="bg-slate-50/80 border border-slate-100 rounded-2xl p-2.5 flex items-start gap-2.5 transition-all hover:bg-white hover:border-slate-200"
+                >
+                  <div className="w-8 h-8 rounded-xl border bg-rose-50 text-[#ff2d55] border-rose-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <IconComponent className="w-4 h-4" />
+                  </div>
+
+                  <div className="flex-1">
+                    <h4 className="font-kal-3 font-bold text-slate-800 text-xs mb-0.5">
+                      {item.title}
+                    </h4>
+                    <p className="font-kal-2 text-slate-500 text-[11px] leading-tight">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="flex gap-2 items-start justify-end">
-            <div>
-              <p className="font-bold text-gray-800 mb-0.5">ضمانت عودت وجه ۱۰۰٪</p>
-              <p className="text-gray-500">در صورت تغییر شرایط سالن یا مغایرت خدمات با فاکتور صادر شده، کل مبلغ پرداختی به کارت شما عودت داده می‌شود.</p>
-            </div>
-            <Award className="w-4.5 h-4.5 text-emerald-500 flex-shrink-0 mt-0.5" />
+          {/* Action Button */}
+          <div className="pt-3 border-t border-slate-100 mt-3">
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.98 }}
+              id="accept-terms-btn"
+              onClick={onClose}
+              className="w-full py-3 bg-[#ff2d55] hover:bg-[#e02547] text-white text-xs font-kal-3 font-bold rounded-2xl transition-all shadow-[0_4px_16px_rgba(255,45,85,0.2)] cursor-pointer text-center"
+            >
+              متوجه شدم و می‌پذیرم
+            </motion.button>
           </div>
-
-          <div className="flex gap-2 items-start justify-end">
-            <div>
-              <p className="font-bold text-gray-800 mb-0.5">انتقال کوپن به غیر</p>
-              <p className="text-gray-500">انتقال کوپن خریداری شده به دوستان یا بستگان بلامانع است؛ کافی است کد دریافتی را به پذیرش ارائه دهند.</p>
-            </div>
-            <AlertTriangle className="w-4.5 h-4.5 text-amber-500 flex-shrink-0 mt-0.5" />
-          </div>
-
-        </div>
-
-        {/* Action Button */}
-        <button
-          id="accept-terms-btn"
-          onClick={onClose}
-          className="w-full mt-6 py-3 bg-gray-900 hover:bg-gray-800 text-white text-xs font-black rounded-2xl transition-all cursor-pointer text-center"
-        >
-          متوجه شدم
-        </button>
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
+

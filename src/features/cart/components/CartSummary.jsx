@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 
 function CartSummary({ summaryData, onCheckout }) {
   const {
@@ -100,13 +101,15 @@ function CartSummary({ summaryData, onCheckout }) {
 
       {/* Row 4: Payment Button */}
       <div className="pt-2">
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.97 }}
           type="button"
           onClick={onCheckout}
-          className="w-full bg-[#ff0055] hover:bg-[#e0004c] active:scale-[0.99] text-white font-kal-3 font-bold text-base py-3.5 rounded-lg shadow-md shadow-pink-500/15 text-center transition-all cursor-pointer"
+          className="w-full bg-[#ff2d55] hover:bg-[#e02547] text-white font-kal-3 font-bold text-base py-3.5 rounded-xl shadow-[0_6px_20px_rgba(255,45,85,0.25)] text-center transition-all cursor-pointer"
         >
           پرداخت
-        </button>
+        </motion.button>
       </div>
     </div>
   );

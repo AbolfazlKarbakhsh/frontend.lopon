@@ -8,7 +8,7 @@ import ReviewsSection from '@components/Items/ReviewsSection';
 import StickyFooterBar from '@components/Items/StickyFooterBar';
 import TermsModal from '@components/Items/TermsModal';
 import ReceiptModal from '@components/Items/ReceiptModal';
-import { INITIAL_SERVICES, INITIAL_REVIEWS, SALON_IMAGES } from '@core/data';
+import { INITIAL_SERVICES, getReviewsByServiceCategory, SALON_IMAGES } from '@core/data';
 import { BUSINESSES, DEALS } from '@core/constants';
 
 export default function MainBusiness() {
@@ -54,17 +54,22 @@ export default function MainBusiness() {
   const [cart, setCart] = useState({});
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
-  const [reviews, setReviews] = useState(INITIAL_REVIEWS);
+  const [reviews, setReviews] = useState(() =>
+    getReviewsByServiceCategory(business?.name, activeDeal?.serviceTitle, activeDeal?.category)
+  );
 
-  // Reset cart and scroll to top when active business or deal changes
+  // Reset cart, scroll to top, and set tailored reviews when active business or deal changes
   useEffect(() => {
     setCart({});
+    setReviews(
+      getReviewsByServiceCategory(business?.name, activeDeal?.serviceTitle, activeDeal?.category)
+    );
     window.scrollTo(0, 0);
     const scrollables = document.querySelectorAll('.overflow-y-auto');
     scrollables.forEach((el) => {
       el.scrollTop = 0;
     });
-  }, [id, dealIdFromQuery]);
+  }, [id, dealIdFromQuery, business?.name, activeDeal?.serviceTitle, activeDeal?.category]);
 
   // Gallery images for header slider
   const galleryImages = [
@@ -131,7 +136,7 @@ export default function MainBusiness() {
   };
 
   return (
-    <div className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto pb-32 bg-white">
+    <div className="w-full max-w-md md:max-w-xl lg:max-w-2xl mx-auto pb-16 bg-white">
       {/* Scrollable Container */}
       <div className="flex-1 flex flex-col">
         {/* Header Image */}
@@ -147,8 +152,8 @@ export default function MainBusiness() {
           address={business.address}
           rate={business.rating}
           discount={maxDiscount}
-          purchasesCount={120}
-          time="ساعت ۱۲ ظهر تا ۴ عصر"
+          purchasesCount={activeDeal?.purchasesCount || 28}
+          time={business.workingHours || "ساعت ۱۲ ظهر تا ۴ عصر"}
         />
 
         {/* Services modules with actual prices */}

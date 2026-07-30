@@ -6,10 +6,10 @@ import { DEALS, BUSINESSES } from '@core/constants';
 import { CarouselDealCard } from '@components/Items/DealCard';
 import SupportDrawer from '@components/global/Drawers/SupportDrawer';
 import {
-  ShieldCheck,
+  CreditCard,
+  Award,
+  Store,
   Headphones,
-  BadgeCheck,
-  ShieldPlus,
 } from "lucide-react";
 import cx from 'clsx';
 
@@ -82,17 +82,17 @@ const FeaturesGrid = ({ className }) => {
     {
       title: "پرداخت امن",
       desc: "با درگاه بانکی معتبر",
-      Icon: ShieldCheck,
+      Icon: CreditCard,
     },
     {
       title: "دارای نماد اعتماد",
       desc: "مطمئن و امن",
-      Icon: ShieldPlus,
+      Icon: Award,
     },
     {
       title: "مجموعه‌ معتبر",
       desc: "بررسی و تایید شده",
-      Icon: BadgeCheck,
+      Icon: Store,
     },
     {
       title: "پشتیبانی سریع",
@@ -161,6 +161,7 @@ function SectionCarousel({
 /* ================= HomeApp ================= */
 function HomeApp() {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
+  const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
   const featuredDeals = BUSINESSES.map(business => {
     const businessDeals = DEALS.filter(d => d.businessId === business.id);
@@ -177,7 +178,7 @@ function HomeApp() {
   const medicalDeals = getDealsByCategory(['medical']);
 
   return (
-    <div className="flex flex-col min-h-screen w-full max-w-md md:max-w-3xl lg:max-w-xl mx-auto shadow-xl relative bg-white">
+    <div className="flex flex-col min-h-screen w-full max-w-md md:max-w-xl mx-auto shadow-xl relative bg-white">
 
       <div className="absolute top-0 left-0 right-0 z-30 h-[70px] md:h-[130px] flex justify-between items-center px-5 md:px-10">
 
@@ -199,9 +200,16 @@ function HomeApp() {
         </div>
       </div>
 
-      <div className="relative w-full bg-gray-100 mb-4 h-[calc(100dvh-180px)] -mt-14">
-        <img src="./images/header.webp" className="w-full h-full object-cover" />
-        <div className="absolute -bottom-2 left-0 w-full h-12 bg-gradient-to-t from-red-500/35 via-black/5 to-transparent blur-sm" />
+      <div className={`relative w-full mb-4 h-[calc(100dvh-180px)] -mt-14 transition-all duration-300 ${!isHeaderImageLoaded ? 'bg-slate-100/80 animate-pulse' : 'bg-gray-100'}`}>
+        <img 
+          src="./images/header.webp" 
+          onLoad={() => setIsHeaderImageLoaded(true)}
+          className={`w-full h-full object-cover transition-opacity duration-500 ${isHeaderImageLoaded ? 'opacity-100' : 'opacity-0'}`} 
+          alt="Lopon Header"
+        />
+        {isHeaderImageLoaded && (
+          <div className="absolute -bottom-2 left-0 w-full h-12 bg-gradient-to-t from-red-500/35 via-black/5 to-transparent blur-sm transition-opacity duration-300" />
+        )}
       </div>
 
       <SectionCarousel
@@ -219,12 +227,14 @@ function HomeApp() {
         title="محبوب ترین"
         deals={nailDeals.length ? nailDeals : featuredDeals}
         id="2"
+        className="mt-[5px]"
       />
 
       <SectionCarousel
         title="نزدیک شما"
         deals={skinDeals.length ? skinDeals : featuredDeals}
         id="3"
+        className="mt-[5px]"
       />
 
       <Banner src="./images/Advertisement.webp" alt="1تخفیف ویژه" />

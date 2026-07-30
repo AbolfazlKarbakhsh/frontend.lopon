@@ -35,7 +35,7 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             {/* Option 2: ارتباط با پشتیبانی */}
             <a
               href="tel:09103748047"
-              className="flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700"
+              className="flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700 cursor-pointer"
             >
               <span className="font-kal-2 text-sm font-bold text-slate-600">ارتباط با پشتیبانی</span>
               <Headset className="w-5 h-5 text-slate-600 shrink-0" />

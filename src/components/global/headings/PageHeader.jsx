@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SupportDrawer from '@components/global/Drawers/SupportDrawer';
-import { LuUser } from 'react-icons/lu';
 import { BiSupport } from 'react-icons/bi';
+import { ChevronRight } from 'lucide-react';
 
-function PageHeader({ title, onBack, showProfileIcon = true, showSupportIcon = true }) {
+function PageHeader({ title, onBack, showSupportIcon = true }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSupportOpen, setIsSupportOpen] = useState(false);
@@ -12,61 +12,43 @@ function PageHeader({ title, onBack, showProfileIcon = true, showSupportIcon = t
   const handleBack = () => {
     if (onBack) {
       onBack();
+    } else if (["/faq", "/about-us", "/profile/orders", "/profile/myPaymentList"].includes(location.pathname)) {
+      navigate('/profile');
     } else {
-      navigate(-1);
+      navigate('/');
     }
   };
 
-  const isProfilePage = location.pathname === '/profile';
-
   return (
     <>
-      <div className="flex items-center justify-between w-full py-3 px-4 mb-2 bg-white">
+      <div className="relative flex items-center justify-between w-full py-3 px-4 mb-2 bg-white border-b border-slate-100">
         {/* Right Side in RTL: Back Chevron Button */}
         <button
           type="button"
           onClick={handleBack}
-          className="w-10 h-10 rounded-full bg-[#f4f5f7] flex items-center justify-center text-slate-700 hover:bg-slate-200 active:scale-95 transition-all cursor-pointer"
+          className="w-11 h-11 rounded-full bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-95 transition-all cursor-pointer z-10 shadow-3xs"
           aria-label="بازگشت"
         >
-          <img src="./svg/iconback.svg" alt="بازگشت" />
+          <ChevronRight className="w-6 h-6 text-slate-700 stroke-[2.4]" />
         </button>
 
-        {/* Center Title */}
-        <h1 className="font-kal-3 font-bold text-slate-800 text-lg sm:text-xl text-center">
-          {title}
-        </h1>
+        {/* Center Title - Absolutely Centered */}
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 pointer-events-none flex justify-center">
+          <h1 className="font-kal-3 font-bold text-slate-800 text-base sm:text-lg tracking-tight pointer-events-auto">
+            {title}
+          </h1>
+        </div>
 
-        {/* Left Side in RTL: Support & User Profile Icons */}
-        <div className="flex items-center gap-2">
+        {/* Left Side in RTL: Support Icon (Profile icon is removed) */}
+        <div className="flex items-center gap-2 z-10">
           {showSupportIcon && (
             <button
               type="button"
               onClick={() => setIsSupportOpen(true)}
-              className="w-10 h-10 rounded-full bg-[#f4f5f7] flex items-center justify-center text-slate-700 hover:bg-slate-200 active:scale-95 transition-all cursor-pointer"
+              className="w-11 h-11 rounded-full bg-slate-50 flex items-center justify-center text-slate-600 hover:bg-slate-100 active:scale-95 transition-all cursor-pointer shadow-3xs"
               aria-label="پشتیبانی"
             >
-                          <BiSupport size={20} />
-              
-              
-            </button>
-          )}
-
-          {showProfileIcon && (
-            <button
-            type="button"
-            onClick={() => {
-              if (!isProfilePage) {
-                navigate('/profile');
-              }
-            }}
-            className="w-10 h-10 rounded-full bg-[#f4f5f7] flex items-center justify-center text-slate-700 hover:bg-slate-200 active:scale-95 transition-all cursor-pointer"
-            aria-label="حساب کاربری"
-            >
-                          <LuUser size={20} />
-              
-            
-
+              <BiSupport size={22} className="text-slate-700" />
             </button>
           )}
         </div>

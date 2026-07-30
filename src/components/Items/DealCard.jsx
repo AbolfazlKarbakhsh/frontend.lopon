@@ -3,18 +3,13 @@ import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 import { FiMapPin } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { BUSINESSES } from '../../core/constants';
-
-
+import { BUSINESSES } from '@core/constants';
+import { formatPrice } from '@utils/formatters';
 
 export const CarouselDealCard = ({ deal }) => {
   const business = BUSINESSES.find(b => b.id === deal.businessId);
   const rating = business?.rating || 4.5;
   const address = business?.address ? business.address.split('،')[1] || business.address : 'خیابان جهاد';
-
-  const formatPrice = (price) => {
-    return price ? price.toLocaleString('fa-IR') : '۰';
-  };
 
   return (
     <motion.div

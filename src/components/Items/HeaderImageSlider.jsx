@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { ChevronRight, Maximize2, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { BiSupport } from 'react-icons/bi';
+import SupportDrawer from '../global/Drawers/SupportDrawer';
 
 export default function HeaderImageSlider({ image, images }) {
   const navigate = useNavigate();
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
 
   // Determine single main product image
   const singleImage = image || (Array.isArray(images) && images.length > 0 ? images[0] : '/placeholder.jpg');
@@ -30,6 +33,19 @@ export default function HeaderImageSlider({ image, images }) {
         <div className="absolute bottom-5 left-5 z-20 flex items-center justify-center bg-black/40 p-2 rounded-full text-white hover:bg-black/60 transition-all pointer-events-none">
           <Maximize2 className="w-4 h-4" />
         </div>
+
+        {/* Support Button */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsSupportOpen(true);
+          }}
+          className="absolute top-5 left-5 z-20 flex items-center justify-center w-10 h-10 bg-black/40 hover:bg-black/60 active:scale-95 text-white rounded-full transition-all backdrop-blur-md cursor-pointer border border-white/10"
+          title="پشتیبانی لوپُن"
+        >
+          <BiSupport size={20} className="text-white" />
+        </button>
 
         {/* Back Button */}
         <button
@@ -86,6 +102,8 @@ export default function HeaderImageSlider({ image, images }) {
           </div>
         </div>
       )}
+
+      <SupportDrawer isOpen={isSupportOpen} setIsOpen={setIsSupportOpen} />
     </>
   );
 }
