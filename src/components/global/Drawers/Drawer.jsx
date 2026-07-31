@@ -1,9 +1,11 @@
 import React from 'react'
 import toast from 'react-hot-toast';
 import { Drawer } from 'vaul';
+import { useRegisterModal } from '@core/backButtonManager';
 
 function DrawerVual({ children, trigger, isHeaight = true }) {
   const [isOpen, setIsOpen] = React.useState(false);
+  useRegisterModal(isOpen, () => setIsOpen(false));
   return (
     <>
       <Drawer.Root dismissible={true} open={isOpen} onOpenChange={setIsOpen}>

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, User, Phone } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useRegisterModal } from '@core/backButtonManager';
 
 export default function EditProfileModal({ isOpen, onClose, initialData, onSave }) {
   const [name, setName] = useState(initialData?.name || 'سارا احمدی');
   const mobile = initialData?.mobile || '۰۹۳۸۱۷۷۸۹۲۰';
+
+  useRegisterModal(isOpen, onClose);
 
   if (!isOpen) return null;
 

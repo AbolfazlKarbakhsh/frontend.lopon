@@ -7,8 +7,10 @@ import useHeaderShow from "@store/app/appLayout"
 import useFooterShow from "@store/app/appFooter"
 import useHideWithRoute from "@hooks/app/useHideWithRoute"
 import React, { useEffect, useRef } from "react"
+import { useBackButtonHandler } from "@core/backButtonManager"
 
 function MainLayout() {
+  useBackButtonHandler();
   const { data: hideHeader, changeData: setHideHeader } = useHeaderShow();
   const { data: hideFooter, changeData: setHideFooter } = useFooterShow();
   const location = useLocation();

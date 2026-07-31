@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer } from 'vaul';
 import { Phone, Headset, HelpCircle } from 'lucide-react';
+import { useRegisterModal } from '@core/backButtonManager';
 
 function SupportDrawer({ isOpen, setIsOpen }) {
+  useRegisterModal(isOpen, () => setIsOpen(false));
+
   return (
     <Drawer.Root dismissible={true} open={isOpen} onOpenChange={setIsOpen}>
       <Drawer.Portal>

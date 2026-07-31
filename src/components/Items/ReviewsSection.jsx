@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Star, Check } from 'lucide-react';
 
 export default function ReviewsSection({ reviews, onAddReview }) {
@@ -140,130 +141,134 @@ export default function ReviewsSection({ reviews, onAddReview }) {
       </div>
 
       {/* Write Review Modal Dialogue */}
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity animate-fade-in">
-          <div className="bg-white rounded-3xl w-full max-w-md p-6 text-right relative shadow-2xl transition-all scale-up">
-            <h3 className="text-base font-black text-gray-800 mb-2">ثبت دیدگاه و امتیاز</h3>
-            <p className="text-xs text-gray-400 mb-5">تجربه ارزشمند خود را از خدمات ما بنویسید.</p>
+      {isOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs transition-opacity animate-fade-in">
+            <div className="bg-white rounded-3xl w-full max-w-md p-6 text-right relative shadow-2xl transition-all scale-up">
+              <h3 className="text-base font-black text-gray-800 mb-2">ثبت دیدگاه و امتیاز</h3>
+              <p className="text-xs text-gray-400 mb-5">تجربه ارزشمند خود را از خدمات ما بنویسید.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Star selector */}
-              <div>
-                <label className="block text-xs font-bold text-gray-500 mb-2">امتیاز شما:</label>
-                <div className="flex gap-2 justify-end">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <button
-                      key={i}
-                      id={`star-${i}`}
-                      type="button"
-                      onClick={() => setRating(5 - i)}
-                      className="text-amber-400 focus:outline-none transition-transform active:scale-125 cursor-pointer"
-                    >
-                      <Star
-                        className={`w-8 h-8 ${
-                          5 - i <= rating ? 'fill-amber-400 text-amber-400' : 'text-gray-200'
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Author name */}
-              <div>
-                <label className="block text-xs font-bold text-gray-500 mb-1.5">نام و نام خانوادگی:</label>
-                <input
-                  id="author-input"
-                  type="text"
-                  required
-                  value={author}
-                  onChange={(e) => setAuthor(e.target.value)}
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:outline-hidden focus:border-rose-400 focus:ring-1 focus:ring-rose-400 text-right text-gray-800"
-                  placeholder=""
-                />
-              </div>
-
-              {/* Review Text */}
-              <div>
-                <label className="block text-xs font-bold text-gray-500 mb-1.5">متن نظر شما:</label>
-                <textarea
-                  id="text-input"
-                  rows={3}
-                  required
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:outline-hidden focus:border-rose-400 focus:ring-1 focus:ring-rose-400 text-right text-gray-800 leading-relaxed"
-                  placeholder="توضیحات و نظرات باکیفیت شما به ما انگیزه مضاعف می‌دهد..."
-                />
-              </div>
-
-              {/* Tags Selector */}
-              <div>
-                <label className="block text-xs font-bold text-gray-500 mb-2">برچسب خدمات مورد استفاده:</label>
-                <div className="flex flex-wrap gap-1.5 justify-end">
-                  {availableTags.map((tag) => {
-                    const isSelected = selectedTags.includes(tag);
-                    return (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Star selector */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 mb-2">امتیاز شما:</label>
+                  <div className="flex gap-2 justify-end">
+                    {Array.from({ length: 5 }).map((_, i) => (
                       <button
-                        key={tag}
-                        id={`tag-btn-${tag}`}
+                        key={i}
+                        id={`star-${i}`}
                         type="button"
-                        onClick={() => toggleTag(tag)}
-                        className={`text-[10px] font-black px-2.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1 ${
-                          isSelected
-                            ? 'bg-rose-50 text-rose-500 border-rose-200'
-                            : 'bg-slate-50 text-gray-500 border-slate-100 hover:bg-slate-100'
-                        }`}
+                        onClick={() => setRating(5 - i)}
+                        className="text-amber-400 focus:outline-none transition-transform active:scale-125 cursor-pointer"
                       >
-                        {isSelected && <Check className="w-2.5 h-2.5" />}
-                        <span>{tag}</span>
+                        <Star
+                          className={`w-8 h-8 ${
+                            5 - i <= rating ? 'fill-amber-400 text-amber-400' : 'text-gray-200'
+                          }`}
+                        />
                       </button>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Action Buttons */}
-              <div className="flex gap-3 pt-2">
-                <button
-                  id="close-modal-btn"
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-650 text-xs font-black rounded-2xl transition-all cursor-pointer text-center"
-                >
-                  انصراف
-                </button>
-                <button
-                  id="submit-review-form-btn"
-                  type="submit"
-                  className="flex-1 py-3 bg-rose-500 hover:bg-rose-600 text-white text-xs font-black rounded-2xl transition-all shadow-md shadow-rose-100 cursor-pointer text-center"
-                >
-                  ثبت نظر
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+                {/* Author name */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 mb-1.5">نام و نام خانوادگی:</label>
+                  <input
+                    id="author-input"
+                    type="text"
+                    required
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:outline-hidden focus:border-rose-400 focus:ring-1 focus:ring-rose-400 text-right text-gray-800"
+                    placeholder=""
+                  />
+                </div>
+
+                {/* Review Text */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 mb-1.5">متن نظر شما:</label>
+                  <textarea
+                    id="text-input"
+                    rows={3}
+                    required
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold focus:outline-hidden focus:border-rose-400 focus:ring-1 focus:ring-rose-400 text-right text-gray-800 leading-relaxed"
+                    placeholder="توضیحات و نظرات باکیفیت شما به ما انگیزه مضاعف می‌دهد..."
+                  />
+                </div>
+
+                {/* Tags Selector */}
+                <div>
+                  <label className="block text-xs font-bold text-gray-500 mb-2">برچسب خدمات مورد استفاده:</label>
+                  <div className="flex flex-wrap gap-1.5 justify-end">
+                    {availableTags.map((tag) => {
+                      const isSelected = selectedTags.includes(tag);
+                      return (
+                        <button
+                          key={tag}
+                          id={`tag-btn-${tag}`}
+                          type="button"
+                          onClick={() => toggleTag(tag)}
+                          className={`text-[10px] font-black px-2.5 py-1.5 rounded-xl border transition-all cursor-pointer flex items-center gap-1 ${
+                            isSelected
+                              ? 'bg-rose-50 text-rose-500 border-rose-200'
+                              : 'bg-slate-50 text-gray-500 border-slate-100 hover:bg-slate-100'
+                          }`}
+                        >
+                          {isSelected && <Check className="w-2.5 h-2.5" />}
+                          <span>{tag}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 pt-2">
+                  <button
+                    id="close-modal-btn"
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                    className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-650 text-xs font-black rounded-2xl transition-all cursor-pointer text-center"
+                  >
+                    انصراف
+                  </button>
+                  <button
+                    id="submit-review-form-btn"
+                    type="submit"
+                    className="flex-1 py-3 bg-rose-500 hover:bg-rose-600 text-white text-xs font-black rounded-2xl transition-all shadow-md shadow-rose-100 cursor-pointer text-center"
+                  >
+                    ثبت نظر
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>,
+          document.body
+        )}
 
       {/* Centered Alert Modal */}
-      {alertMessage && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs transition-all animate-fade-in">
-          <div className="bg-white rounded-2xl w-full max-w-xs p-5 text-center shadow-2xl space-y-4 border border-slate-100">
-            <div className="text-sm font-bold text-slate-800 leading-relaxed">
-              {alertMessage}
+      {alertMessage &&
+        createPortal(
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs transition-all animate-fade-in">
+            <div className="bg-white rounded-2xl w-full max-w-xs p-5 text-center shadow-2xl space-y-4 border border-slate-100">
+              <div className="text-sm font-bold text-slate-800 leading-relaxed">
+                {alertMessage}
+              </div>
+              <button
+                id="alert-close-btn"
+                type="button"
+                onClick={() => setAlertMessage(null)}
+                className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all cursor-pointer"
+              >
+                تایید
+              </button>
             </div>
-            <button
-              id="alert-close-btn"
-              type="button"
-              onClick={() => setAlertMessage(null)}
-              className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all cursor-pointer"
-            >
-              تایید
-            </button>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
