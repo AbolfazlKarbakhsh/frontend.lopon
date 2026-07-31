@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import { FaUserGear } from "react-icons/fa6";
+import { useRegisterModal } from "@core/backButtonManager";
 
 export default function Poppover({ children }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -15,6 +16,8 @@ export default function Poppover({ children }) {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  useRegisterModal(open, handleClose);
 
 
 

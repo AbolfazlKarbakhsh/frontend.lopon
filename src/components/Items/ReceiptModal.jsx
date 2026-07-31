@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { CheckCircle2, Copy, Check, Calendar, Phone, Share2, Printer } from 'lucide-react';
+import { useRegisterModal } from '@core/backButtonManager';
 
 export default function ReceiptModal({
   isOpen,
@@ -11,6 +12,8 @@ export default function ReceiptModal({
 }) {
   const [copied, setCopied] = useState(false);
   const voucherCode = 'ZB-1405-9274';
+
+  useRegisterModal(isOpen, onClose);
 
   if (!isOpen) return null;
 

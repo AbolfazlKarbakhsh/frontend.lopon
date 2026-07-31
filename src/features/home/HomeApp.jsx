@@ -183,7 +183,7 @@ function HomeApp() {
       <div className="absolute top-0 left-0 right-0 z-30 h-[70px] md:h-[130px] flex justify-between items-center px-5 md:px-10">
 
         <Link to="/" className="flex items-center py-1">
-          <img src="./images/lopon-logo.png" alt="logo" className="h-[60px] w-[60px]" />
+          <img src="/images/lopon-logo.png" alt="logo" className="h-[60px] w-[60px]" />
         </Link>
 
         <div className="flex items-center gap-2">
@@ -202,7 +202,7 @@ function HomeApp() {
 
       <div className={`relative w-full mb-4 h-[calc(100dvh-180px)] -mt-14 transition-all duration-300 ${!isHeaderImageLoaded ? 'bg-slate-100/80 animate-pulse' : 'bg-gray-100'}`}>
         <img 
-          src="./images/header.webp" 
+          src="/images/header.webp" 
           onLoad={() => setIsHeaderImageLoaded(true)}
           className={`w-full h-full object-cover transition-opacity duration-500 ${isHeaderImageLoaded ? 'opacity-100' : 'opacity-0'}`} 
           alt="Lopon Header"
@@ -237,7 +237,7 @@ function HomeApp() {
         className="mt-[5px]"
       />
 
-      <Banner src="./images/Advertisement.webp" alt="1تخفیف ویژه" />
+      <Banner src="/images/Advertisement.webp" alt="1تخفیف ویژه" />
 
       <div className="w-32 h-32 rounded-full bg-pink-500/50 blur-2xl mt-[-7.5rem]  ms-auto z-10"></div>
 
@@ -248,7 +248,7 @@ function HomeApp() {
         className="pt-6"
       />
 
-      <Banner src="./images/present.webp" alt="دوستاتو دعوت کن و جایزه بگیر !  " className={"pt-4"}/>
+      <Banner src="/images/present.webp" alt="دوستاتو دعوت کن و جایزه بگیر !  " className={"pt-4"}/>
 
       {/* Support */}
       <SupportDrawer

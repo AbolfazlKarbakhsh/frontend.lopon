@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Calendar, PhoneCall, ShieldCheck, Users } from 'lucide-react';
+import { useRegisterModal } from '@core/backButtonManager';
 
 export default function TermsModal({ isOpen, onClose }) {
+  useRegisterModal(isOpen, onClose);
+
   if (!isOpen) return null;
 
   const termsList = [

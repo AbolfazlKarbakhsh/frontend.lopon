@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Drawer } from 'vaul';
 import SearchPage from '../page/SearchPage';
+import { useRegisterModal } from '@core/backButtonManager';
 
 function DrawerSearch({ children , isHeaight = true}) {
+  const [isOpen, setIsOpen] = useState(false);
+  useRegisterModal(isOpen, () => setIsOpen(false));
+
   return (
     <div className={` ${isHeaight ? 'h-0' : 'h-fit'} `}>
-      <Drawer.Root dismissible={true}>
+      <Drawer.Root dismissible={true} open={isOpen} onOpenChange={setIsOpen}>
         <Drawer.Trigger className="h-auto">
           {children}
         </Drawer.Trigger>

@@ -61,7 +61,7 @@ function MainFooter() {
           </div>
 
           <div className=" border border-gray-800 rounded-lg ">
-            <img src="./images/zarin-palpng.png" alt="" className="w-[80px]" />
+            <img src="/images/zarin-palpng.png" alt="" className="w-[80px]" />
 
           </div>
 
