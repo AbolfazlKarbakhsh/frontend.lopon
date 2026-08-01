@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { getCart } from '@utils/cartCookie';
 
 // Custom exact SVG icons matching the design screenshot
+
 export const IconHome = ({ active }) => {
   return active ? (
 
@@ -215,6 +217,8 @@ const NAV_ITEMS = [
 
 export default function BottomNavigation() {
   const location = useLocation();
+  const cartItems = getCart();
+  const cartCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
 
   return (
     <nav
@@ -254,13 +258,18 @@ export default function BottomNavigation() {
                     : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
-                          <div
-                            className={`transition-transform duration-200 ${
-                              active ? "scale-105" : ""
-                            }`}
-                          >
-                            <Icon active={active} />
-                          </div>
+                <div
+                  className={`relative transition-transform duration-200 ${
+                    active ? 'scale-105' : ''
+                  }`}
+                >
+                  <Icon active={active} />
+                  {item.id === 'cart' && cartCount > 0 && (
+                    <span className="absolute -top-1.5 -right-2 bg-[#ff2d55] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white shadow-xs">
+                      {cartCount}
+                    </span>
+                  )}
+                </div>
                 <span
                   className={`text-[11.5px] leading-tight mt-0.5 font-kal-3 transition-colors duration-200 ${
                     active ? 'font-bold text-[#ff2d55]' : 'font-medium text-slate-500'

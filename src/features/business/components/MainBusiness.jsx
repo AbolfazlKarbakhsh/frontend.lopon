@@ -10,6 +10,14 @@ import TermsModal from '@components/Items/TermsModal';
 import ReceiptModal from '@components/Items/ReceiptModal';
 import { INITIAL_SERVICES, getReviewsByServiceCategory, SALON_IMAGES } from '@core/data';
 import { BUSINESSES, DEALS } from '@core/constants';
+import { formatPrice } from '@utils/formatters';
+import {
+  getCart,
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+} from '@utils/cartCookie';
 
 export default function MainBusiness() {
   const { id } = useParams();
@@ -55,16 +63,17 @@ export default function MainBusiness() {
   const additionalServices = INITIAL_SERVICES.filter((s) => !existingNames.has(s.name));
   const currentServices = [...mappedDeals, ...additionalServices].slice(0, 8);
 
-  const [cart, setCart] = useState({});
+  // Cart state stored as array of item objects (persisted in Cookie)
+  const [cartItems, setCartItems] = useState(() => getCart());
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const [reviews, setReviews] = useState(() =>
     getReviewsByServiceCategory(business?.name, activeDeal?.serviceTitle, activeDeal?.category)
   );
 
-  // Reset cart, scroll to top, and set tailored reviews when active business or deal changes
+  // Sync state from Cookie, scroll to top, and set tailored reviews when active business or deal changes
   useEffect(() => {
-    setCart({});
+    setCartItems(getCart());
     setReviews(
       getReviewsByServiceCategory(business?.name, activeDeal?.serviceTitle, activeDeal?.category)
     );
@@ -90,25 +99,52 @@ export default function MainBusiness() {
     ? Math.max(...businessDeals.map((d) => d.discountPercentage))
     : 60;
 
-  // Cart operations
+  // Convert cartItems array to cartMap { [serviceId]: quantity } for ServicesList UI
+  const cartMap = cartItems.reduce((acc, item) => {
+    acc[item.id] = item.quantity || 1;
+    return acc;
+  }, {});
+
+  // Cart operations using Cookie persistence
   const handleAddToCart = (serviceId) => {
-    setCart((prev) => ({
-      ...prev,
-      [serviceId]: (prev[serviceId] || 0) + 1,
-    }));
+    const service = currentServices.find((s) => s.id === serviceId);
+    if (service) {
+      const orig = service.originalPrice || 0;
+      const disc = service.discountedPrice || 0;
+      const pct = orig > 0 ? Math.round(((orig - disc) / orig) * 100) : 0;
+
+      const itemToSave = {
+        id: service.id,
+        title: service.name,
+        businessName: business?.name || 'مجموعه زیبایی رزا',
+        originalPrice: formatPrice(orig),
+        originalPriceVal: orig,
+        discountedPrice: formatPrice(disc),
+        discountedPriceVal: disc,
+        discountPercent: pct,
+        image: service.imageUrl || activeDeal?.imageUrl || business?.imageUrl || '/images/header.webp',
+        quantity: 1,
+      };
+      const updated = addToCart(itemToSave);
+      setCartItems(updated);
+    } else {
+      const updated = addToCart({ id: serviceId, quantity: 1 });
+      setCartItems(updated);
+    }
   };
 
   const handleRemoveFromCart = (serviceId) => {
-    setCart((prev) => {
-      const newCart = { ...prev };
-      if (!newCart[serviceId]) return prev;
-      if (newCart[serviceId] === 1) {
-        delete newCart[serviceId];
+    const existingItem = cartItems.find((i) => i.id === serviceId);
+    if (existingItem) {
+      const currentQty = existingItem.quantity || 1;
+      let updated;
+      if (currentQty > 1) {
+        updated = updateQuantity(serviceId, currentQty - 1);
       } else {
-        newCart[serviceId]--;
+        updated = removeFromCart(serviceId);
       }
-      return newCart;
-    });
+      setCartItems(updated);
+    }
   };
 
   // Add a new user review
@@ -124,11 +160,13 @@ export default function MainBusiness() {
   };
 
   // Calculations for sticky bottom sheet
-  const totals = currentServices.reduce(
-    (acc, service) => {
-      const qty = cart[service.id] || 0;
-      acc.totalOriginal += service.originalPrice * qty;
-      acc.totalDiscounted += service.discountedPrice * qty;
+  const totals = cartItems.reduce(
+    (acc, item) => {
+      const qty = item.quantity || 1;
+      const orig = item.originalPriceVal !== undefined ? item.originalPriceVal : 0;
+      const disc = item.discountedPriceVal !== undefined ? item.discountedPriceVal : 0;
+      acc.totalOriginal += orig * qty;
+      acc.totalDiscounted += disc * qty;
       acc.totalQuantity += qty;
       return acc;
     },
@@ -136,7 +174,13 @@ export default function MainBusiness() {
   );
 
   const resetCart = () => {
-    setCart({});
+    clearCart();
+    setCartItems([]);
+  };
+
+  const handleReceiptClose = () => {
+    setIsReceiptOpen(false);
+    resetCart();
   };
 
   return (
@@ -160,7 +204,7 @@ export default function MainBusiness() {
         {/* Services modules with actual prices */}
         <ServicesList
           services={currentServices}
-          cart={cart}
+          cart={cartMap}
           onAddToCart={handleAddToCart}
           onRemoveFromCart={handleRemoveFromCart}
           onOpenTermsModal={() => setIsTermsOpen(true)}
@@ -173,17 +217,28 @@ export default function MainBusiness() {
         <ReviewsSection reviews={reviews} onAddReview={handleAddReview} />
       </div>
 
-      {/* Dynamic Sticky Bottom Checkout Footer */}
-      <StickyFooterBar
-        totalOriginal={totals.totalOriginal}
-        totalDiscounted={totals.totalDiscounted}
-        totalQuantity={totals.totalQuantity}
-        onCheckout={() => setIsReceiptOpen(true)}
-      />
+      {/* Dynamic Sticky Bottom Checkout Footer: Only rendered if cart is NOT empty */}
+      {totals.totalQuantity > 0 && (
+        <StickyFooterBar
+          totalOriginal={totals.totalOriginal}
+          totalDiscounted={totals.totalDiscounted}
+          totalQuantity={totals.totalQuantity}
+          onCheckout={() => setIsReceiptOpen(true)}
+        />
+      )}
 
       {/* Conditions Modal */}
       <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
 
+      {/* Receipt / Invoice Modal */}
+      <ReceiptModal
+        isOpen={isReceiptOpen}
+        onClose={handleReceiptClose}
+        cart={cartMap}
+        services={currentServices}
+        totalDiscounted={totals.totalDiscounted}
+      />
     </div>
   );
 }
+
