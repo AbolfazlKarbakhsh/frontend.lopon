@@ -14,7 +14,7 @@ export const navigateTo = (path) => {
     }
 };
 
-const Base_url = import.meta.env.VITE_API_BASE_URL || "https://sa-app.ir/api/v1/";
+const Base_url = import.meta.env.VITE_API_BASE_URL || "https://lopon.ir/api/v1/";
 
 export const httpService = axios.create({
     baseURL: Base_url
