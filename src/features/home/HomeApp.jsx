@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { LuUser } from 'react-icons/lu';
 import { BiSupport } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { DEALS, BUSINESSES } from '@core/constants';
-import { CarouselDealCard } from '@components/Items/DealCard';
+import { CarouselDealCard, CarouselDealCardSkeleton } from '@components/Items/DealCard';
 import SupportDrawer from '@components/global/Drawers/SupportDrawer';
+import { useGetCarousel } from '@hooks/server/carousel/useGetCarousel';
 import {
   CreditCard,
   Award,
@@ -103,7 +103,7 @@ const FeaturesGrid = ({ className }) => {
 
   return (
     <div className={cx("flex justify-center pt-4 pb-5 z-20", className)}>
-      <div className="relative w-[93%] h-[155px] rounded-2xl bg-white overflow-hidden shadow border border-gray-200">
+      <div className="relative w-[93%] h-[155px] rounded-2xl bg-[#FFFFFF] overflow-hidden shadow border border-gray-200">
 
         <div className="absolute left-5 right-5 top-1/2 h-px -translate-y-1/2 bg-[#FDF2F8]" />
         <div className="absolute left-1/2 top-5 h-[42px] w-px -translate-x-1/2 bg-[#FDF2F8]" />
@@ -125,8 +125,29 @@ function SectionCarousel({
   title,
   deals,
   id,
-  className
+  className,
+  isLoading
 }) {
+  if (isLoading) {
+    return (
+      <section id={id} className={cx("bg-white overflow-hidden text-right py-4 pt-2", className)}>
+        <div className="px-4">
+          <div className="flex flex-col mb-3">
+            <div className="h-5 w-32 bg-gray-200 rounded animate-pulse" />
+            <div className="w-12 h-1 bg-[#ff0055]/30 rounded-full mt-1" />
+          </div>
+          <div className="relative -mx-4">
+            <div className="flex overflow-x-auto gap-3 px-4 pb-2 no-scrollbar">
+              {[1, 2, 3].map((n) => (
+                <CarouselDealCardSkeleton key={n} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   if (!deals?.length) return null;
 
   return (
@@ -163,19 +184,10 @@ function HomeApp() {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
   const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
-  const featuredDeals = BUSINESSES.map(business => {
-    const businessDeals = DEALS.filter(d => d.businessId === business.id);
-    return businessDeals.sort(
-      (a, b) => b.discountPercentage - a.discountPercentage
-    )[0];
-  }).filter(Boolean);
-
-  const getDealsByCategory = (categories) =>
-    DEALS.filter(d => categories.includes(d.category));
-
-  const nailDeals = getDealsByCategory(['nail']);
-  const skinDeals = getDealsByCategory(['skin', 'hair']);
-  const medicalDeals = getDealsByCategory(['medical']);
+  const carousel1 = useGetCarousel(1, "پیشنهادهای ویژه");
+  const carousel2 = useGetCarousel(2, "محبوب‌ترین‌ها");
+  const carousel3 = useGetCarousel(3, "نزدیک شما");
+  const carousel4 = useGetCarousel(4, "از دست نده!");
 
   return (
     <div className="flex flex-col min-h-screen w-full max-w-md md:max-w-xl mx-auto shadow-xl relative bg-white">
@@ -213,8 +225,9 @@ function HomeApp() {
       </div>
 
       <SectionCarousel
-        title="پیشنهادهای ویژه"
-        deals={featuredDeals}
+        title={carousel1.title}
+        deals={carousel1.deals}
+        isLoading={carousel1.isLoading}
         id="1"
         className="pt-5 pb-3"
       />
@@ -224,31 +237,34 @@ function HomeApp() {
       <FeaturesGrid />
 
       <SectionCarousel
-        title="محبوب ترین"
-        deals={nailDeals.length ? nailDeals : featuredDeals}
+        title={carousel2.title}
+        deals={carousel2.deals}
+        isLoading={carousel2.isLoading}
         id="2"
         className="mt-[5px]"
       />
 
       <SectionCarousel
-        title="نزدیک شما"
-        deals={skinDeals.length ? skinDeals : featuredDeals}
+        title={carousel3.title}
+        deals={carousel3.deals}
+        isLoading={carousel3.isLoading}
         id="3"
         className="mt-[5px]"
       />
 
-      <Banner src="/images/Advertisement.webp" alt="1تخفیف ویژه" />
+      <Banner src="/images/Advertisement.webp" alt="تخفیف ویژه" />
 
-      <div className="w-32 h-32 rounded-full bg-pink-500/50 blur-2xl mt-[-7.5rem]  ms-auto z-10"></div>
+      <div className="w-32 h-32 rounded-full bg-pink-500/50 blur-2xl mt-[-7.5rem] ms-auto z-10"></div>
 
       <SectionCarousel
-        title="از دست نده!"
-        deals={medicalDeals.length ? medicalDeals : featuredDeals}
+        title={carousel4.title}
+        deals={carousel4.deals}
+        isLoading={carousel4.isLoading}
         id="4"
         className="pt-6"
       />
 
-      <Banner src="/images/present.webp" alt="دوستاتو دعوت کن و جایزه بگیر !  " className={"pt-4"}/>
+      <Banner src="/images/present.webp" alt="دوستاتو دعوت کن و جایزه بگیر !" className={"pt-4"}/>
 
       {/* Support */}
       <SupportDrawer

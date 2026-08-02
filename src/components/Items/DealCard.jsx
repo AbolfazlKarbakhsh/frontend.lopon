@@ -6,21 +6,48 @@ import { Link } from 'react-router-dom';
 import { BUSINESSES } from '@core/constants';
 import { formatPrice } from '@utils/formatters';
 
+export const CarouselDealCardSkeleton = () => {
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden shadow-xs border border-gray-200 flex flex-col h-full min-w-[190px] w-[190px] sm:min-w-[230px] sm:w-[230px] snap-center animate-pulse">
+      <div className="h-32 bg-gray-200 w-full relative" />
+      <div className="p-3 pt-2 flex flex-col flex-grow text-right space-y-2">
+        <div className="h-3 bg-gray-200 rounded w-1/2 mb-1" />
+        <div className="h-4 bg-gray-200 rounded w-3/4 mb-1" />
+        <div className="h-3 bg-gray-200 rounded w-2/5 mb-2" />
+        <div className="flex flex-col items-start pt-2 space-y-1">
+          <div className="h-4 bg-gray-200 rounded w-1/3" />
+          <div className="h-5 bg-gray-200 rounded w-1/2" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const CarouselDealCard = ({ deal }) => {
-  const business = BUSINESSES.find(b => b.id === deal.businessId);
-  const rating = business?.rating || 4.5;
-  const address = business?.address ? business.address.split('،')[1] || business.address : 'خیابان جهاد';
+  if (!deal) return null;
+
+  const businessId = deal.businessId || deal.salonId || deal.id;
+  const business = BUSINESSES.find(b => b.id === businessId);
+  const rating = deal.rating || business?.rating || 4.8;
+  const rawAddress = deal.address || deal.location || business?.address || 'خیابان جهاد';
+  const address = rawAddress.includes('،') ? rawAddress.split('،')[1] : rawAddress;
+  const imageUrl = deal.imageUrl || deal.image || '/images/header.webp';
+  const businessName = deal.businessName || deal.salonName || business?.name || 'مجموعه زیبایی';
+  const serviceTitle = deal.serviceTitle || deal.title || deal.name || 'خدمات زیبایی';
+  const discountPercentage = deal.discountPercentage ?? deal.discountPercent ?? deal.discount ?? 0;
+  const originalPrice = deal.originalPrice || 0;
+  const discountedPrice = deal.discountedPrice || 0;
 
   return (
     <motion.div
       className="bg-white z-20 rounded-2xl overflow-hidden shadow-xs border border-gray-200  shadow-gray shadow  flex flex-col h-full min-w-[190px] w-[190px] sm:min-w-[230px] sm:w-[230px] snap-center select-none "
       id={`carousel-deal-card-${deal.id}`}
     >
-      <Link to={`/business/${deal.businessId}?dealId=${deal.id}`} className="flex flex-col h-full">
+      <Link to={`/business/${businessId}?dealId=${deal.id}`} className="flex flex-col h-full">
         <div className="relative h-32 overflow-hidden bg-gray-100">
           <img
-            src={deal.imageUrl}
-            alt={deal.serviceTitle}
+            src={imageUrl}
+            alt={serviceTitle}
             className="w-full h-32 object-cover"
             referrerPolicy="no-referrer"
           />
@@ -31,8 +58,8 @@ export const CarouselDealCard = ({ deal }) => {
         </div>
 
         <div className="p-3 pt-2 flex flex-col flex-grow text-right">
-          <p className="text-[12px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{deal.businessName || 'مجموعه زیبا بیوتی کرمان کریمان'}</p>
-          <h3 className="text-[13px] font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{deal.serviceTitle}</h3>
+          <p className="text-[12px] text-gray-400 font-kal-2 line-clamp-1 mb-0.5">{businessName}</p>
+          <h3 className="text-[13px] font-bold text-gray-800 font-kal-3 line-clamp-1 mb-1">{serviceTitle}</h3>
 
           <div className="flex items-center gap-1 text-[9px] text-gray-400 font-kal-2 mb-2">
             <FiMapPin size={11} className="shrink-0 text-gray-600" />
@@ -45,29 +72,28 @@ export const CarouselDealCard = ({ deal }) => {
 
               {/* قیمت اصلی خط خورده */}
               <div className="flex items-center gap-2">
-                <span className=" flex items-center justify-center bg-[#ef4444] w-[37px] h-[24px] text-white text-[12px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
-                  {deal.discountPercentage}٪
-                </span>
+                {discountPercentage > 0 && (
+                  <span className=" flex items-center justify-center bg-[#ef4444] w-[37px] h-[24px] text-white text-[12px] font-bold px-[5px] py-[6px] rounded-[13px] font-kal-3 leading-none">
+                    {discountPercentage}٪
+                  </span>
+                )}
 
-                <span className="relative text-[12px] text-[#64748b] font-kal-2">
-                  {formatPrice(deal.originalPrice)}
-                  <span className="absolute left-0 top-1/2 h-px w-full rotate-[-10deg] bg-[#64748b]"></span>
-                </span>
-
-
+                {originalPrice > 0 && (
+                  <span className="relative text-[12px] text-[#64748b] font-kal-2">
+                    {formatPrice(originalPrice)}
+                    <span className="absolute left-0 top-1/2 h-px w-full rotate-[-10deg] bg-[#64748b]"></span>
+                  </span>
+                )}
               </div>
               {/* قیمت تخفیف خورده + درصد */}
 
-
               <span className="text-[18px] font-normal text-gray-900 ">
-                {formatPrice(deal.discountedPrice)}
+                {formatPrice(discountedPrice || originalPrice)}
                 <span className="text-[12px] font-normal text-gray-500 mr-1 relative inline-block">
                   توما
                   <span className="absolute -top-[10px] right-[9px]">ن</span>
                 </span>
               </span>
-
-
 
             </div>
 
