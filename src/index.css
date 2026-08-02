@@ -142,6 +142,40 @@ body {
   backdrop-filter: blur(10px);
 }
 
+/* Goftino Widget Custom Styles */
+#goftino_btn,
+#goftino_w #goftino_btn,
+.goftino_btn,
+#goftino_work,
+[id^="goftino_btn"] {
+  background-color: #EF4444 !important;
+  background: #EF4444 !important;
+  border-color: #EF4444 !important;
+}
+
+#goftino_btn svg,
+#goftino_w #goftino_btn svg,
+[id^="goftino_btn"] svg,
+#goftino_btn path,
+#goftino_w #goftino_btn path {
+  fill: #ffffff !important;
+}
+
+@media (max-width: 768px) {
+  #goftino_btn,
+  #goftino_w,
+  #goftino_work,
+  [id^="goftino_btn"],
+  div[id^="goftino_w"] {
+    position: fixed !important;
+    bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 16px !important;
+    right: auto !important;
+    z-index: 9999 !important;
+  }
+}
+
+
 
 
 
