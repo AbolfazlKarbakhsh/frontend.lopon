@@ -19,33 +19,41 @@ export const mapCarouselResponse = (responseData, defaultTitle = "") => {
   const rawItems = rawData?.items || rawData?.deals || (Array.isArray(rawData) ? rawData : []);
 
   const deals = rawItems.map((item) => {
-    const id = item.id || item._id || item.business_id || item.businessId;
-    const originalPrice = Number(item.originalPrice || item.original_price || item.price || 0);
-    const discountedPrice = Number(item.discountedPrice || item.discounted_price || item.off_price || item.final_price || 0);
-    let discountPercent = item.discountPercent || item.discount_percent || item.discount;
+    const id = item.vendorServiceId || item.id || item._id || item.business_id || item.businessId;
+    const businessId = item.vendorId || item.businessId || item.business_id || item.salonId || id;
+    const originalPrice = Number(item.price ?? item.originalPrice ?? item.original_price ?? 0);
+    const discountedPrice = Number(item.finalPrice ?? item.discountedPrice ?? item.discounted_price ?? item.off_price ?? 0);
+    let discountPercent = item.discountPercent ?? item.discount_percent ?? item.discount;
 
-    if (!discountPercent && originalPrice > 0 && discountedPrice > 0 && originalPrice > discountedPrice) {
+    if (discountPercent === undefined && originalPrice > 0 && discountedPrice > 0 && originalPrice > discountedPrice) {
       discountPercent = Math.round(((originalPrice - discountedPrice) / originalPrice) * 100);
     }
 
     return {
       id: id || Math.random().toString(),
-      businessId: item.businessId || item.business_id || item.salonId || id,
-      salonId: item.salonId || item.business_id || item.businessId || id,
+      vendorServiceId: item.vendorServiceId || id,
+      vendorId: businessId,
+      businessId,
+      salonId: businessId,
       serviceTitle: item.serviceTitle || item.title || item.name || item.service_name || 'خدمات زیبایی',
-      title: item.title || item.name || item.serviceTitle || 'خدمات زیبایی',
-      businessName: item.businessName || item.salonName || item.business_name || item.name || 'مجموعه زیبایی',
-      salonName: item.salonName || item.business_name || item.businessName || 'مجموعه زیبایی',
-      imageUrl: item.imageUrl || item.image || item.cover_image || item.banner || item.img || '/images/header.webp',
+      title: item.serviceTitle || item.title || item.name || 'خدمات زیبایی',
+      vendorTitle: item.vendorTitle || item.businessName || item.salonName || item.business_name || 'مجموعه زیبایی',
+      businessName: item.vendorTitle || item.businessName || item.salonName || item.business_name || 'مجموعه زیبایی',
+      salonName: item.vendorTitle || item.salonName || item.businessName || 'مجموعه زیبایی',
+      categoryTitle: item.categoryTitle || '',
+      imageUrl: item.image || item.imageUrl || item.cover_image || item.banner || item.img || '/images/header.webp',
       image: item.image || item.imageUrl || item.cover_image || item.banner || item.img || '/images/header.webp',
+      price: originalPrice,
       originalPrice,
+      finalPrice: discountedPrice,
       discountedPrice,
-      discountPercentage: discountPercent || 0,
-      discountPercent: discountPercent || 0,
-      rating: item.rating || item.score || 4.8,
+      discountPercent: Number(discountPercent || 0),
+      discountPercentage: Number(discountPercent || 0),
+      rating: item.rating ?? item.score ?? 4.8,
       reviewsCount: item.reviewsCount || item.reviews_count || item.comments_count || 0,
-      address: item.address || item.location || item.city || 'کرمان',
+      address: item.location || item.address || item.city || 'کرمان',
       location: item.location || item.address || item.city || 'کرمان',
+      couponValidityDays: item.couponValidityDays,
     };
   });
 

@@ -26,17 +26,17 @@ export const CarouselDealCardSkeleton = () => {
 export const CarouselDealCard = ({ deal }) => {
   if (!deal) return null;
 
-  const businessId = deal.businessId || deal.salonId || deal.id;
+  const businessId = deal.vendorId || deal.businessId || deal.salonId || deal.id;
   const business = BUSINESSES.find(b => b.id === businessId);
-  const rating = deal.rating || business?.rating || 4.8;
-  const rawAddress = deal.address || deal.location || business?.address || 'خیابان جهاد';
+  const rating = deal.rating ?? business?.rating ?? 4.8;
+  const rawAddress = deal.location || deal.address || business?.address || 'کرمان';
   const address = rawAddress.includes('،') ? rawAddress.split('،')[1] : rawAddress;
-  const imageUrl = deal.imageUrl || deal.image || '/images/header.webp';
-  const businessName = deal.businessName || deal.salonName || business?.name || 'مجموعه زیبایی';
+  const imageUrl = deal.image || deal.imageUrl || '/images/header.webp';
+  const businessName = deal.vendorTitle || deal.businessName || deal.salonName || business?.name || 'مجموعه زیبایی';
   const serviceTitle = deal.serviceTitle || deal.title || deal.name || 'خدمات زیبایی';
-  const discountPercentage = deal.discountPercentage ?? deal.discountPercent ?? deal.discount ?? 0;
-  const originalPrice = deal.originalPrice || 0;
-  const discountedPrice = deal.discountedPrice || 0;
+  const discountPercentage = deal.discountPercent ?? deal.discountPercentage ?? deal.discount ?? 0;
+  const originalPrice = deal.price ?? deal.originalPrice ?? 0;
+  const discountedPrice = deal.finalPrice ?? deal.discountedPrice ?? 0;
 
   return (
     <motion.div

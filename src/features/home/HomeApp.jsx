@@ -184,10 +184,10 @@ function HomeApp() {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
   const [isHeaderImageLoaded, setIsHeaderImageLoaded] = useState(false);
 
-  const carousel1 = useGetCarousel(1, "پیشنهادهای ویژه");
-  const carousel2 = useGetCarousel(2, "محبوب‌ترین‌ها");
-  const carousel3 = useGetCarousel(3, "نزدیک شما");
-  const carousel4 = useGetCarousel(4, "از دست نده!");
+  const carousel1 = useGetCarousel(1);
+  const carousel2 = useGetCarousel(1);
+  const carousel3 = useGetCarousel(1);
+  const carousel4 = useGetCarousel(1);
 
   return (
     <div className="flex flex-col min-h-screen w-full max-w-md md:max-w-xl mx-auto shadow-xl relative bg-white">
