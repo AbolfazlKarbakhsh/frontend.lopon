@@ -9,7 +9,7 @@ import { usePost } from "@hooks/server/auth/usePost";
 import { STORAGE_KEYS } from "@core/constants/storage-keys";
 
 const LoginMainOtp = () => {
-  const { control, handleSubmit, watch, reset } = useForm();
+  const { control, handleSubmit, watch, reset, setValue } = useForm();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ const LoginMainOtp = () => {
       >
         <LoginIcon />
         <div className="w-full mt-2">
-          <PhoneOtp control={control} watch={watch} submitForm={submitForm} phone={params.phone} />
+          <PhoneOtp control={control} watch={watch} setValue={setValue} submitForm={submitForm} phone={params.phone} />
         </div>
       </motion.form>
     </div>

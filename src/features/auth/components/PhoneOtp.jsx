@@ -1,12 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import { RotateCw, Timer } from 'lucide-react';
 import Button from '@components/table/Button';
 import useTimer from '@hooks/animations/useTimerOtp';
 import LoginHeader from '../components/LoginHeader';
 
-const PhoneOtp = ({ control, submitForm, phone }) => {
+const PhoneOtp = ({ control, setValue, submitForm, phone }) => {
   const { isTimeUp, resetTimer, minutes, seconds } = useTimer(1);
+
+  // WebOTP API Auto Fill Implementation
+  useEffect(() => {
+    if (!('OTPCredential' in window)) return;
+
+    const ac = new AbortController();
+
+    const receiveOtp = async () => {
+      try {
+        const otpCredential = await navigator.credentials.get({
+          otp: { transport: ['sms'] },
+          signal: ac.signal,
+        });
+
+        if (otpCredential && otpCredential.code) {
+          const cleanCode = otpCredential.code.replace(/[^0-9]/g, '').slice(0, 5);
+          if (setValue) {
+            setValue('otp', cleanCode);
+          }
+        }
+      } catch (err) {
+        // Handle aborts gracefully (e.g. unmount, user manual entry, or unsupported environment)
+      }
+    };
+
+    receiveOtp();
+
+    return () => {
+      ac.abort();
+    };
+  }, [setValue]);
 
   const getNewOtp = () => {
     resetTimer();
