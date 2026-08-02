@@ -37,16 +37,6 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             {/* Option 2: ارتباط با پشتیبانی */}
             <button
               type="button"
-              onClick={() => {
-                setIsOpen(false);
-                if (window.Goftino) {
-                  window.Goftino.open();
-                } else {
-                  window.addEventListener('goftino_ready', () => {
-                    window.Goftino?.open();
-                  }, { once: true });
-                }
-              }}
               className="w-full flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700 cursor-pointer text-right"
             >
               <span className="font-kal-2 text-sm font-bold text-slate-600">ارتباط با پشتیبانی</span>
