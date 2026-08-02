@@ -35,13 +35,23 @@ function SupportDrawer({ isOpen, setIsOpen }) {
             <div className="border-b border-dashed border-slate-200 my-2 mx-1" />
 
             {/* Option 2: ارتباط با پشتیبانی */}
-            <a
-              href="tel:09103748047"
-              className="flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700 cursor-pointer"
+            <button
+              type="button"
+              onClick={() => {
+                setIsOpen(false);
+                if (window.Goftino) {
+                  window.Goftino.open();
+                } else {
+                  window.addEventListener('goftino_ready', () => {
+                    window.Goftino?.open();
+                  }, { once: true });
+                }
+              }}
+              className="w-full flex items-center justify-between py-5 px-3 hover:bg-slate-50 transition-colors rounded-xl text-slate-700 cursor-pointer text-right"
             >
               <span className="font-kal-2 text-sm font-bold text-slate-600">ارتباط با پشتیبانی</span>
               <Headset className="w-5 h-5 text-slate-600 shrink-0" />
-            </a>
+            </button>
 
             <div className="border-b border-dashed border-slate-200 my-2 mx-1" />
 
