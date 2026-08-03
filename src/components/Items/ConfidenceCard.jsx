@@ -2,18 +2,45 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const WORKING_HOURS = [
-  { day: 'یکشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
-  { day: 'دوشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
-  { day: 'سه‌شنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
-  { day: 'چهارشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
-  { day: 'پنجشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
-  { day: 'جمعه', time: '۱۲:۰۰ – ۱۸:۰۰' },
-  { day: 'شنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+const ALL_WEEK_DAYS = [
+  { dayNum: 1, day: 'شنبه' },
+  { dayNum: 2, day: 'یکشنبه' },
+  { dayNum: 3, day: 'دوشنبه' },
+  { dayNum: 4, day: 'سه‌شنبه' },
+  { dayNum: 5, day: 'چهارشنبه' },
+  { dayNum: 6, day: 'پنج‌شنبه' },
+  { dayNum: 7, day: 'جمعه' },
 ];
 
-export default function ConfidenceCard() {
+export default function ConfidenceCard({ workingDays }) {
   const [isOpen, setIsOpen] = useState(true);
+
+  let hoursList = [];
+  if (workingDays && Array.isArray(workingDays) && workingDays.length > 0) {
+    const daysMap = new Map();
+    workingDays.forEach((w) => {
+      const d = Number(w.day);
+      if (d >= 1 && d <= 7) {
+        const timeStr = w.from && w.to ? `${w.from} – ${w.to}` : (w.time || 'تعطیل');
+        daysMap.set(d, timeStr);
+      }
+    });
+
+    hoursList = ALL_WEEK_DAYS.map((d) => ({
+      day: d.day,
+      time: daysMap.has(d.dayNum) ? daysMap.get(d.dayNum) : 'تعطیل',
+    }));
+  } else {
+    hoursList = [
+      { day: 'شنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'یکشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'دوشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'سه‌شنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'چهارشنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'پنج‌شنبه', time: '۱۰:۰۰ – ۲۱:۰۰' },
+      { day: 'جمعه', time: '۱۲:۰۰ – ۱۸:۰۰' },
+    ];
+  }
 
   return (
     <div className="mx-4 mt-6 space-y-6" dir="rtl">
@@ -73,7 +100,7 @@ export default function ConfidenceCard() {
 
         {/* Horizontal Scrollable Row for Days */}
         <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1 text-right">
-          {WORKING_HOURS.map((item, index) => (
+          {hoursList.map((item, index) => (
             <div
               key={index}
               className="w-[70px] min-w-[70px] h-[67px] bg-slate-100 rounded-[7px] flex flex-col justify-center items-center text-center p-1 flex-shrink-0 select-none"

@@ -26,13 +26,13 @@ export const CarouselDealCardSkeleton = () => {
 export const CarouselDealCard = ({ deal }) => {
   if (!deal) return null;
 
-  const businessId = deal.vendorId || deal.businessId || deal.salonId || deal.id;
-  const business = BUSINESSES.find(b => b.id === businessId);
-  const rating = deal.rating ?? business?.rating ?? 4.8;
-  const rawAddress = deal.location || deal.address || business?.address || 'کرمان';
+  const vendorServiceId = deal.vendorServiceId || deal.id || deal._id;
+  const businessId = deal.vendorId || deal.businessId || deal.salonId || vendorServiceId;
+  const rating = deal.rating ?? 4.8;
+  const rawAddress = deal.location || deal.address || 'کرمان';
   const address = rawAddress.includes('،') ? rawAddress.split('،')[1] : rawAddress;
   const imageUrl = deal.image || deal.imageUrl || '/images/header.webp';
-  const businessName = deal.vendorTitle || deal.businessName || deal.salonName || business?.name || 'مجموعه زیبایی';
+  const businessName = deal.vendorTitle || deal.businessName || deal.salonName || 'مجموعه زیبایی';
   const serviceTitle = deal.serviceTitle || deal.title || deal.name || 'خدمات زیبایی';
   const discountPercentage = deal.discountPercent ?? deal.discountPercentage ?? deal.discount ?? 0;
   const originalPrice = deal.price ?? deal.originalPrice ?? 0;
@@ -43,7 +43,7 @@ export const CarouselDealCard = ({ deal }) => {
       className="bg-white z-20 rounded-2xl overflow-hidden shadow-xs border border-gray-200  shadow-gray shadow  flex flex-col h-full min-w-[190px] w-[190px] sm:min-w-[230px] sm:w-[230px] snap-center select-none "
       id={`carousel-deal-card-${deal.id}`}
     >
-      <Link to={`/business/${businessId}?dealId=${deal.id}`} className="flex flex-col h-full">
+      <Link to={`/business/${businessId}`} className="flex flex-col h-full">
         <div className="relative h-32 overflow-hidden bg-gray-100">
           <img
             src={imageUrl}
