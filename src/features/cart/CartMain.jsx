@@ -113,6 +113,7 @@ function CartMain() {
           {/* Cart Summary Box & Payment Button - Fixed above bottom navigation */}
           <div className="fixed bottom-[58px] left-0 right-0 z-40 bg-white p-3.5 px-4 rounded-t-2xl max-w-md md:max-w-xl mx-auto border-t border-slate-100 shadow-[0_-4px_15px_rgba(0,0,0,0.05)]">
             <CartSummary
+              items={items}
               summaryData={summaryData}
               onCheckout={handleCheckout}
             />

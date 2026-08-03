@@ -1,6 +1,8 @@
 import { httpService } from "@core/http-service";
 
 export const businessService = {
-  getBusinessById: (id) => httpService.get(`business/${id}`),
-  getBusinesses: (params) => httpService.get("business", { params }),
+  getVendorDetails: (id) => httpService.get(`vendors/details/${id}`),
+  getBusinessById: (id) => httpService.get(`vendors/details/${id}`),
+  getBusinesses: (params) => httpService.get("vendors", { params }),
 };
+

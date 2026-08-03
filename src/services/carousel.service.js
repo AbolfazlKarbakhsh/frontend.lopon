@@ -19,8 +19,12 @@ export const mapCarouselResponse = (responseData, defaultTitle = "") => {
   const rawItems = rawData?.items || rawData?.deals || (Array.isArray(rawData) ? rawData : []);
 
   const deals = rawItems.map((item) => {
-    const id = item.vendorServiceId || item.id || item._id || item.business_id || item.businessId;
-    const businessId = item.vendorId || item.businessId || item.business_id || item.salonId || id;
+    const vendorServiceId = item.vendorServiceId || (typeof item.vendorService === 'object' ? item.vendorService?._id : item.vendorService) || item._id || item.id;
+    const vendorObj = item.vendor || item.vendorId || item.businessId;
+    const vendorId = typeof vendorObj === 'object' ? (vendorObj?._id || vendorObj?.id) : (vendorObj || item.vendor_id || item.business_id || item.salonId);
+    
+    const id = vendorServiceId || vendorId;
+    const businessId = vendorId || vendorServiceId;
     const originalPrice = Number(item.price ?? item.originalPrice ?? item.original_price ?? 0);
     const discountedPrice = Number(item.finalPrice ?? item.discountedPrice ?? item.discounted_price ?? item.off_price ?? 0);
     let discountPercent = item.discountPercent ?? item.discount_percent ?? item.discount;
@@ -31,7 +35,7 @@ export const mapCarouselResponse = (responseData, defaultTitle = "") => {
 
     return {
       id: id || Math.random().toString(),
-      vendorServiceId: item.vendorServiceId || id,
+      vendorServiceId: vendorServiceId || id,
       vendorId: businessId,
       businessId,
       salonId: businessId,

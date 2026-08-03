@@ -1,7 +1,7 @@
 import React from 'react';
-import { MapPin, ShieldCheck, Star } from 'lucide-react';
+import { MapPin, ShieldCheck, Star, Tag, Phone } from 'lucide-react';
 
-export default function SalonInfoCard({ name, address, rate, discount }) {
+export default function SalonInfoCard({ name, address, rate, discount, category, phone }) {
   return (
     <div className="relative -mt-[70px] mx-4 z-20 filter drop-shadow-[0_12px_24px_rgba(15,23,42,0.14)]">
       <div
@@ -9,28 +9,30 @@ export default function SalonInfoCard({ name, address, rate, discount }) {
         style={{
           WebkitMaskImage: `
             radial-gradient(circle 9px at 0px 64px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 100% 64px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 0px 157px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 100% 157px, transparent 8.5px, black 9px)
+            radial-gradient(circle 9px at 100% 64px, transparent 8.5px, black 9px)
           `,
           maskImage: `
             radial-gradient(circle 9px at 0px 64px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 100% 64px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 0px 157px, transparent 8.5px, black 9px),
-            radial-gradient(circle 9px at 100% 157px, transparent 8.5px, black 9px)
+            radial-gradient(circle 9px at 100% 64px, transparent 8.5px, black 9px)
           `,
           WebkitMaskComposite: 'destination-in',
           maskComposite: 'intersect',
         }}
       >
-        {/* Section 1: Salon Name - Increased top/bottom spacing */}
-        <div className="text-center py-5 px-4 h-[64px] flex items-center justify-center">
+        {/* Section 1: Salon Name */}
+        <div className="text-center py-4 px-4 min-h-[64px] flex flex-col items-center justify-center">
           <h1 className="text-lg font-black text-slate-800 tracking-tight select-none">
             {name || "مجموعه زیبایی بیوتی کرمان"}
           </h1>
+          {category && (
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded-full mt-1">
+              <Tag className="w-3 h-3" />
+              <span>{category}</span>
+            </span>
+          )}
         </div>
 
-        {/* Divider 1 - Fewer dashes with larger spacing */}
+        {/* Divider 1 */}
         <div className="w-full px-2 h-[1px] flex items-center">
           <svg className="w-full h-[2px] overflow-visible" preserveAspectRatio="none">
             <line
@@ -46,24 +48,33 @@ export default function SalonInfoCard({ name, address, rate, discount }) {
           </svg>
         </div>
 
-        {/* Section 2: Address & Guarantee */}
-        <div className="space-y-3.5 py-4 px-5 text-xs text-slate-600 text-right h-[93px] flex flex-col justify-center">
-          <div className="flex items-center gap-2.5 justify-start">
-            <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
-            <span className="font-bold text-slate-600 leading-relaxed">
+        {/* Section 2: Address & Phone */}
+        <div className="space-y-2.5 py-3.5 px-5 text-xs text-slate-600 text-right flex flex-col justify-center">
+          <div className="flex items-start gap-2.5 justify-start">
+            <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
+            <span className="font-bold text-slate-700 leading-relaxed">
               {address || "خیابان قرنی کوچه شماره ۲۲"}
             </span>
           </div>
 
+          {phone && (
+            <div className="flex items-center gap-2.5 justify-start">
+              <Phone className="w-4 h-4 text-slate-400 flex-shrink-0" />
+              <span className="font-bold text-slate-600 dir-ltr">
+                {phone}
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center gap-2.5 justify-start">
-            <ShieldCheck className="w-4 h-4 text-slate-400 flex-shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-emerald-500 flex-shrink-0" />
             <span className="font-bold text-slate-600">
-              ضمانت شده
+              تضمین کیفیت و اصالت لوپُن
             </span>
           </div>
         </div>
 
-        {/* Divider 2 - Fewer dashes with larger spacing */}
+        {/* Divider 2 */}
         <div className="w-full px-2 h-[1px] flex items-center">
           <svg className="w-full h-[2px] overflow-visible" preserveAspectRatio="none">
             <line
@@ -80,8 +91,8 @@ export default function SalonInfoCard({ name, address, rate, discount }) {
         </div>
 
         {/* Section 3: Bottom Rating & Discount */}
-        <div className="relative flex justify-between items-center py-4 px-2 text-center h-[72px]">
-          {/* Vertical Dashed Line Divider - Full top to bottom touch */}
+        <div className="relative flex justify-between items-center py-3.5 px-2 text-center min-h-[64px]">
+          {/* Vertical Dashed Line Divider */}
           <div className="absolute inset-y-0 right-1/2 translate-x-1/2 w-[2px] pointer-events-none">
             <svg className="w-full h-full" preserveAspectRatio="none">
               <line
@@ -109,7 +120,7 @@ export default function SalonInfoCard({ name, address, rate, discount }) {
           <div className="flex-1 flex flex-col justify-center items-center text-rose-600 pl-2">
             <div className="flex gap-1 items-center leading-none text-xl font-black">
               <span>تا</span>
-              <span>{discount ? (typeof discount === 'number' ? discount.toLocaleString('fa-IR') : discount) : "۶۰"}٪</span>
+              <span>{discount ? (typeof discount === 'number' ? discount.toLocaleString('fa-IR') : discount) : "۰"}٪</span>
             </div>
             <span className="text-xs font-black mt-1">
               تخفیف
@@ -120,5 +131,6 @@ export default function SalonInfoCard({ name, address, rate, discount }) {
     </div>
   );
 }
+
 
 
