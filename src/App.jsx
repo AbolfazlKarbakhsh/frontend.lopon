@@ -5,6 +5,7 @@ import router from './router'
 import './index.css'
 import { Toaster } from 'react-hot-toast';
 import { setRouter } from './core/http-service';
+import { TopAlertProvider } from './context/TopAlertContext';
 
 
 const client = new QueryClient({
@@ -21,16 +22,18 @@ function App() {
   return (
     <>
       <QueryClientProvider client={client}>
-        <div className='OtpFont'>
-          <Toaster
-            position="top-center"
-            reverseOrder={true}
-            toastOptions={{ duration: 4000, style: { direction: 'rtl', fontSize: '.9rem' } }}
-          />
-        </div>
+        <TopAlertProvider>
+          <div className='OtpFont'>
+            <Toaster
+              position="top-center"
+              reverseOrder={true}
+              toastOptions={{ duration: 4000, style: { direction: 'rtl', fontSize: '.9rem' } }}
+            />
+          </div>
 
-        <RouterProvider router={router} />
-        {/* <ReactQueryDevtools /> */}
+          <RouterProvider router={router} />
+          {/* <ReactQueryDevtools /> */}
+        </TopAlertProvider>
       </QueryClientProvider>
     </>
   )

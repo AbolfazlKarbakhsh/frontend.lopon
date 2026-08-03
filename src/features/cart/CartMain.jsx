@@ -8,12 +8,16 @@ import {
   getCart,
   updateQuantity,
   removeFromCart,
-  clearCart,
 } from '@utils/cartCookie';
+import { paymentService } from '@services/payment.service';
+import { STORAGE_KEYS } from '@core/constants/storage-keys';
+import { useTopAlert } from '@hooks/useTopAlert';
 
 function CartMain() {
   const [items, setItems] = useState(() => getCart());
+  const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
   const navigate = useNavigate();
+  const { showAlert } = useTopAlert();
 
   // Keep state synchronized with Cookie when component mounts or gains focus
   useEffect(() => {
@@ -39,10 +43,67 @@ function CartMain() {
     setItems(updated);
   };
 
-  const handleCheckout = () => {
-    alert('انتقال به درگاه پرداخت و تکمیل خرید...');
-    clearCart();
-    setItems([]);
+  const handleCheckout = async (appliedCode) => {
+    // 1. Authentication check
+    const token = localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+    if (!token) {
+      showAlert({
+        type: 'error',
+        message: 'برای ادامه فرایند پرداخت، لطفاً ابتدا وارد حساب کاربری خود شوید.',
+        duration: 3000,
+      });
+      navigate('/login');
+      return;
+    }
+
+    // 2. Validate Cart Items
+    if (!items || items.length === 0) {
+      showAlert({
+        type: 'error',
+        message: 'سبد خرید شما خالی است.',
+        duration: 3000,
+      });
+      return;
+    }
+
+    // 3. Prepare payload format
+    const payloadItems = items.map((item) => ({
+      id: item.id || item.serviceId || item._id,
+      quantity: Number(item.quantity) || 1,
+    }));
+
+    const payload = {
+      items: payloadItems,
+    };
+
+    if (appliedCode && typeof appliedCode === 'string' && appliedCode.trim() !== '') {
+      payload.discountCode = appliedCode.trim();
+    }
+
+    setIsSubmittingPayment(true);
+
+    try {
+      const res = await paymentService.createPayment(payload);
+      setIsSubmittingPayment(false);
+
+      if (res?.data?.status === 'success' || res?.data?.data?.paymentLink) {
+        const paymentData = res?.data?.data;
+        const paymentLink = paymentData?.paymentLink;
+
+        if (paymentLink) {
+          window.location.href = paymentLink;
+        }
+      } else {
+        const errorMsg = res?.data?.message || 'خطا در ساخت لینک پرداخت';
+        showAlert({ type: 'error', message: errorMsg, duration: 3000 });
+      }
+    } catch (err) {
+      setIsSubmittingPayment(false);
+      const errorMsg =
+        err?.response?.data?.message ||
+        'خطا در ساخت لینک پرداخت. لطفاً مجدداً تلاش کنید.';
+      showAlert({ type: 'error', message: errorMsg, duration: 3000 });
+    }
   };
 
   const parseNum = (val) => {
@@ -116,6 +177,7 @@ function CartMain() {
               items={items}
               summaryData={summaryData}
               onCheckout={handleCheckout}
+              isSubmittingPayment={isSubmittingPayment}
             />
           </div>
         </div>

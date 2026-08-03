@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { Loader2 } from 'lucide-react';
 import { discountService } from '@services/discount.service';
 import { STORAGE_KEYS } from '@core/constants/storage-keys';
 import { getCart } from '@utils/cartCookie';
 import { formatPrice } from '@utils/formatters';
 
-function CartSummary({ summaryData, onCheckout, items }) {
+function CartSummary({ summaryData, onCheckout, items, isSubmittingPayment }) {
   const {
     totalOriginal = '۲۷۷.۵۰۰',
     totalDiscount = '۲۷۷.۵۰۰',
@@ -52,7 +53,8 @@ function CartSummary({ summaryData, onCheckout, items }) {
     }
 
     const payloadItems = currentItems.map((item) => ({
-      serviceId: item.serviceId || item.vendorServiceId || item.id,
+      id: item.id || item.serviceId || item._id,
+      serviceId: item.serviceId || item.id || item._id,
       quantity: Number(item.quantity) || 1,
     }));
 
@@ -221,13 +223,21 @@ function CartSummary({ summaryData, onCheckout, items }) {
       {/* Row 4: Payment Button */}
       <div className="pt-2">
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.97 }}
+          whileHover={{ scale: isSubmittingPayment ? 1 : 1.02 }}
+          whileTap={{ scale: isSubmittingPayment ? 1 : 0.97 }}
           type="button"
-          onClick={onCheckout}
-          className="w-full bg-[#ff2d55] hover:bg-[#e02547] text-white font-kal-3 font-bold text-base py-3.5 rounded-xl shadow-[0_6px_20px_rgba(255,45,85,0.25)] text-center transition-all cursor-pointer"
+          disabled={isSubmittingPayment}
+          onClick={() => onCheckout && onCheckout(discountCode)}
+          className="w-full bg-[#ff2d55] hover:bg-[#e02547] text-white font-kal-3 font-bold text-base py-3.5 rounded-xl shadow-[0_6px_20px_rgba(255,45,85,0.25)] text-center transition-all cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
-          پرداخت
+          {isSubmittingPayment ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin text-white" />
+              <span>درحال انتقال به درگاه...</span>
+            </>
+          ) : (
+            'پرداخت'
+          )}
         </motion.button>
       </div>
     </div>

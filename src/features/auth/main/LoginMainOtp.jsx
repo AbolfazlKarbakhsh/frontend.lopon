@@ -1,97 +1,134 @@
-import React, { useEffect } from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useState } from "react";
 import PhoneOtp from "../components/PhoneOtp";
 import LoginIcon from "@components/svg/LoginIcon";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "motion/react";
-import { usePost } from "@hooks/server/auth/usePost";
 import { STORAGE_KEYS } from "@core/constants/storage-keys";
+import { authService } from "@services/auth.service";
+import { useTopAlert } from "@hooks/useTopAlert";
+import PageHeader from "@components/global/headings/PageHeader";
 
 const LoginMainOtp = () => {
-  const { control, handleSubmit, watch, reset, setValue } = useForm();
+  const { control, handleSubmit, watch, setValue, register } = useForm();
   const params = useParams();
   const navigate = useNavigate();
+  const { showAlert } = useTopAlert();
+  const [loading, setLoading] = useState(false);
+  const [resending, setResending] = useState(false);
 
-  const [getOtpCode] = usePost("users/send-otp_POST", "users/send-otp", "");
-  const [sendOtp, tokenAuth, , isError] = usePost("users/login_POST", "users/login", "");
-
-  const otpValue = watch("otp");
-
-  const submitForm = async () => {
-    await getOtpCode({ mobile: params.phone });
-  };
-
-  const sendOtpServer = () => {
+  // Resend OTP
+  const handleResendOtp = async () => {
+    if (!params.phone) return;
+    setResending(true);
     try {
-      sendOtp(
-        {
-          mobile: params.phone,
-          otp: otpValue,
-        },
-        {
-          onSuccess: (res) => {
-            localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, res?.data?.token || "demo-auth-token");
-            navigate("/");
-          },
-          onError: () => {
-            localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, "demo-auth-token");
-            navigate("/");
-          },
-        }
-      );
-    } catch {
-      localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, "demo-auth-token");
-      navigate("/");
+      const res = await authService.sendOtp({ mobile: params.phone });
+      setResending(false);
+      if (res?.data?.status === "success" || res?.status === 200) {
+        showAlert({ type: "success", message: res?.data?.message || "کد تایید مجدداً ارسال شد" });
+      } else {
+        showAlert({ type: "error", message: res?.data?.message || "خطا در ارسال مجدد کد" });
+      }
+    } catch (err) {
+      setResending(false);
+      showAlert({ type: "error", message: err?.response?.data?.message || "خطا در ارسال مجدد کد" });
     }
   };
 
-  useEffect(() => {
-    if (otpValue?.length === 5) {
-      sendOtpServer();
-    }
-  }, [otpValue]);
+  // Submit Login with OTP & optional Referral Code
+  const handleLoginSubmit = async (formData) => {
+    const otp = formData.otp || watch("otp");
+    const referralCode = formData.referralCode || watch("referralCode");
 
-  useEffect(() => {
-    if (tokenAuth?.data?.token) {
-      localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, tokenAuth.data.token);
-      navigate("/");
+    if (!otp || otp.length < 5) {
+      showAlert({ type: "error", message: "لطفاً کد ۵ رقمی را به طور کامل وارد کنید" });
+      return;
     }
-  }, [tokenAuth, navigate]);
 
-  useEffect(() => {
-    if (isError) {
-      reset();
+    setLoading(true);
+
+    const payload = {
+      mobile: params.phone,
+      otp: otp,
+    };
+
+    if (referralCode && referralCode.trim() !== "") {
+      payload.referralCode = referralCode.trim();
     }
-  }, [isError, reset]);
+
+    try {
+      const res = await authService.login(payload);
+      setLoading(false);
+
+      if (res?.data?.status === "success" || res?.data?.token) {
+        const token = res?.data?.token;
+        if (token) {
+          localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
+        } else {
+          localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, "demo-auth-token");
+        }
+
+        const msg = res?.data?.message || "ثبت‌نام و ورود شما با موفقیت انجام شد !";
+        showAlert({ type: "success", message: msg });
+
+        navigate("/");
+      } else {
+        const errorMsg = res?.data?.message || "کد وارد شده یا اطلاعات نامعتبر است";
+        showAlert({ type: "error", message: errorMsg });
+      }
+    } catch (err) {
+      setLoading(false);
+      const errorMsg = err?.response?.data?.message || "کد تایید وارد شده اشتباه یا منقضی شده است";
+      showAlert({ type: "error", message: errorMsg });
+
+      // Fallback for demo environment if server is unreachable
+      if (!err?.response) {
+        setTimeout(() => {
+          localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, "demo-auth-token");
+          showAlert({ type: "success", message: "ورود موفقیت‌آمیز به برنامه" });
+          navigate("/");
+        }, 1200);
+      }
+    }
+  };
 
   return (
-    <div className="min-h-screen w-full bg-white flex flex-col justify-center items-center px-6 py-12 relative select-none overflow-hidden">
-      {/* Premium subtle background grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
-
-      {/* Back to Login Button */}
-      <Link
-        to="/login"
-        className="fixed top-6 right-6 z-20 inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-slate-50 border border-slate-100/80 shadow-xs text-slate-600 hover:text-[#ff2d55] hover:bg-slate-100 font-kal-3 font-semibold text-xs sm:text-sm transition-all duration-200 cursor-pointer"
-      >
-        <ArrowRight className="w-4 h-4 text-[#ff2d55]" />
-        <span>ویرایش شماره</span>
-      </Link>
+    <div className="h-[100dvh] max-h-[100dvh] w-full bg-white flex flex-col relative select-none overflow-hidden">
+      {/* Page Header with Back and Support Drawer */}
+      <PageHeader
+        title="تأیید کد یک‌بار مصرف"
+        showSupportIcon={true}
+        onBack={() => navigate('/login')}
+      />
 
       {/* Main Form Container */}
-      <motion.form
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        onSubmit={handleSubmit(submitForm)}
-        className="w-full max-w-[380px] relative z-10 flex flex-col items-center"
-      >
-        <LoginIcon />
-        <div className="w-full mt-2">
-          <PhoneOtp control={control} watch={watch} setValue={setValue} submitForm={submitForm} phone={params.phone} />
-        </div>
-      </motion.form>
+      <div className="flex-1 w-full flex flex-col justify-center items-center px-6 py-4 relative overflow-y-auto sm:overflow-hidden">
+        {/* Premium subtle background grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
+
+        <motion.form
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          onSubmit={handleSubmit(handleLoginSubmit)}
+          className="w-full max-w-[380px] relative z-10 flex flex-col items-center my-auto"
+        >
+          <LoginIcon />
+          <div className="w-full mt-2">
+            <PhoneOtp
+              control={control}
+              watch={watch}
+              setValue={setValue}
+              register={register}
+              onResend={handleResendOtp}
+              phone={params.phone}
+              loading={loading}
+              resending={resending}
+              onSubmit={handleSubmit(handleLoginSubmit)}
+            />
+          </div>
+        </motion.form>
+      </div>
     </div>
   );
 };
